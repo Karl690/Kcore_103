@@ -4,9 +4,6 @@
     <Filter Include="VisualGDB settings">
       <UniqueIdentifier>{2b09fd0b-2c31-42e2-b9ef-000494a952c6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="KCore">
-      <UniqueIdentifier>{dedacb05-998a-460d-9adf-64c8dcea4a30}</UniqueIdentifier>
-    </Filter>
     <Filter Include="cmsis">
       <UniqueIdentifier>{bb24456b-0d68-4a14-bcee-82252d3da25e}</UniqueIdentifier>
     </Filter>
@@ -25,26 +22,23 @@
     <Filter Include="cmsis_lib\src">
       <UniqueIdentifier>{8296b5b2-6a1c-41ec-a23e-75f1912119e7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Device-specific files">
-      <UniqueIdentifier>{c4166be3-9087-4e1b-9251-68e1293cd430}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="KCore\gpio">
-      <UniqueIdentifier>{9457b783-acdf-407b-911a-9859c96cd300}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="KCore\taskmanger">
-      <UniqueIdentifier>{0526efe1-f748-447f-8934-903565bcb8c7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="KCore\utils">
-      <UniqueIdentifier>{08690b8d-b45f-4f85-9f18-4e1d8fdb2406}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="KCore\adc">
+    <Filter Include="adc">
       <UniqueIdentifier>{f9ddfbad-859b-4b48-9eda-b68a8df5d4e8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="KCore\display">
+    <Filter Include="display">
       <UniqueIdentifier>{0c350491-a105-46bb-9ed0-cb8b007c86d4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="KCore\timer">
+    <Filter Include="gpio">
+      <UniqueIdentifier>{9457b783-acdf-407b-911a-9859c96cd300}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="taskmanger">
+      <UniqueIdentifier>{0526efe1-f748-447f-8934-903565bcb8c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="timer">
       <UniqueIdentifier>{c5bc67b8-75e1-44cc-9437-8f3c48692480}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="utils">
+      <UniqueIdentifier>{08690b8d-b45f-4f85-9f18-4e1d8fdb2406}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -63,9 +57,6 @@
     <None Include="stm32.props" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="KCore\main.c">
-      <Filter>KCore</Filter>
-    </ClCompile>
     <ClCompile Include="cmsis\core_cm3.c">
       <Filter>cmsis</Filter>
     </ClCompile>
@@ -112,43 +103,41 @@
       <Filter>cmsis_lib\src</Filter>
     </ClCompile>
     <ClCompile Include="KCore\gpio\gpio.c">
-      <Filter>KCore\gpio</Filter>
+      <Filter>gpio</Filter>
     </ClCompile>
     <ClCompile Include="KCore\taskmanager\taskmanager.c">
-      <Filter>KCore\taskmanger</Filter>
+      <Filter>taskmanger</Filter>
     </ClCompile>
     <ClCompile Include="KCore\utils\utils.c">
-      <Filter>KCore\utils</Filter>
+      <Filter>utils</Filter>
     </ClCompile>
     <ClCompile Include="KCore\gpio\pins.c">
-      <Filter>KCore\gpio</Filter>
+      <Filter>gpio</Filter>
     </ClCompile>
     <ClCompile Include="KCore\adc\adc.c">
-      <Filter>KCore\adc</Filter>
+      <Filter>adc</Filter>
     </ClCompile>
     <ClCompile Include="KCore\adc\tables.c">
-      <Filter>KCore\adc</Filter>
+      <Filter>adc</Filter>
     </ClCompile>
     <ClCompile Include="KCore\display\display.c">
-      <Filter>KCore\display</Filter>
+      <Filter>display</Filter>
     </ClCompile>
     <ClCompile Include="KCore\display\st7735.c">
-      <Filter>KCore\display</Filter>
+      <Filter>display</Filter>
     </ClCompile>
     <ClCompile Include="KCore\display\displaylist.c">
-      <Filter>KCore\display</Filter>
+      <Filter>display</Filter>
     </ClCompile>
     <ClCompile Include="KCore\display\gui.c">
-      <Filter>KCore\display</Filter>
+      <Filter>display</Filter>
     </ClCompile>
     <ClCompile Include="KCore\timer\timer.c">
-      <Filter>KCore\timer</Filter>
+      <Filter>timer</Filter>
     </ClCompile>
+    <ClCompile Include="KCore\main.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="KCore\main.h">
-      <Filter>KCore</Filter>
-    </ClInclude>
     <ClInclude Include="cmsis\core_cm3.h">
       <Filter>cmsis</Filter>
     </ClInclude>
@@ -195,49 +184,48 @@
       <Filter>cmsis_lib\inc</Filter>
     </ClInclude>
     <ClInclude Include="KCore\gpio\pinout.h">
-      <Filter>KCore\gpio</Filter>
+      <Filter>gpio</Filter>
     </ClInclude>
     <ClInclude Include="KCore\gpio\pins.h">
-      <Filter>KCore\gpio</Filter>
+      <Filter>gpio</Filter>
     </ClInclude>
     <ClInclude Include="KCore\gpio\pins_stm32f10x.h">
-      <Filter>KCore\gpio</Filter>
+      <Filter>gpio</Filter>
     </ClInclude>
     <ClInclude Include="KCore\gpio\gpio.h">
-      <Filter>KCore\gpio</Filter>
+      <Filter>gpio</Filter>
     </ClInclude>
     <ClInclude Include="KCore\taskmanager\taskmanager.h">
-      <Filter>KCore\taskmanger</Filter>
+      <Filter>taskmanger</Filter>
     </ClInclude>
     <ClInclude Include="KCore\utils\utils.h">
-      <Filter>KCore\utils</Filter>
+      <Filter>utils</Filter>
     </ClInclude>
     <ClInclude Include="KCore\adc\adc.h">
-      <Filter>KCore\adc</Filter>
+      <Filter>adc</Filter>
     </ClInclude>
     <ClInclude Include="KCore\adc\tables.h">
-      <Filter>KCore\adc</Filter>
+      <Filter>adc</Filter>
     </ClInclude>
     <ClInclude Include="KCore\display\display.h">
-      <Filter>KCore\display</Filter>
+      <Filter>display</Filter>
     </ClInclude>
     <ClInclude Include="KCore\display\font5x7.h">
-      <Filter>KCore\display</Filter>
+      <Filter>display</Filter>
     </ClInclude>
     <ClInclude Include="KCore\display\displaylist.h">
-      <Filter>KCore\display</Filter>
+      <Filter>display</Filter>
     </ClInclude>
     <ClInclude Include="KCore\display\gui.h">
-      <Filter>KCore\display</Filter>
+      <Filter>display</Filter>
     </ClInclude>
     <ClInclude Include="KCore\display\st7735.h">
-      <Filter>KCore\display</Filter>
+      <Filter>display</Filter>
     </ClInclude>
     <ClInclude Include="KCore\timer\timer.h">
-      <Filter>KCore\timer</Filter>
+      <Filter>timer</Filter>
     </ClInclude>
-    <ClInclude Include="KCore\RevisionHistory.h">
-      <Filter>KCore</Filter>
-    </ClInclude>
+    <ClInclude Include="KCore\main.h" />
+    <ClInclude Include="KCore\RevisionHistory.h" />
   </ItemGroup>
 </Project>

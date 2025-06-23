@@ -15,36 +15,21 @@ uint16_t scr_height;
 
 
 void ST7735_write(uint8_t data) {
-#ifdef SOFT_SPI
-	uint8_t i;
-
-	for(i = 0; i < 8; i++) {
-		if (data & 0x80) SDA_H(); else SDA_L();
-		data = data << 1;
-		SCK_L();
-		SCK_H();
-	}
-#else
 	while (SPI_I2S_GetFlagStatus(SPI_PORT,SPI_I2S_FLAG_TXE) == RESET);
 	SPI_I2S_SendData(SPI_PORT,data);
 	while (SPI_I2S_GetFlagStatus(SPI2, SPI_I2S_FLAG_BSY) == SET) ;   // Wait until SPI is not busy
-#endif
 }
 
 void ST7735_cmd(uint8_t cmd) {
 	DC_L();
 	ST7735_write(cmd);
-#ifndef SOFT_SPI
 	while (SPI_I2S_GetFlagStatus(SPI_PORT,SPI_I2S_FLAG_BSY) == SET);
-#endif
 }
 
 void ST7735_data(uint8_t data) {
 	DC_H();
 	ST7735_write(data);
-#ifndef SOFT_SPI
 	while (SPI_I2S_GetFlagStatus(SPI_PORT,SPI_I2S_FLAG_BSY) == SET);
-#endif
 }
 
 uint16_t RGB565(uint8_t R,uint8_t G,uint8_t B) {

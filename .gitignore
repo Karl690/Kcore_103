@@ -4,3 +4,4 @@ Kcore_103/VisualGDB/
 Kcore_103/Kcore_103.vcxproj.user
 VisualGDB/Debug/
 Kcore_103/Kcore_103-Debug.vgdbsettings.falcon.user
+.visualgdb/CodeExplorer/NodeFlags.dat
