@@ -40,6 +40,9 @@
     <Filter Include="utils">
       <UniqueIdentifier>{08690b8d-b45f-4f85-9f18-4e1d8fdb2406}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Device-specific files">
+      <UniqueIdentifier>{618e4a40-b639-4b16-8965-4fdbee10058f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Kcore_103-Debug.vgdbsettings">
