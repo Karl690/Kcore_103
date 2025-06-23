@@ -9,8 +9,15 @@ char strTempVal[40] = {0};
 uint16_t idx = 0;
 LcdVariableInfo *varInfo  = NULL;
 
+void Format_Title(uint8_t row, void* info)
+{
+	varInfo = (LcdVariableInfo*)info;
+	DrawString(30, TOP_PADDING + (row * LCD_LINESIZE), varInfo->Label, varInfo->Color_1);
+	DrawLine(0, TOP_PADDING + (row * LCD_LINESIZE) + LCD_LINESIZE / 2, 20, TOP_PADDING + (row * LCD_LINESIZE) + LCD_LINESIZE / 2, varInfo->Color_2);
+	DrawLine(DISPLAY_WIDTH-20, TOP_PADDING + (row * LCD_LINESIZE) + LCD_LINESIZE / 2, DISPLAY_WIDTH, TOP_PADDING + (row * LCD_LINESIZE) + LCD_LINESIZE / 2, varInfo->Color_2);
+}
 
-void Format_Int(uint8_t row, void* info)
+void Format_Int32(uint8_t row, void* info)
 {
 	varInfo = (LcdVariableInfo*)info;
 	DrawString(LEFT_PADDING, TOP_PADDING + (row * LCD_LINESIZE) ,varInfo->Label, varInfo->Color_1);
@@ -130,7 +137,8 @@ void UpdateScreen(LcdVariableInfo* InfoToDisplay)
 	{
 		switch (InfoToDisplay[row].FuncType)
 		{
-		case FUNC_INT: 			Format_Int(row, &InfoToDisplay[row]); break;
+		case FUNC_TITLE: 		Format_Title(row, &InfoToDisplay[row]); break;
+		case FUNC_INT32: 		Format_Int32(row, &InfoToDisplay[row]); break;
 		case FUNC_INT16: 		Format_Int16(row, &InfoToDisplay[row]); break;
 		case FUNC_FLOAT: 		Format_Float3_3(row, &InfoToDisplay[row]); break;
 		case FUNC_HEX8: 		Format_Hex8(row, &InfoToDisplay[row]); break;
