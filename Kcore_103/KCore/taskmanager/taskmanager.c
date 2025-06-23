@@ -4,6 +4,7 @@
 uint16_t SliceOffset = 0;
 uint16_t SliceCnt = 0; // current slice being processed
 uint32_t HeartBeat = 0;
+uint32_t tickCount = 0;
 const PFUNC F1000HZ[NUM_1000HZ] =
 {
 	Spare,
@@ -43,7 +44,7 @@ const PFUNC F10HZ[NUM_10HZ] =
 const PFUNC F1HZ[NUM_1HZ] =
 {
 	Spare,
-	taskmanager_blink_led,
+	BlinkHeartBeat,
 	Spare,
 	Spare,
 	Spare,
@@ -55,15 +56,32 @@ const PFUNC F1HZ[NUM_1HZ] =
 void Spare(void) {}
 
 
-void taskmanager_callback()
+void func_SystickCallback()
 {
-	if (!isBooted) return;
+	//HEARTBEAT_SET;
+	if (!Booted) return;
 
+	// TIM6->CNT = 0; //reset the slice timer
+	//CheckForUart6TxRx();
 	SliceCnt++;
+	tickCount++;
 	SliceOffset = SliceCnt & 0x0007; //precalculate the slice index into the jump table
 	if (SliceOffset)
 	{
+		//reall 6.4khz
 		F1000HZ[SliceOffset](); //run the task
+//		if (LastSliceTimeFlag)TaskTime[SliceOffset] = TIM6->CNT;
+//		else
+//		{
+//		if (TIM6->CNT > TaskTime[SliceOffset])
+//		{
+//			TaskTime[SliceOffset] = TIM6->CNT;
+//		}	
+		//		}
+		
+//		if ((COM2_SC01.UartHandler->SR & USART_SR_TXE))	checkForUart2Tx();
+//		if ((COM6_SSD.UartHandler->SR & USART_SR_TXE))	checkForUart6Tx();
+
 		return;//toggle pin so we can see on Oscillosclope and exit
 	}
 	if (SliceCnt & 0x0038)
@@ -73,6 +91,9 @@ void taskmanager_callback()
 		SliceOffset = (SliceCnt >> 3) & 0x0007;
 		F100HZ[SliceOffset]();
 		SliceOffset += 8;
+		// if (TIM6->CNT > TaskTime[SliceOffset]) TaskTime[SliceOffset] = TIM6->CNT;
+		//HEARTBEAT_CLR;
+		//HEARTBEAT_CLR;
 		return;//toggle pin so we can see on Oscillosclope and exit
 	}
 
@@ -82,16 +103,24 @@ void taskmanager_callback()
 		SliceOffset = (SliceCnt >> 6)  & 0x0007;
 		F10HZ[SliceOffset]();
 		SliceOffset += 16;
+		// if (TIM6->CNT > TaskTime[SliceOffset]) TaskTime[SliceOffset] = TIM6->CNT;
+		//HEARTBEAT_CLR;
 		return;//toggle pin so we can see on Oscillosclope and exit
 	}
 //1.5625 hz
 	SliceOffset = (SliceCnt >> 9)  & 0x0007;
 	F1HZ[SliceOffset]();
 	SliceOffset += 24;
+//	if (TIM6->CNT > TaskTime[SliceOffset])
+//	{
+//		TaskTime[SliceOffset] = TIM6->CNT;
+//	}
+	//HEARTBEAT_CLR;
 	return;//toggle pin so we can see on Oscillosclope and exit
+
 }
 
-void taskmanager_blink_led()
+void BlinkHeartBeat()
 {
 	HeartBeat++;
 	pinToggleOutput(PIN_LED_50);

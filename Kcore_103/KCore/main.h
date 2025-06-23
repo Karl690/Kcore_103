@@ -28,4 +28,4 @@
 
 #define DELAY_TIMER							TIM1
 
-extern uint8_t isBooted;
+extern uint8_t Booted;

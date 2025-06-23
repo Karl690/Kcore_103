@@ -4,7 +4,7 @@
 extern "C"
 #endif
 
-uint8_t isBooted = 0;
+uint8_t Booted = 0;
 uint8_t DisplayIndex = 0;
 void SetupIWDG(uint32_t interval)
 {
@@ -30,16 +30,16 @@ int main(void)
 	
 	SysTick_Config(SystemCoreClock / SYSTICKS_PER_SECOND);
 	
-	isBooted = 1;
+	Booted = 1;
 	while (1)
 	{
-//		DisplayIndex %= 3;
-//		switch (DisplayIndex)
-//		{
-//		case 0:UpdateScreen(LcdVarsTable); break;
-//		case 1:UpdateScreen(TaskTimeTable1); break;
-//		case 2:UpdateScreen(TaskTimeTable2); break;
-//		}
+		DisplayIndex %= 3;
+		switch (DisplayIndex)
+		{
+		case 0:UpdateScreen(LcdVarsTable); break;
+		case 1:UpdateScreen(TaskTimeTable1); break;
+		case 2:UpdateScreen(TaskTimeTable2); break;
+		}
 		delay_sec(1);
 		pinToggleOutput(PIN_LED_175);
 	}
@@ -48,5 +48,5 @@ int main(void)
 
 void SysTick_Handler(void)
 {
-	taskmanager_callback();
+	func_SystickCallback();
 }
