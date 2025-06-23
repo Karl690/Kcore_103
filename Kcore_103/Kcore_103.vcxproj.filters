@@ -1,10 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Resource files">
-      <UniqueIdentifier>{5ffb911d-43e2-4fa3-8fe1-e559af904e52}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
-    </Filter>
     <Filter Include="VisualGDB settings">
       <UniqueIdentifier>{2b09fd0b-2c31-42e2-b9ef-000494a952c6}</UniqueIdentifier>
     </Filter>
@@ -20,9 +16,6 @@
     <Filter Include="cmsis_lib">
       <UniqueIdentifier>{83683d30-6b5d-42e9-b916-3f7da4ef5ec6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="syscalls">
-      <UniqueIdentifier>{cdb1267a-afc9-46f8-9f50-7d5d23121691}</UniqueIdentifier>
-    </Filter>
     <Filter Include="cmsis_boot\startup">
       <UniqueIdentifier>{b9df714f-3e0f-4dbb-9f87-357f61201680}</UniqueIdentifier>
     </Filter>
@@ -34,12 +27,6 @@
     </Filter>
     <Filter Include="Device-specific files">
       <UniqueIdentifier>{c4166be3-9087-4e1b-9251-68e1293cd430}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resource files\Device-specific files">
-      <UniqueIdentifier>{5c6e1643-4410-4a11-a172-c1dfa2c269ab}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Device-specific files\Semihosting/Profiler">
-      <UniqueIdentifier>{d437221c-913a-4eaa-b053-223c47116007}</UniqueIdentifier>
     </Filter>
     <Filter Include="KCore\gpio">
       <UniqueIdentifier>{9457b783-acdf-407b-911a-9859c96cd300}</UniqueIdentifier>
@@ -74,36 +61,6 @@
       <Filter>cmsis_lib\src</Filter>
     </None>
     <None Include="stm32.props" />
-    <ClCompile Include="$(EFP_BASE)\Profiler\FastSemihosting.cpp">
-      <Filter>Device-specific files\Semihosting/Profiler</Filter>
-    </ClCompile>
-    <ClCompile Include="$(EFP_BASE)\Profiler\InstrumentingProfiler.cpp">
-      <Filter>Device-specific files\Semihosting/Profiler</Filter>
-    </ClCompile>
-    <ClCompile Include="$(EFP_BASE)\Profiler\TestResourceManager.cpp">
-      <Filter>Device-specific files\Semihosting/Profiler</Filter>
-    </ClCompile>
-    <ClCompile Include="$(EFP_BASE)\Profiler\ProfilerRTOS_FreeRTOS.c">
-      <Filter>Device-specific files\Semihosting/Profiler</Filter>
-    </ClCompile>
-    <ClInclude Include="$(EFP_BASE)\Profiler\SysprogsProfiler.h">
-      <Filter>Device-specific files\Semihosting/Profiler</Filter>
-    </ClInclude>
-    <ClInclude Include="$(EFP_BASE)\Profiler\SmallNumberCoder.h">
-      <Filter>Device-specific files\Semihosting/Profiler</Filter>
-    </ClInclude>
-    <ClInclude Include="$(EFP_BASE)\Profiler\SysprogsProfilerInterface.h">
-      <Filter>Device-specific files\Semihosting/Profiler</Filter>
-    </ClInclude>
-    <ClInclude Include="$(EFP_BASE)\Profiler\ProfilerFreeRTOSHooks.h">
-      <Filter>Device-specific files\Semihosting/Profiler</Filter>
-    </ClInclude>
-    <ClInclude Include="$(EFP_BASE)\Profiler\CustomRealTimeWatches.h">
-      <Filter>Device-specific files\Semihosting/Profiler</Filter>
-    </ClInclude>
-    <ClInclude Include="$(EFP_BASE)\Profiler\DebuggerChecker.h">
-      <Filter>Device-specific files\Semihosting/Profiler</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="KCore\main.c">
