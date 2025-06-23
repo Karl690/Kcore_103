@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|VisualGDB">
+      <Configuration>Debug</Configuration>
+      <Platform>VisualGDB</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|VisualGDB">
+      <Configuration>Release</Configuration>
+      <Platform>VisualGDB</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <ProjectGuid>{C136877F-1026-478C-8B59-8E58C3233905}</ProjectGuid>
+    <BSP_ID>com.visualgdb.bsp.in-place</BSP_ID>
+    <BSP_VERSION>1.0</BSP_VERSION>
+    <InPlaceBSPSubdir>BSP</InPlaceBSPSubdir>
+    <RelativeBSPPath />
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Release|VisualGDB'">
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">
+    <GNUConfigurationType>Debug</GNUConfigurationType>
+    <ToolchainID>com.visualgdb.arm-eabi</ToolchainID>
+    <ToolchainVersion>14.2.1/15.2/r2</ToolchainVersion>
+    <MCUPropertyListFile>$(ProjectDir)stm32.props</MCUPropertyListFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|VisualGDB'">
+    <ToolchainID>com.visualgdb.arm-eabi</ToolchainID>
+    <ToolchainVersion>14.2.1/15.2/r2</ToolchainVersion>
+    <MCUPropertyListFile>$(ProjectDir)stm32.props</MCUPropertyListFile>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">
+    <Link>
+      <ProduceRelocationRecords>true</ProduceRelocationRecords>
+    </Link>
+    <ClCompile>
+      <AdditionalIncludeDirectories>./KCore;./cmsis;./cmsis_boot;./cmsis_lib/inc;./common/inc;./common/lcd/fonts;./common/lcd;./inc;%(ClCompile.AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>-D STM32F10X_LD -D COMPILE_FOR_DEVICE %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|VisualGDB'">
+    <Link>
+      <ProduceRelocationRecords>true</ProduceRelocationRecords>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="KCore\adc\adc.c" />
+    <ClCompile Include="KCore\adc\tables.c" />
+    <ClCompile Include="KCore\display\display.c" />
+    <ClCompile Include="KCore\display\displaylist.c" />
+    <ClCompile Include="KCore\display\gui.c" />
+    <ClCompile Include="KCore\display\st7735.c" />
+    <ClCompile Include="KCore\gpio\pins.c" />
+    <ClCompile Include="KCore\taskmanager\taskmanager.c" />
+    <ClCompile Include="KCore\timer\timer.c" />
+    <ClCompile Include="KCore\utils\utils.c" />
+    <ClInclude Include="cmsis\core_cm3.h" />
+    <ClInclude Include="cmsis_boot\stm32f10x.h" />
+    <ClInclude Include="cmsis_boot\stm32f10x_conf.h" />
+    <ClInclude Include="cmsis_boot\system_stm32f10x.h" />
+    <ClInclude Include="cmsis_lib\inc\stm32f10x_adc.h" />
+    <ClInclude Include="cmsis_lib\inc\stm32f10x_can.h" />
+    <ClInclude Include="cmsis_lib\inc\stm32f10x_exti.h" />
+    <ClInclude Include="cmsis_lib\inc\stm32f10x_flash.h" />
+    <ClInclude Include="cmsis_lib\inc\stm32f10x_gpio.h" />
+    <ClInclude Include="cmsis_lib\inc\stm32f10x_iwdg.h" />
+    <ClInclude Include="cmsis_lib\inc\stm32f10x_misc.h" />
+    <ClInclude Include="cmsis_lib\inc\stm32f10x_rcc.h" />
+    <ClInclude Include="cmsis_lib\inc\stm32f10x_spi.h" />
+    <ClInclude Include="cmsis_lib\inc\stm32f10x_tim.h" />
+    <ClInclude Include="cmsis_lib\inc\stm32f10x_usart.h" />
+    <ClInclude Include="KCore\adc\adc.h" />
+    <ClInclude Include="KCore\adc\tables.h" />
+    <ClInclude Include="KCore\display\display.h" />
+    <ClInclude Include="KCore\display\displaylist.h" />
+    <ClInclude Include="KCore\display\font5x7.h" />
+    <ClInclude Include="KCore\display\gui.h" />
+    <ClInclude Include="KCore\display\st7735.h" />
+    <ClInclude Include="KCore\gpio\gpio.h" />
+    <ClInclude Include="KCore\gpio\pinout.h" />
+    <ClInclude Include="KCore\gpio\pins.h" />
+    <ClInclude Include="KCore\gpio\pins_stm32f10x.h" />
+    <ClInclude Include="KCore\main.h" />
+    <ClInclude Include="KCore\RevisionHistory.h" />
+    <ClInclude Include="KCore\taskmanager\taskmanager.h" />
+    <ClInclude Include="KCore\timer\timer.h" />
+    <ClInclude Include="KCore\utils\utils.h" />
+    <None Include="stm32.props" />
+    <ClCompile Include="$(EFP_BASE)\Profiler\FastSemihosting.cpp" />
+    <ClCompile Include="$(EFP_BASE)\Profiler\InstrumentingProfiler.cpp" />
+    <ClCompile Include="$(EFP_BASE)\Profiler\TestResourceManager.cpp" />
+    <ClCompile Include="$(EFP_BASE)\Profiler\ProfilerRTOS_FreeRTOS.c" />
+    <ClInclude Include="$(EFP_BASE)\Profiler\SysprogsProfiler.h" />
+    <ClInclude Include="$(EFP_BASE)\Profiler\SmallNumberCoder.h" />
+    <ClInclude Include="$(EFP_BASE)\Profiler\SysprogsProfilerInterface.h" />
+    <ClInclude Include="$(EFP_BASE)\Profiler\ProfilerFreeRTOSHooks.h" />
+    <ClInclude Include="$(EFP_BASE)\Profiler\CustomRealTimeWatches.h" />
+    <ClInclude Include="$(EFP_BASE)\Profiler\DebuggerChecker.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="cmsis\core_cm3.c" />
+    <ClCompile Include="cmsis_boot\startup\startup_stm32f10x_ld.c" />
+    <ClCompile Include="cmsis_boot\startup\startup_stm32f10x_md.c" />
+    <ClCompile Include="cmsis_boot\system_stm32f10x.c" />
+    <ClCompile Include="cmsis_lib\src\stm32f10x_adc.c" />
+    <ClCompile Include="cmsis_lib\src\stm32f10x_can.c" />
+    <ClCompile Include="cmsis_lib\src\stm32f10x_exti.c" />
+    <ClCompile Include="cmsis_lib\src\stm32f10x_flash.c" />
+    <ClCompile Include="cmsis_lib\src\stm32f10x_gpio.c" />
+    <ClCompile Include="cmsis_lib\src\stm32f10x_iwdg.c" />
+    <ClCompile Include="cmsis_lib\src\stm32f10x_misc.c" />
+    <ClCompile Include="cmsis_lib\src\stm32f10x_rcc.c" />
+    <ClCompile Include="cmsis_lib\src\stm32f10x_spi.c" />
+    <ClCompile Include="cmsis_lib\src\stm32f10x_tim.c" />
+    <ClCompile Include="cmsis_lib\src\stm32f10x_usart.c" />
+    <ClCompile Include="KCore\gpio\gpio.c" />
+    <ClCompile Include="KCore\main.c" />
+    <None Include="cmsis_lib\src\.stm32f10x_flash.c.swp" />
+    <None Include="Kcore_103-Debug.vgdbsettings" />
+    <None Include="Kcore_103-Release.vgdbsettings" />
+    <None Include="stm32.xml" />
+  </ItemGroup>
+</Project>

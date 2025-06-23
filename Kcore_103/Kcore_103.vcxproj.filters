@@ -1,0 +1,286 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Resource files">
+      <UniqueIdentifier>{5ffb911d-43e2-4fa3-8fe1-e559af904e52}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
+    </Filter>
+    <Filter Include="VisualGDB settings">
+      <UniqueIdentifier>{2b09fd0b-2c31-42e2-b9ef-000494a952c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="KCore">
+      <UniqueIdentifier>{dedacb05-998a-460d-9adf-64c8dcea4a30}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cmsis">
+      <UniqueIdentifier>{bb24456b-0d68-4a14-bcee-82252d3da25e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cmsis_boot">
+      <UniqueIdentifier>{82ba0ce9-7a10-4da7-aad5-5059acc563de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cmsis_lib">
+      <UniqueIdentifier>{83683d30-6b5d-42e9-b916-3f7da4ef5ec6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="syscalls">
+      <UniqueIdentifier>{cdb1267a-afc9-46f8-9f50-7d5d23121691}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cmsis_boot\startup">
+      <UniqueIdentifier>{b9df714f-3e0f-4dbb-9f87-357f61201680}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cmsis_lib\inc">
+      <UniqueIdentifier>{ca3cc80b-d341-44c3-9486-ecbfea740b88}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cmsis_lib\src">
+      <UniqueIdentifier>{8296b5b2-6a1c-41ec-a23e-75f1912119e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Device-specific files">
+      <UniqueIdentifier>{c4166be3-9087-4e1b-9251-68e1293cd430}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource files\Device-specific files">
+      <UniqueIdentifier>{5c6e1643-4410-4a11-a172-c1dfa2c269ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Device-specific files\Semihosting/Profiler">
+      <UniqueIdentifier>{d437221c-913a-4eaa-b053-223c47116007}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="KCore\gpio">
+      <UniqueIdentifier>{9457b783-acdf-407b-911a-9859c96cd300}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="KCore\taskmanger">
+      <UniqueIdentifier>{0526efe1-f748-447f-8934-903565bcb8c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="KCore\utils">
+      <UniqueIdentifier>{08690b8d-b45f-4f85-9f18-4e1d8fdb2406}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="KCore\adc">
+      <UniqueIdentifier>{f9ddfbad-859b-4b48-9eda-b68a8df5d4e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="KCore\display">
+      <UniqueIdentifier>{0c350491-a105-46bb-9ed0-cb8b007c86d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="KCore\timer">
+      <UniqueIdentifier>{c5bc67b8-75e1-44cc-9437-8f3c48692480}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Kcore_103-Debug.vgdbsettings">
+      <Filter>VisualGDB settings</Filter>
+    </None>
+    <None Include="Kcore_103-Release.vgdbsettings">
+      <Filter>VisualGDB settings</Filter>
+    </None>
+    <None Include="stm32.xml">
+      <Filter>VisualGDB settings</Filter>
+    </None>
+    <None Include="cmsis_lib\src\.stm32f10x_flash.c.swp">
+      <Filter>cmsis_lib\src</Filter>
+    </None>
+    <None Include="stm32.props" />
+    <ClCompile Include="$(EFP_BASE)\Profiler\FastSemihosting.cpp">
+      <Filter>Device-specific files\Semihosting/Profiler</Filter>
+    </ClCompile>
+    <ClCompile Include="$(EFP_BASE)\Profiler\InstrumentingProfiler.cpp">
+      <Filter>Device-specific files\Semihosting/Profiler</Filter>
+    </ClCompile>
+    <ClCompile Include="$(EFP_BASE)\Profiler\TestResourceManager.cpp">
+      <Filter>Device-specific files\Semihosting/Profiler</Filter>
+    </ClCompile>
+    <ClCompile Include="$(EFP_BASE)\Profiler\ProfilerRTOS_FreeRTOS.c">
+      <Filter>Device-specific files\Semihosting/Profiler</Filter>
+    </ClCompile>
+    <ClInclude Include="$(EFP_BASE)\Profiler\SysprogsProfiler.h">
+      <Filter>Device-specific files\Semihosting/Profiler</Filter>
+    </ClInclude>
+    <ClInclude Include="$(EFP_BASE)\Profiler\SmallNumberCoder.h">
+      <Filter>Device-specific files\Semihosting/Profiler</Filter>
+    </ClInclude>
+    <ClInclude Include="$(EFP_BASE)\Profiler\SysprogsProfilerInterface.h">
+      <Filter>Device-specific files\Semihosting/Profiler</Filter>
+    </ClInclude>
+    <ClInclude Include="$(EFP_BASE)\Profiler\ProfilerFreeRTOSHooks.h">
+      <Filter>Device-specific files\Semihosting/Profiler</Filter>
+    </ClInclude>
+    <ClInclude Include="$(EFP_BASE)\Profiler\CustomRealTimeWatches.h">
+      <Filter>Device-specific files\Semihosting/Profiler</Filter>
+    </ClInclude>
+    <ClInclude Include="$(EFP_BASE)\Profiler\DebuggerChecker.h">
+      <Filter>Device-specific files\Semihosting/Profiler</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="KCore\main.c">
+      <Filter>KCore</Filter>
+    </ClCompile>
+    <ClCompile Include="cmsis\core_cm3.c">
+      <Filter>cmsis</Filter>
+    </ClCompile>
+    <ClCompile Include="cmsis_boot\system_stm32f10x.c">
+      <Filter>cmsis_boot</Filter>
+    </ClCompile>
+    <ClCompile Include="cmsis_boot\startup\startup_stm32f10x_ld.c">
+      <Filter>cmsis_boot\startup</Filter>
+    </ClCompile>
+    <ClCompile Include="cmsis_boot\startup\startup_stm32f10x_md.c">
+      <Filter>cmsis_boot\startup</Filter>
+    </ClCompile>
+    <ClCompile Include="cmsis_lib\src\stm32f10x_adc.c">
+      <Filter>cmsis_lib\src</Filter>
+    </ClCompile>
+    <ClCompile Include="cmsis_lib\src\stm32f10x_can.c">
+      <Filter>cmsis_lib\src</Filter>
+    </ClCompile>
+    <ClCompile Include="cmsis_lib\src\stm32f10x_exti.c">
+      <Filter>cmsis_lib\src</Filter>
+    </ClCompile>
+    <ClCompile Include="cmsis_lib\src\stm32f10x_flash.c">
+      <Filter>cmsis_lib\src</Filter>
+    </ClCompile>
+    <ClCompile Include="cmsis_lib\src\stm32f10x_gpio.c">
+      <Filter>cmsis_lib\src</Filter>
+    </ClCompile>
+    <ClCompile Include="cmsis_lib\src\stm32f10x_iwdg.c">
+      <Filter>cmsis_lib\src</Filter>
+    </ClCompile>
+    <ClCompile Include="cmsis_lib\src\stm32f10x_misc.c">
+      <Filter>cmsis_lib\src</Filter>
+    </ClCompile>
+    <ClCompile Include="cmsis_lib\src\stm32f10x_rcc.c">
+      <Filter>cmsis_lib\src</Filter>
+    </ClCompile>
+    <ClCompile Include="cmsis_lib\src\stm32f10x_spi.c">
+      <Filter>cmsis_lib\src</Filter>
+    </ClCompile>
+    <ClCompile Include="cmsis_lib\src\stm32f10x_tim.c">
+      <Filter>cmsis_lib\src</Filter>
+    </ClCompile>
+    <ClCompile Include="cmsis_lib\src\stm32f10x_usart.c">
+      <Filter>cmsis_lib\src</Filter>
+    </ClCompile>
+    <ClCompile Include="KCore\gpio\gpio.c">
+      <Filter>KCore\gpio</Filter>
+    </ClCompile>
+    <ClCompile Include="KCore\taskmanager\taskmanager.c">
+      <Filter>KCore\taskmanger</Filter>
+    </ClCompile>
+    <ClCompile Include="KCore\utils\utils.c">
+      <Filter>KCore\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="KCore\gpio\pins.c">
+      <Filter>KCore\gpio</Filter>
+    </ClCompile>
+    <ClCompile Include="KCore\adc\adc.c">
+      <Filter>KCore\adc</Filter>
+    </ClCompile>
+    <ClCompile Include="KCore\adc\tables.c">
+      <Filter>KCore\adc</Filter>
+    </ClCompile>
+    <ClCompile Include="KCore\display\display.c">
+      <Filter>KCore\display</Filter>
+    </ClCompile>
+    <ClCompile Include="KCore\display\st7735.c">
+      <Filter>KCore\display</Filter>
+    </ClCompile>
+    <ClCompile Include="KCore\display\displaylist.c">
+      <Filter>KCore\display</Filter>
+    </ClCompile>
+    <ClCompile Include="KCore\display\gui.c">
+      <Filter>KCore\display</Filter>
+    </ClCompile>
+    <ClCompile Include="KCore\timer\timer.c">
+      <Filter>KCore\timer</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="KCore\main.h">
+      <Filter>KCore</Filter>
+    </ClInclude>
+    <ClInclude Include="cmsis\core_cm3.h">
+      <Filter>cmsis</Filter>
+    </ClInclude>
+    <ClInclude Include="cmsis_boot\stm32f10x.h">
+      <Filter>cmsis_boot</Filter>
+    </ClInclude>
+    <ClInclude Include="cmsis_boot\stm32f10x_conf.h">
+      <Filter>cmsis_boot</Filter>
+    </ClInclude>
+    <ClInclude Include="cmsis_boot\system_stm32f10x.h">
+      <Filter>cmsis_boot</Filter>
+    </ClInclude>
+    <ClInclude Include="cmsis_lib\inc\stm32f10x_adc.h">
+      <Filter>cmsis_lib\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="cmsis_lib\inc\stm32f10x_can.h">
+      <Filter>cmsis_lib\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="cmsis_lib\inc\stm32f10x_exti.h">
+      <Filter>cmsis_lib\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="cmsis_lib\inc\stm32f10x_flash.h">
+      <Filter>cmsis_lib\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="cmsis_lib\inc\stm32f10x_gpio.h">
+      <Filter>cmsis_lib\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="cmsis_lib\inc\stm32f10x_iwdg.h">
+      <Filter>cmsis_lib\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="cmsis_lib\inc\stm32f10x_misc.h">
+      <Filter>cmsis_lib\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="cmsis_lib\inc\stm32f10x_rcc.h">
+      <Filter>cmsis_lib\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="cmsis_lib\inc\stm32f10x_spi.h">
+      <Filter>cmsis_lib\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="cmsis_lib\inc\stm32f10x_tim.h">
+      <Filter>cmsis_lib\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="cmsis_lib\inc\stm32f10x_usart.h">
+      <Filter>cmsis_lib\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="KCore\gpio\pinout.h">
+      <Filter>KCore\gpio</Filter>
+    </ClInclude>
+    <ClInclude Include="KCore\gpio\pins.h">
+      <Filter>KCore\gpio</Filter>
+    </ClInclude>
+    <ClInclude Include="KCore\gpio\pins_stm32f10x.h">
+      <Filter>KCore\gpio</Filter>
+    </ClInclude>
+    <ClInclude Include="KCore\gpio\gpio.h">
+      <Filter>KCore\gpio</Filter>
+    </ClInclude>
+    <ClInclude Include="KCore\taskmanager\taskmanager.h">
+      <Filter>KCore\taskmanger</Filter>
+    </ClInclude>
+    <ClInclude Include="KCore\utils\utils.h">
+      <Filter>KCore\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="KCore\adc\adc.h">
+      <Filter>KCore\adc</Filter>
+    </ClInclude>
+    <ClInclude Include="KCore\adc\tables.h">
+      <Filter>KCore\adc</Filter>
+    </ClInclude>
+    <ClInclude Include="KCore\display\display.h">
+      <Filter>KCore\display</Filter>
+    </ClInclude>
+    <ClInclude Include="KCore\display\font5x7.h">
+      <Filter>KCore\display</Filter>
+    </ClInclude>
+    <ClInclude Include="KCore\display\displaylist.h">
+      <Filter>KCore\display</Filter>
+    </ClInclude>
+    <ClInclude Include="KCore\display\gui.h">
+      <Filter>KCore\display</Filter>
+    </ClInclude>
+    <ClInclude Include="KCore\display\st7735.h">
+      <Filter>KCore\display</Filter>
+    </ClInclude>
+    <ClInclude Include="KCore\timer\timer.h">
+      <Filter>KCore\timer</Filter>
+    </ClInclude>
+    <ClInclude Include="KCore\RevisionHistory.h">
+      <Filter>KCore</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
