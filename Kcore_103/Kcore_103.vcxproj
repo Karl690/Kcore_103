@@ -60,6 +60,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="KCore\adc\1xx\adc_1xx.c" />
     <ClCompile Include="KCore\adc\adc.c" />
     <ClCompile Include="KCore\adc\ADC_Tables.c" />
     <ClCompile Include="KCore\adc\AD_Channel_Definitions.c" />
@@ -86,6 +87,7 @@
     <ClInclude Include="cmsis_lib\inc\stm32f10x_spi.h" />
     <ClInclude Include="cmsis_lib\inc\stm32f10x_tim.h" />
     <ClInclude Include="cmsis_lib\inc\stm32f10x_usart.h" />
+    <ClInclude Include="KCore\adc\1xx\adc_1xx.h" />
     <ClInclude Include="KCore\adc\adc.h" />
     <ClInclude Include="KCore\adc\ADC_Tables.h" />
     <ClInclude Include="KCore\adc\AD_Channel_Definitions.h" />

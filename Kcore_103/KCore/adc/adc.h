@@ -1,5 +1,6 @@
 #pragma once
 #include <stdint.h>
+#include "1xx/adc_1xx.h"
 
 #define ADC_NUM_CHANNELS                4
 #define ADC_CHANNEL_POSITION            ADC_Channel_9
