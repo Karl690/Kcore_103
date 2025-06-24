@@ -12,6 +12,7 @@ typedef void(*PFUNC)(void);
 
 
 extern uint32_t HeartBeat;
+extern uint16_t SliceCnt;
 void Spare(void);
 void func_SystickCallback();
 void BlinkHeartBeat();

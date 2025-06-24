@@ -40,7 +40,7 @@ int main(void)
 		case 1:UpdateScreen(TaskTimeTable1); break;
 		case 2:UpdateScreen(TaskTimeTable2); break;
 		}
-		delay_sec(1);
+		//delay_sec(1);
 		pinToggleOutput(PIN_LED_175);
 	}
 }
