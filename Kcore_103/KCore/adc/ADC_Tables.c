@@ -1,4 +1,4 @@
-#include "tables.h"
+#include "ADC_Tables.h"
 
 
 AdcTableStruct const RtdTable_1K[] __attribute__((aligned(4))) =

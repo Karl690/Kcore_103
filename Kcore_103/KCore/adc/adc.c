@@ -1,26 +1,14 @@
 #include "main.h"
 #include "adc.h"
-
-#define CovertionTableIndexSize 16
-float ConvertionTable[CovertionTableIndexSize] = {1, 1, 1, 1, 1, 1, 1, 1,
-						1, 1, 1, 1, 1, 1, 1, 1};
-ADC_ChannelDef AdcChannelTable[ADC_NUM_CHANNELS] = {
-	{ ADC_CHANNEL_POSITION, PIN_ADC_POSITION, ConvertionTable },
-	{ ADC_CHANNEL_RTD1, PIN_ADC_RTD1_IN, ConvertionTable },
-	{ ADC_CHANNEL_RTD2, PIN_ADC_RTD2_IN, ConvertionTable },
-} ;
-
+#include "AD_Channel_Definitions.h"
 uint16_t   RawADCDataBuffer[ADC_NUM_CHANNELS] = { 0 };
 
-
-void adc_config(uint8_t channel, pinType pin) {
+void adc_config(uint8_t channel) {
 	//define type of analog to digital conversion
 	// make copy of ADC_RegularChannelConfig focus on rank=1; ADC_SampleTime_71Cycles5, and limited input channel
 	// ONLY GOOD TO CHAN 9
 	// ADC_RegularChannelConfig(ADC1, adcp->inputChannel, 1, ADC_SampleTime_71Cycles5);
 	
-	// initialize the ADC GPIO pin
-	pinInit(pin);
 	
 	// initialize the ADC channel
 	uint32_t tmpreg1, tmpreg2;
@@ -56,7 +44,12 @@ void adc_init(void)
 	uint8_t i = 0;
 	for (uint8_t i = 0; i < ADC_NUM_CHANNELS; i ++)
 	{	
-		adc_config(AdcChannelTable[i].Channel, AdcChannelTable[i].Pin);
+		adc_config(AdcChannelTable[i].Channel);
+		//initialize pin for channel
+		if (AdcChannelTable[i].Pin)//if pin def is 0, skip pin init
+		{
+			pinInit(AdcChannelTable[i].Pin); 
+		}
 	}
 	
 }

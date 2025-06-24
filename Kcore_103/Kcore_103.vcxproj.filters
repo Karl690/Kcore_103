@@ -120,7 +120,7 @@
     <ClCompile Include="KCore\adc\adc.c">
       <Filter>adc</Filter>
     </ClCompile>
-    <ClCompile Include="KCore\adc\tables.c">
+    <ClCompile Include="KCore\adc\ADC_Tables.c">
       <Filter>adc</Filter>
     </ClCompile>
     <ClCompile Include="KCore\display\display.c">
@@ -139,6 +139,9 @@
       <Filter>timer</Filter>
     </ClCompile>
     <ClCompile Include="KCore\main.c" />
+    <ClCompile Include="KCore\adc\AD_Channel_Definitions.c">
+      <Filter>adc</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cmsis\core_cm3.h">
@@ -207,7 +210,7 @@
     <ClInclude Include="KCore\adc\adc.h">
       <Filter>adc</Filter>
     </ClInclude>
-    <ClInclude Include="KCore\adc\tables.h">
+    <ClInclude Include="KCore\adc\ADC_Tables.h">
       <Filter>adc</Filter>
     </ClInclude>
     <ClInclude Include="KCore\display\display.h">
@@ -230,5 +233,8 @@
     </ClInclude>
     <ClInclude Include="KCore\main.h" />
     <ClInclude Include="KCore\RevisionHistory.h" />
+    <ClInclude Include="KCore\adc\AD_Channel_Definitions.h">
+      <Filter>adc</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

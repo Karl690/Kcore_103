@@ -15,11 +15,6 @@
 #define ADC_NUM_SAMPLES                 10  // 10 values saved; toss high and low to get average
 #define ADC_SHIFT_FOR_AVG               3
 
-typedef struct {
-	uint32_t Channel;
-	pinType Pin;
-	float* ConvertionTable;
-}ADC_ChannelDef;
 
 typedef enum {
 	CONV_UNDEFINED = 0,

@@ -61,7 +61,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="KCore\adc\adc.c" />
-    <ClCompile Include="KCore\adc\tables.c" />
+    <ClCompile Include="KCore\adc\ADC_Tables.c" />
+    <ClCompile Include="KCore\adc\AD_Channel_Definitions.c" />
     <ClCompile Include="KCore\display\display.c" />
     <ClCompile Include="KCore\display\displaylist.c" />
     <ClCompile Include="KCore\display\gui.c" />
@@ -86,7 +87,8 @@
     <ClInclude Include="cmsis_lib\inc\stm32f10x_tim.h" />
     <ClInclude Include="cmsis_lib\inc\stm32f10x_usart.h" />
     <ClInclude Include="KCore\adc\adc.h" />
-    <ClInclude Include="KCore\adc\tables.h" />
+    <ClInclude Include="KCore\adc\ADC_Tables.h" />
+    <ClInclude Include="KCore\adc\AD_Channel_Definitions.h" />
     <ClInclude Include="KCore\display\display.h" />
     <ClInclude Include="KCore\display\displaylist.h" />
     <ClInclude Include="KCore\display\font5x7.h" />
