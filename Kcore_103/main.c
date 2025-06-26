@@ -36,7 +36,7 @@ int main(void)
 	SysTick_Config(SystemCoreClock / SYSTICKS_PER_SECOND);
 	
 	Booted = 1;
-	// adc_start();
+	adc_start();
 	
 	for (;;)
 	{	
