@@ -22,7 +22,7 @@
         <Revision>0</Revision>
       </Version>
     </ToolchainID>
-    <ProjectFile>Kcore_103.vcxproj</ProjectFile>
+    <ProjectFile>KCore_103.vcxproj</ProjectFile>
     <ParallelJobCount>0</ParallelJobCount>
     <SuppressDirectoryChangeMessages>true</SuppressDirectoryChangeMessages>
     <BuildAsRoot>false</BuildAsRoot>
