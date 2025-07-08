@@ -8,41 +8,41 @@
   </ToolchainVersion>
   <BspID>com.visualgdb.bsp.in-place</BspID>
   <BspVersion>1.0</BspVersion>
-  <McuID>STM32F103CB</McuID>
+  <McuID>STM32F103C6</McuID>
   <BSPSubdirectory>BSP</BSPSubdirectory>
-  <MCUDefinitionFile>.\BSP\BSP\stm32f103xb.xml</MCUDefinitionFile>
+  <MCUDefinitionFile>stm32f103x6.xml</MCUDefinitionFile>
   <MCUProperties>
     <Entries />
   </MCUProperties>
   <BSPSourceFolderName>Device-specific files</BSPSourceFolderName>
   <InPlaceMCU>
-    <ID>STM32F103CB</ID>
-    <UserFriendlyName>STM32F103CB</UserFriendlyName>
+    <ID>STM32F103C6</ID>
+    <UserFriendlyName>STM32F103C6</UserFriendlyName>
     <CompilationFlags>
       <PreprocessorMacros>
         <string>ARM_MATH_CM3</string>
         <string>flash_layout</string>
-        <string>STM32F103CB</string>
-        <string>STM32F103xB</string>
+        <string>STM32F103C6</string>
+        <string>STM32F103x6</string>
         <string>USE_HAL_DRIVER</string>
         <string>USE_ADC</string>
       </PreprocessorMacros>
       <IncludeDirectories>
+        <string>.</string>
         <string>./BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc</string>
         <string>./BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/Legacy</string>
         <string>./BSP/STM32F1xxxx/CMSIS_HAL/Core/Include</string>
         <string>./BSP/STM32F1xxxx/CMSIS_HAL/Device/ST/STM32F1xx/Include</string>
         <string>./BSP/STM32F1xxxx/CMSIS_HAL/Include</string>
         <string>./BSP/STM32F1xxxx/CMSIS_HAL/RTOS2/Include</string>
-        <string>.</string>
       </IncludeDirectories>
       <LDFLAGS>--specs=nano.specs -u _printf_float --specs=nosys.specs -Wl,--no-warn-rwx-segments</LDFLAGS>
-      <LinkerScript>./BSP/STM32F1xxxx/LinkerScripts/STM32F103CB_flash.lds</LinkerScript>
+      <LinkerScript>$$SYS:BSP_ROOT$$/STM32F1xxxx/LinkerScripts/STM32F103C6_flash.lds</LinkerScript>
       <COMMONFLAGS>-mcpu=cortex-m3 -mthumb</COMMONFLAGS>
       <EnableLinkerGroups>true</EnableLinkerGroups>
     </CompilationFlags>
     <AdditionalSourceFiles>
-      <string>./BSP/STM32F1xxxx/StartupFiles/startup_stm32f103xb.c</string>
+      <string>./BSP/STM32F1xxxx/StartupFiles/startup_stm32f103x6.c</string>
       <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.c</string>
       <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c</string>
       <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c</string>
@@ -222,14 +222,14 @@
         <MCUMemory>
           <Name>FLASH</Name>
           <Address>134217728</Address>
-          <Size>131072</Size>
+          <Size>32768</Size>
           <AddressSpaceSize>0</AddressSpaceSize>
           <Flags>IsDefaultFLASH</Flags>
         </MCUMemory>
         <MCUMemory>
           <Name>SRAM</Name>
           <Address>536870912</Address>
-          <Size>20480</Size>
+          <Size>10240</Size>
           <AddressSpaceSize>0</AddressSpaceSize>
           <Flags>None</Flags>
         </MCUMemory>
@@ -272,11 +272,11 @@
       </SysVarEntry>
       <SysVarEntry>
         <Key>com.sysprogs.stm32.hal_device_family</Key>
-        <Value>STM32F103xB</Value>
+        <Value>STM32F103x6</Value>
       </SysVarEntry>
       <SysVarEntry>
         <Key>com.sysprogs.stm32.legacy_device_family</Key>
-        <Value>STM32F10X_MD</Value>
+        <Value>STM32F10X_LD</Value>
       </SysVarEntry>
     </AdditionalSystemVars>
     <ConfigurableProperties>
@@ -360,11 +360,11 @@
     </ConfigurableProperties>
     <HierarchicalPath>STM32\STM32F1</HierarchicalPath>
     <FamilyID>STM32F1</FamilyID>
-    <FLASHSize>131072</FLASHSize>
-    <RAMSize>20480</RAMSize>
+    <FLASHSize>32768</FLASHSize>
+    <RAMSize>10240</RAMSize>
     <FLASHBase>134217728</FLASHBase>
     <RAMBase>536870912</RAMBase>
-    <MCUDefinitionFile>.\BSP\BSP\stm32f103xb.xml</MCUDefinitionFile>
+    <MCUDefinitionFile>stm32f103x6.xml</MCUDefinitionFile>
     <AdditionalSourcesRequiredForTesting>false</AdditionalSourcesRequiredForTesting>
   </InPlaceMCU>
   <MCUMakFile>stm32.mak</MCUMakFile>
