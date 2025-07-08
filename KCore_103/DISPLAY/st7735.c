@@ -61,8 +61,11 @@ void ST7735_Init(uint8_t wid, uint8_t height) {
 		Error_Handler();
 	}
 	
+#if (_SPI_PORT == 1)
+	__HAL_RCC_SPI1_CLK_ENABLE();
+#else
 	__HAL_RCC_SPI2_CLK_ENABLE();
-  
+#endif
 	GPIO_InitTypeDef GPIO_InitStruct = { 0 };
 	GPIO_InitStruct.Pin = SPI_SCK_PIN | SPI_MOSI_PIN;
 	GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;

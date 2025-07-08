@@ -14,8 +14,8 @@
 
 	#if _SPI_PORT == 1
 		#define SPI_PORT      SPI1
-		#define SPI_SCK_PIN   GPIO_Pin_5     // PA5
-		#define SPI_MOSI_PIN  GPIO_Pin_7     // PA7
+		#define SPI_SCK_PIN   GPIO_PIN_5     // PA5
+		#define SPI_MOSI_PIN  GPIO_PIN_7     // PA7
 		#define SPI_GPIO_PORT GPIOA
 	#elif _SPI_PORT == 2
 		#define SPI_PORT      SPI2
