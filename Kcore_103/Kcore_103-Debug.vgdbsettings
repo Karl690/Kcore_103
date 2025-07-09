@@ -22,11 +22,8 @@
         <Revision>0</Revision>
       </Version>
     </ToolchainID>
-    <ProjectFile>Kcore_103.vcxproj</ProjectFile>
-    <RemoteBuildEnvironment>
-      <Records />
-    </RemoteBuildEnvironment>
-    <ParallelJobCount>1</ParallelJobCount>
+    <ProjectFile>KCore_103.vcxproj</ProjectFile>
+    <ParallelJobCount>0</ParallelJobCount>
     <SuppressDirectoryChangeMessages>true</SuppressDirectoryChangeMessages>
     <BuildAsRoot>false</BuildAsRoot>
   </Build>
@@ -110,7 +107,7 @@
         <ExtraParameters>
           <Frequency xsi:nil="true" />
           <BoostedFrequency xsi:nil="true" />
-          <ConnectUnderReset>false</ConnectUnderReset>
+          <ConnectUnderReset>true</ConnectUnderReset>
         </ExtraParameters>
         <LoadProgressGUIThreshold>131072</LoadProgressGUIThreshold>
         <ProgramMode>Enabled</ProgramMode>

@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.36128.20
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "KCore103CBT6", "KCore103CBT6\KCore103CBT6.vcxproj", "{81B54445-EEC0-4540-AA00-B41FEBC33EDB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|VisualGDB = Debug|VisualGDB
+		Release|VisualGDB = Release|VisualGDB
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{81B54445-EEC0-4540-AA00-B41FEBC33EDB}.Debug|VisualGDB.ActiveCfg = Debug|VisualGDB
+		{81B54445-EEC0-4540-AA00-B41FEBC33EDB}.Debug|VisualGDB.Build.0 = Debug|VisualGDB
+		{81B54445-EEC0-4540-AA00-B41FEBC33EDB}.Release|VisualGDB.ActiveCfg = Release|VisualGDB
+		{81B54445-EEC0-4540-AA00-B41FEBC33EDB}.Release|VisualGDB.Build.0 = Release|VisualGDB
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5B5BDA30-0B41-44E1-AB93-BF3DD9B3D0FB}
+	EndGlobalSection
+EndGlobal

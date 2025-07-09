@@ -8,45 +8,228 @@
   </ToolchainVersion>
   <BspID>com.visualgdb.bsp.in-place</BspID>
   <BspVersion>1.0</BspVersion>
-  <McuID>STM32F103C6</McuID>
+  <McuID>STM32F103CB</McuID>
   <BSPSubdirectory>BSP</BSPSubdirectory>
+  <MCUDefinitionFile>.\BSP\BSP\stm32f103xb.xml</MCUDefinitionFile>
   <MCUProperties>
     <Entries />
   </MCUProperties>
   <BSPSourceFolderName>Device-specific files</BSPSourceFolderName>
   <InPlaceMCU>
-    <ID>STM32F103C6</ID>
-    <UserFriendlyName>STM32F103C6</UserFriendlyName>
+    <ID>STM32F103CB</ID>
+    <UserFriendlyName>STM32F103CB</UserFriendlyName>
     <CompilationFlags>
       <PreprocessorMacros>
         <string>ARM_MATH_CM3</string>
         <string>flash_layout</string>
-        <string>STM32F103C6</string>
-        <string>STM32F103x6</string>
+        <string>STM32F103CB</string>
+        <string>STM32F103xB</string>
         <string>USE_HAL_DRIVER</string>
-        <string />
+        <string>USE_ADC</string>
       </PreprocessorMacros>
       <IncludeDirectories>
+        <string>./BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc</string>
+        <string>./BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/Legacy</string>
+        <string>./BSP/STM32F1xxxx/CMSIS_HAL/Core/Include</string>
+        <string>./BSP/STM32F1xxxx/CMSIS_HAL/Device/ST/STM32F1xx/Include</string>
+        <string>./BSP/STM32F1xxxx/CMSIS_HAL/Include</string>
+        <string>./BSP/STM32F1xxxx/CMSIS_HAL/RTOS2/Include</string>
         <string>.</string>
       </IncludeDirectories>
       <LDFLAGS>--specs=nano.specs -u _printf_float --specs=nosys.specs -Wl,--no-warn-rwx-segments</LDFLAGS>
-      <LinkerScript>E:/GIT/Kcore_103/Kcore_103/STM32F103C6_flash.lds</LinkerScript>
+      <LinkerScript>./BSP/STM32F1xxxx/LinkerScripts/STM32F103CB_flash.lds</LinkerScript>
       <COMMONFLAGS>-mcpu=cortex-m3 -mthumb</COMMONFLAGS>
       <EnableLinkerGroups>true</EnableLinkerGroups>
     </CompilationFlags>
+    <AdditionalSourceFiles>
+      <string>./BSP/STM32F1xxxx/StartupFiles/startup_stm32f103xb.c</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.c</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_can.c</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cec.c</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_crc.c</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dac.c</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dac_ex.c</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dma.c</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_eth.c</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_exti.c</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash.c</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash_ex.c</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.c</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio_ex.c</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_hcd.c</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_i2c.c</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_i2s.c</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_irda.c</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_iwdg.c</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_mmc.c</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_nand.c</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_nor.c</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pccard.c</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pcd.c</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pcd_ex.c</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc.c</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc_ex.c</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc.c</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_sd.c</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_smartcard.c</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi.c</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_sram.c</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.c</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim_ex.c</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_uart.c</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_usart.c</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_wwdg.c</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_usb.c</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_adc.c</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_crc.c</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_dac.c</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_dma.c</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_exti.c</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_fsmc.c</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_gpio.c</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_i2c.c</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_pwr.c</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_rcc.c</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_rtc.c</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_sdmmc.c</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_spi.c</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_usart.c</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_utils.c</string>
+    </AdditionalSourceFiles>
+    <AdditionalHeaderFiles>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_adc.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_adc_ex.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_can.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cec.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_crc.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dac.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dac_ex.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_eth.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_exti.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_hcd.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_i2c.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_i2s.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_irda.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_iwdg.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_mmc.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_nand.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_nor.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pccard.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pcd.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pcd_ex.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rtc.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rtc_ex.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_sd.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_smartcard.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_sram.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_usart.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_wwdg.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_usb.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/Legacy/stm32f1xx_hal_can_ex_legacy.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/Legacy/stm32f1xx_hal_can_legacy.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/CMSIS_HAL/Core/Include/cmsis_armcc.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/CMSIS_HAL/Core/Include/cmsis_armclang.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/CMSIS_HAL/Core/Include/cmsis_compiler.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/CMSIS_HAL/Core/Include/cmsis_gcc.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/CMSIS_HAL/Core/Include/cmsis_iccarm.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/CMSIS_HAL/Core/Include/cmsis_version.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/CMSIS_HAL/Core/Include/core_armv8mbl.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/CMSIS_HAL/Core/Include/core_armv8mml.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/CMSIS_HAL/Core/Include/core_cm0.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/CMSIS_HAL/Core/Include/core_cm0plus.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/CMSIS_HAL/Core/Include/core_cm1.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/CMSIS_HAL/Core/Include/core_cm23.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/CMSIS_HAL/Core/Include/core_cm3.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/CMSIS_HAL/Core/Include/core_cm33.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/CMSIS_HAL/Core/Include/core_cm4.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/CMSIS_HAL/Core/Include/core_cm7.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/CMSIS_HAL/Core/Include/core_sc000.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/CMSIS_HAL/Core/Include/core_sc300.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/CMSIS_HAL/Core/Include/mpu_armv7.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/CMSIS_HAL/Core/Include/mpu_armv8.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/CMSIS_HAL/Core/Include/tz_context.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/CMSIS_HAL/Device/ST/STM32F1xx/Include/stm32f1xx.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/CMSIS_HAL/Device/ST/STM32F1xx/Include/system_stm32f1xx.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/CMSIS_HAL/Include/cmsis_armcc.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/CMSIS_HAL/Include/cmsis_armclang.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/CMSIS_HAL/Include/cmsis_compiler.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/CMSIS_HAL/Include/cmsis_gcc.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/CMSIS_HAL/Include/cmsis_iccarm.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/CMSIS_HAL/Include/cmsis_version.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/CMSIS_HAL/Include/core_armv8mbl.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/CMSIS_HAL/Include/core_armv8mml.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/CMSIS_HAL/Include/core_cm0.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/CMSIS_HAL/Include/core_cm0plus.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/CMSIS_HAL/Include/core_cm1.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/CMSIS_HAL/Include/core_cm23.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/CMSIS_HAL/Include/core_cm3.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/CMSIS_HAL/Include/core_cm33.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/CMSIS_HAL/Include/core_cm4.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/CMSIS_HAL/Include/core_cm7.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/CMSIS_HAL/Include/core_sc000.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/CMSIS_HAL/Include/core_sc300.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/CMSIS_HAL/Include/mpu_armv7.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/CMSIS_HAL/Include/mpu_armv8.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/CMSIS_HAL/Include/tz_context.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/CMSIS_HAL/RTOS/Template/cmsis_os.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_adc.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_bus.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_cortex.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_crc.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_dac.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_dma.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_exti.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_fsmc.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_i2c.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_iwdg.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_pwr.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_rcc.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_rtc.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_sdmmc.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_spi.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_system.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_usart.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_utils.h</string>
+      <string>$$SYS:BSP_ROOT$$/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_wwdg.h</string>
+    </AdditionalHeaderFiles>
     <MemoryMap>
       <Memories>
         <MCUMemory>
           <Name>FLASH</Name>
           <Address>134217728</Address>
-          <Size>32768</Size>
+          <Size>131072</Size>
           <AddressSpaceSize>0</AddressSpaceSize>
           <Flags>IsDefaultFLASH</Flags>
         </MCUMemory>
         <MCUMemory>
           <Name>SRAM</Name>
           <Address>536870912</Address>
-          <Size>10240</Size>
+          <Size>20480</Size>
           <AddressSpaceSize>0</AddressSpaceSize>
           <Flags>None</Flags>
         </MCUMemory>
@@ -89,11 +272,11 @@
       </SysVarEntry>
       <SysVarEntry>
         <Key>com.sysprogs.stm32.hal_device_family</Key>
-        <Value>STM32F103x6</Value>
+        <Value>STM32F103xB</Value>
       </SysVarEntry>
       <SysVarEntry>
         <Key>com.sysprogs.stm32.legacy_device_family</Key>
-        <Value>STM32F10X_LD</Value>
+        <Value>STM32F10X_MD</Value>
       </SysVarEntry>
     </AdditionalSystemVars>
     <ConfigurableProperties>
@@ -177,10 +360,11 @@
     </ConfigurableProperties>
     <HierarchicalPath>STM32\STM32F1</HierarchicalPath>
     <FamilyID>STM32F1</FamilyID>
-    <FLASHSize>32768</FLASHSize>
-    <RAMSize>10240</RAMSize>
+    <FLASHSize>131072</FLASHSize>
+    <RAMSize>20480</RAMSize>
     <FLASHBase>134217728</FLASHBase>
     <RAMBase>536870912</RAMBase>
+    <MCUDefinitionFile>.\BSP\BSP\stm32f103xb.xml</MCUDefinitionFile>
     <AdditionalSourcesRequiredForTesting>false</AdditionalSourcesRequiredForTesting>
   </InPlaceMCU>
   <MCUMakFile>stm32.mak</MCUMakFile>

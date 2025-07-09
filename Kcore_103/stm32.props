@@ -9,18 +9,18 @@
 <!-- In order to build this project manually (outside VisualGDB), please provide TOOLCHAIN_ROOT, BSP_ROOT, EFP_BASE and TESTFW_BASE variables via Environment or Make command line -->
 	<ItemDefinitionGroup>
 		<ClCompile>
-			<PreprocessorDefinitions>ARM_MATH_CM3;flash_layout;STM32F103C6;STM32F103x6;USE_HAL_DRIVER;%(ClCompile.PreprocessorDefinitions)</PreprocessorDefinitions>
-			<AdditionalIncludeDirectories>%(ClCompile.AdditionalIncludeDirectories);$(ProjectDir)</AdditionalIncludeDirectories>
+			<PreprocessorDefinitions>ARM_MATH_CM3;flash_layout;STM32F103CB;STM32F103xB;USE_HAL_DRIVER;USE_ADC;%(ClCompile.PreprocessorDefinitions)</PreprocessorDefinitions>
+			<AdditionalIncludeDirectories>%(ClCompile.AdditionalIncludeDirectories);./BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc;./BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/Legacy;./BSP/STM32F1xxxx/CMSIS_HAL/Core/Include;./BSP/STM32F1xxxx/CMSIS_HAL/Device/ST/STM32F1xx/Include;./BSP/STM32F1xxxx/CMSIS_HAL/Include;./BSP/STM32F1xxxx/CMSIS_HAL/RTOS2/Include;$(ProjectDir)</AdditionalIncludeDirectories>
 		</ClCompile>
 	</ItemDefinitionGroup>
 	<ItemDefinitionGroup>
 		<Link>
-			<LinkerScript Condition="'%(Link.LinkerScript)' == ''">E:/GIT/Kcore_103/Kcore_103/STM32F103C6_flash.lds</LinkerScript>
+			<LinkerScript Condition="'%(Link.LinkerScript)' == ''">./BSP/STM32F1xxxx/LinkerScripts/STM32F103CB_flash.lds</LinkerScript>
 			<AdditionalOptions>--specs=nano.specs -u _printf_float --specs=nosys.specs -Wl,--no-warn-rwx-segments %(Link.AdditionalOptions)</AdditionalOptions>
 		</Link>
 	</ItemDefinitionGroup>
 	<PropertyGroup>
-		<DefaultLinkerScript>E:/GIT/Kcore_103/Kcore_103/STM32F103C6_flash.lds</DefaultLinkerScript>
+		<DefaultLinkerScript>./BSP/STM32F1xxxx/LinkerScripts/STM32F103CB_flash.lds</DefaultLinkerScript>
 	</PropertyGroup>
 
 	<ItemDefinitionGroup>
