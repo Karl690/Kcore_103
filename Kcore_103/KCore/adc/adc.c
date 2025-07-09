@@ -39,13 +39,18 @@ float adc_conversionFactor = 3.3 / 4096;
 
 void ProcessRawADC_Data(void)
 {
-	SmoothDataUsingOlympicVotingAverage();
+	if (ADC_GetFlagStatus(ADC1, ADC_FLAG_EOC) != RESET)
+	{
+		SmoothDataUsingOlympicVotingAverage();	
+	}
+	
 }
 
 void SmoothDataUsingOlympicVotingAverage(void)
 {
 	ADC_Work_Channel = &ADC_Channel[ADC_Work_Channel_Index];
-	ADC_Work_Channel->adcRaw += RawADCDataBuffer[ADC_Work_Channel_Index]; //update last reading
+	// ADC_Work_Channel->adcRaw += RawADCDataBuffer[ADC_Work_Channel_Index]; //update last reading
+	ADC_Work_Channel->adcRaw += ADC_GetConversionValue(ADC1); // read ADC value (range 0 to 4095
 	ADC_Work_Channel->adcRaw = ADC_Work_Channel->adcRaw >> 1; //average from last reading
 	//now we need to plug into the 10 reading buffer for smoothing.
 	ADC_Work_Channel->sampleHistory[ADC_Work_Channel->sampleIndex] = ADC_Work_Channel->adcRaw; //plug in the latest reading.

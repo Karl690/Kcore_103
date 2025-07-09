@@ -2,7 +2,7 @@
 #include <stdint.h>
 #include "1xx/adc_1xx.h"
 
-#define ADC_NUM_CHANNELS                4
+#define ADC_NUM_CHANNELS                3
 #define ADC_CHANNEL_POSITION            ADC_Channel_9
 #define ADC_CHANNEL_RTD1                ADC_Channel_1
 #define ADC_CHANNEL_RTD2                ADC_Channel_0
@@ -37,7 +37,7 @@ typedef struct {
 } adcStruct;
 
 extern uint16_t RawADCDataBuffer[];
-
+extern adcStruct ADC_Channel[ADC_NUM_CHANNELS];
 void adc_init(void);
 void adc_start(void);
 void ProcessRawADC_Data();
