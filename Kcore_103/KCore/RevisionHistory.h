@@ -7,6 +7,6 @@
 #pragma once
 
 #define RevisionHeader ">KCORE103"
-#define MajorStep "1.004"
+#define MajorStep "1.005"
 #define RevisionDate "7/9/2025"
 #define HEARTBEATSTRING "KCORE103" MajorStep

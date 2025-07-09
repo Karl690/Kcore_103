@@ -3,8 +3,43 @@
 #include "AD_Channel_Definitions.h"
 uint16_t   RawADCDataBuffer[ADC_NUM_CHANNELS] = { 0 };
 
+void adcInit(ADC_TypeDef *ADCx)
+{
+#define CFGR_ADCPRE_Reset_Mask    ((uint32_t)0xFFFF3FFF)
+	RCC->CFGR &= CFGR_ADCPRE_Reset_Mask; // 0xffff3fff  //clock for ADC (max 14MHz --> 72/6=12MHz)
+	RCC->CFGR |= RCC_PCLK2_Div6; // 0x0008000
+
+	if (ADCx == ADC1)
+		initClkAndResetAPB2(RCC_APB2Periph_ADC1);
+	else if (ADCx == ADC2)
+		initClkAndResetAPB2(RCC_APB2Periph_ADC2);
+	else if (ADCx == ADC3)
+		initClkAndResetAPB2(RCC_APB2Periph_ADC3);
+
+// define ADC config
+	ADC_InitTypeDef ADC_InitStructure;
+	ADC_InitStructure.ADC_Mode = ADC_Mode_Independent;
+	ADC_InitStructure.ADC_ScanConvMode = DISABLE;
+	ADC_InitStructure.ADC_ContinuousConvMode = DISABLE; // we work in single sampling mode
+	ADC_InitStructure.ADC_ExternalTrigConv = ADC_ExternalTrigConv_None;
+	ADC_InitStructure.ADC_ExternalTrigConv = ADC_ExternalTrigConv_None;
+	ADC_InitStructure.ADC_DataAlign = ADC_DataAlign_Right;
+	ADC_InitStructure.ADC_NbrOfChannel = 1;
+
+	ADC_Init(ADCx, &ADC_InitStructure); //set config of ADCx
+
+	ADC_Cmd(ADCx, ENABLE); //enable ADCx
+
+	//  ADC calibration (optional, but recommended at power on)
+	ADC_ResetCalibration(ADCx); // Reset previous calibration
+	while (ADC_GetResetCalibrationStatus(ADCx)) ;
+	ADC_StartCalibration(ADCx); // Start new calibration (ADC must be off at that time)
+	while (ADC_GetCalibrationStatus(ADCx)) ;                  // Wait until calibration is complete
+}
+	
 void adc_init(void)
 {
+	adcInit(ADC1);
 	uint8_t i = 0;
 	for (uint8_t i = 0; i < ADC_NUM_CHANNELS; i ++)
 	{	
@@ -16,6 +51,8 @@ void adc_init(void)
 		}
 	}
 	
+	// it needs to set first channel in pulling mode, first
+	adc_config(AdcChannelTable[0].Channel);
 }
 
 void adc_start()
@@ -87,5 +124,7 @@ void SmoothDataUsingOlympicVotingAverage(void)
 	// setup next conversion so data will be ready for the next call in ~10ms
 	ADC_Work_Channel_Index++;
 	if (ADC_Work_Channel_Index >= ADC_NUM_CHANNELS) ADC_Work_Channel_Index = 0; //keep in range
-
+	
+	// it needs to setup channel after reading in pulling mode
+	adc_config(AdcChannelTable[ADC_Work_Channel_Index].Channel); // set up next channel
 }
