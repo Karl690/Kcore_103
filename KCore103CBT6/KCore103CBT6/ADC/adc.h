@@ -3,6 +3,9 @@
 
 #include <stdint.h>
 #include "1xx/adc_1xx.h"
+#include "AD_Channel_Definitions.h"
+
+#define ADC_NUM_CHANNELS                3
 
 
 #define ANALOG_VOLTAGE  (0x34cd)    // 3.3V in a 4.12 format
@@ -25,6 +28,7 @@ typedef struct {
 	int16_t     convRaw; // converted value from last rawValue read
 	int16_t     adcAvg; // average of the last 10 read (or converted reads) after tossing high and low
 	float     convAvg; // converted value using the rawAvg
+	float		calcValue; // calculate Value (Temperature) with convAvg by Convertion Table
 	int16_t     sampleHistory[ADC_NUM_SAMPLES]; // last N reads from ADC
 	uint8_t     sampleIndex; // index of last valid value in the history
 	uint8_t     inputChannel; // actual adc channel input selection
@@ -32,9 +36,10 @@ typedef struct {
 } adcStruct;
 
 extern uint16_t RawADCDataBuffer[];
-
+extern adcStruct ADC_Channel[ADC_NUM_CHANNELS];
 void adc_init(void);
 void adc_start(void);
 void ProcessRawADC_Data();
+void ConvertADCToTemperature();
 void SmoothDataUsingOlympicVotingAverage();
 #endif
