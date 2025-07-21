@@ -36,6 +36,7 @@ uint16_t RGB565(uint8_t R,uint8_t G,uint8_t B) {
 
 void ST7735_Init(uint8_t wid, uint8_t height) {
 	
+#ifdef USE_SPI_DMA
 	/* DMA controller clock enable */
 	__HAL_RCC_DMA1_CLK_ENABLE();
 
@@ -43,7 +44,7 @@ void ST7735_Init(uint8_t wid, uint8_t height) {
 	/* DMA1_Channel3_IRQn interrupt configuration */
 	HAL_NVIC_SetPriority(DMA1_Channel3_IRQn, 0, 0);
 	HAL_NVIC_EnableIRQ(DMA1_Channel3_IRQn);
-	
+#endif	
 	hspi.Instance = SPI_PORT;
 	hspi.Init.Mode = SPI_MODE_MASTER;
 	hspi.Init.Direction = SPI_DIRECTION_2LINES;
@@ -71,7 +72,7 @@ void ST7735_Init(uint8_t wid, uint8_t height) {
 	GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
 	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
 	HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
-	
+#ifdef USE_SPI_DMA	
 	/* SPI1 DMA Init */
     /* SPI1_TX Init */
 	hdma_spi_tx.Instance = DMA1_Channel3;
@@ -88,7 +89,7 @@ void ST7735_Init(uint8_t wid, uint8_t height) {
 	}
 	__HAL_LINKDMA(&hspi, hdmatx, hdma_spi_tx);
 	
-	
+#endif
 	
 	// Reset display
 	CS_H();
