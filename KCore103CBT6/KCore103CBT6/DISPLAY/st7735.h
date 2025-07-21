@@ -88,7 +88,7 @@ uint16_t RGB565(uint8_t R,uint8_t G,uint8_t B);
 
 void ST7735_Init(uint8_t wid, uint8_t height);
 void ST7735_AddrSet(uint16_t XS, uint16_t YS, uint16_t XE, uint16_t YE);
-void ST7735_Orientation(uint8_t orientation);
+void ST7735_Orientation(ScrOrientation_TypeDef orientation);
 void ST7735_Clear(uint16_t color);
 
 void ST7735_Pixel(uint16_t X, uint16_t Y, uint16_t color);
