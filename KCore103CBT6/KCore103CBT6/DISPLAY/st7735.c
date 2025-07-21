@@ -16,7 +16,7 @@ void ST7735_write(uint8_t data) {
   HAL_SPI_Transmit_DMA(&hspi, &data, 1);
 	//while(hspi1.State == HAL_SPI_STATE_BUSY_TX);
 #else
-	HAL_SPI_Transmit(&ST7735_SPI_PORT, &cmd, sizeof(cmd), HAL_MAX_DELAY);
+	HAL_SPI_Transmit(&hspi, &data, sizeof(data), HAL_MAX_DELAY);
 #endif
 }
 

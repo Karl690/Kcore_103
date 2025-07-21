@@ -17,7 +17,7 @@
 #include "DISPLAY/display.h"
 #include "DISPLAY/gui.h"
 
-#define USE_SPI_DMA
+// #define USE_SPI_DMA
 extern uint8_t Booted;
 extern uint8_t DisplayIndex;
 
