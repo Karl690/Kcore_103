@@ -130,10 +130,11 @@ void func_SystickCallback()
 void BlinkHeartBeat()
 {
 	HeartBeat++;
-	pinToggleOutput(PIN_LED_50);
-	pinToggleOutput(PIN_LED_100);
-	pinToggleOutput(PIN_LED_150);
-	pinToggleOutput(PIN_LED_175);
+	pinToggleOutput(PIN_LED_HEARTBEAT);
+//	pinToggleOutput(PIN_LED_50);
+//	pinToggleOutput(PIN_LED_100);
+//	pinToggleOutput(PIN_LED_150);
+//	pinToggleOutput(PIN_LED_175);
 }
 
 void ClearSliceTimes()

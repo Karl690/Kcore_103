@@ -9,6 +9,7 @@ void adc_init(void)
 {
 	
 	uint8_t i = 0;
+	adc_1xx_dma_config();
 	adc_1xx_init(ADC_NUM_CHANNELS);
 	for (uint8_t i = 0; i < ADC_NUM_CHANNELS; i ++)
 	{	
@@ -16,7 +17,7 @@ void adc_init(void)
 		//initialize pin for channel
 		if (AdcChannelTable[i].Pin)//if pin def is 0, skip pin init
 		{
-			pinInit(AdcChannelTable[i].Pin); 
+			// pinInit(AdcChannelTable[i].Pin); 
 		}
 	}
 }

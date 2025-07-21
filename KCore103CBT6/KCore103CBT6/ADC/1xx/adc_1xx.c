@@ -4,9 +4,10 @@
 ADC_HandleTypeDef hadc;
 DMA_HandleTypeDef hdma_adc;
 void adc_1xx_init(int channels) {
+	__HAL_RCC_ADC1_CLK_ENABLE();
 	
 	hadc.Instance = ADC1;
-	hadc.Init.ScanConvMode = ENABLE;
+	hadc.Init.ScanConvMode = ADC_SCAN_ENABLE;
 	hadc.Init.ContinuousConvMode = ENABLE;
 	hadc.Init.DiscontinuousConvMode = DISABLE;
 	hadc.Init.ExternalTrigConv = ADC_SOFTWARE_START;
@@ -17,9 +18,9 @@ void adc_1xx_init(int channels) {
 		Error_Handler();
 	}
 	ADC_ChannelConfTypeDef sConfig = { 0 };
-
-	// Configure ADC channels (example: PA0 and PA1)
 	sConfig.SamplingTime = ADC_SAMPLETIME_55CYCLES_5;
+	
+	HAL_ADCEx_Calibration_Start(&hadc);
 }
 
 void adc_1xx_channel_config(uint8_t channel, uint8_t rank)
@@ -28,6 +29,7 @@ void adc_1xx_channel_config(uint8_t channel, uint8_t rank)
 
 	sConfig.Channel = channel;
 	sConfig.Rank = rank;
+	sConfig.SamplingTime = ADC_SAMPLETIME_55CYCLES_5;
 	if (HAL_ADC_ConfigChannel(&hadc, &sConfig) != HAL_OK)
 	{
 		Error_Handler();
@@ -57,9 +59,9 @@ void adc_1xx_dma_config()
 	HAL_NVIC_EnableIRQ(DMA1_Channel1_IRQn);
 }
 
-void adc_1xx_start(uint16_t* adcValues, uint32_t channel)
+void adc_1xx_start(uint32_t* adcValues, uint32_t channels)
 {
-	if (HAL_ADC_Start_DMA(&hadc, (uint32_t*)adcValues, channel) != HAL_OK)
+	if (HAL_ADC_Start_DMA(&hadc, (uint32_t*)adcValues, channels) != HAL_OK)
 	{
 		Error_Handler();
 	}
