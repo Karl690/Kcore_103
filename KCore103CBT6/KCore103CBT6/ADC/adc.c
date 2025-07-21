@@ -2,6 +2,7 @@
 #include "main.h"
 #include "adc.h"
 #include "1xx/adc_1xx.h"
+#include "ADC_Tables.h"
 #include "AD_Channel_Definitions.h"
 uint16_t   RawADCDataBuffer[ADC_NUM_CHANNELS] = { 0 };
 
@@ -9,6 +10,7 @@ void adc_init(void)
 {
 	
 	uint8_t i = 0;
+	adc_1xx_dma_config();
 	adc_1xx_init(ADC_NUM_CHANNELS);
 	for (uint8_t i = 0; i < ADC_NUM_CHANNELS; i ++)
 	{	
@@ -16,7 +18,7 @@ void adc_init(void)
 		//initialize pin for channel
 		if (AdcChannelTable[i].Pin)//if pin def is 0, skip pin init
 		{
-			pinInit(AdcChannelTable[i].Pin); 
+			// pinInit(AdcChannelTable[i].Pin); 
 		}
 	}
 }
@@ -24,7 +26,7 @@ void adc_init(void)
 void adc_start()
 {
 	// it need to call this function if it is in DMA mode
-	adc_1xx_start(RawADCDataBuffer, ADC_NUM_CHANNELS);
+	adc_1xx_start((uint32_t*)RawADCDataBuffer, ADC_NUM_CHANNELS);
 	
 }
 
@@ -47,8 +49,15 @@ void ProcessRawADC_Data(void)
 	SmoothDataUsingOlympicVotingAverage();
 }
 
+void ConvertADCToTemperature()
+{
+	ADC_ChannelDef *channelDef = &AdcChannelTable[ADC_Work_Channel_Index];
+	ADC_Channel[ADC_Work_Channel_Index].calcValue = convertRtdDataFromRawADCValue((const AdcTableStruct*)channelDef->convertionTable, ADC_Channel[2].adcAvg);
+}
+
 void SmoothDataUsingOlympicVotingAverage(void)
 {
+	
 	ADC_Work_Channel = &ADC_Channel[ADC_Work_Channel_Index];
 	ADC_Work_Channel->adcRaw += RawADCDataBuffer[ADC_Work_Channel_Index]; //update last reading
 	ADC_Work_Channel->adcRaw = ADC_Work_Channel->adcRaw >> 1; //average from last reading
@@ -82,11 +91,18 @@ void SmoothDataUsingOlympicVotingAverage(void)
 		ADC_Work_Channel->adcAvg = ADC_Work_Channel->adcAvg >> 1; //divide by 2, so now it is the AVERAGE of the last 2 readings
 
 		ADC_Work_Channel->convAvg = ScaledADCData[ADC_Work_Channel_Index] = (float)((float)ADC_Work_Channel->adcAvg * adc_conversionFactor);
+		
+		if (AdcChannelTable[ADC_Work_Channel_Index].convertionTable)
+		{
+			ADC_Work_Channel->calcValue = convertRtdDataFromRawADCValue(AdcChannelTable[ADC_Work_Channel_Index].convertionTable, ADC_Channel[2].adcAvg);
+		}
+		
+		ADC_Work_Channel_Index++;
+		if (ADC_Work_Channel_Index >= ADC_NUM_CHANNELS) ADC_Work_Channel_Index = 0; //keep in range
+
 		//		ADC_Work_Channel->convAvg = ScaledADCData[ADC_Work_Channel_Index] = (float)(((float)ADC_Work_Channel->adcAvg * 3.3) / 4095);
 	}
 	// setup next conversion so data will be ready for the next call in ~10ms
-	ADC_Work_Channel_Index++;
-	if (ADC_Work_Channel_Index >= ADC_NUM_CHANNELS) ADC_Work_Channel_Index = 0; //keep in range
-
+	
 }
 #endif

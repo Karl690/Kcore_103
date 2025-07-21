@@ -7,9 +7,9 @@
 #include <stm32_hal_legacy.h>
 #include <stm32f1xx_hal_dma.h>
 #include <stm32f1xx_hal_spi.h>
-
 #include "taskmanager.h"
 
+#include "USB/usb_device.h"     //AO!
 #include "GPIO/pins.h"
 #include "GPIO/pinout.h"
 #include "GPIO/gpio.h"

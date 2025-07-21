@@ -37,6 +37,12 @@
     <Filter Include="ADC\1xx">
       <UniqueIdentifier>{ec2a56a3-ee4e-4696-b5f7-5f024881e300}</UniqueIdentifier>
     </Filter>
+    <Filter Include="USB">
+      <UniqueIdentifier>{e927c830-47e4-4cf6-b07b-580956f49faf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UART">
+      <UniqueIdentifier>{675d2d6d-279c-4b7f-8ab8-6c87c10ff850}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="system_stm32f1xx.c">
@@ -265,6 +271,33 @@
     </ClCompile>
     <ClCompile Include="DISPLAY\display.c">
       <Filter>DISPLAY</Filter>
+    </ClCompile>
+    <ClCompile Include="stm32f1xx_it.c">
+      <Filter>BSP\Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="USB\usbd_desc.c">
+      <Filter>USB</Filter>
+    </ClCompile>
+    <ClCompile Include="USB\usb_device.c">
+      <Filter>USB</Filter>
+    </ClCompile>
+    <ClCompile Include="USB\usbd_cdc_if.c">
+      <Filter>USB</Filter>
+    </ClCompile>
+    <ClCompile Include="USB\usbd_conf.c">
+      <Filter>USB</Filter>
+    </ClCompile>
+    <ClCompile Include="USB\usbd_cdc.c">
+      <Filter>USB</Filter>
+    </ClCompile>
+    <ClCompile Include="USB\usbd_core.c">
+      <Filter>USB</Filter>
+    </ClCompile>
+    <ClCompile Include="USB\usbd_ioreq.c">
+      <Filter>USB</Filter>
+    </ClCompile>
+    <ClCompile Include="USB\usbd_ctlreq.c">
+      <Filter>USB</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -583,5 +616,32 @@
       <Filter>DISPLAY</Filter>
     </ClInclude>
     <ClInclude Include="RevisionHistory.h" />
+    <ClInclude Include="stm32f1xx_it.h">
+      <Filter>BSP\Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="USB\usbd_conf.h">
+      <Filter>USB</Filter>
+    </ClInclude>
+    <ClInclude Include="USB\usbd_desc.h">
+      <Filter>USB</Filter>
+    </ClInclude>
+    <ClInclude Include="USB\usb_device.h">
+      <Filter>USB</Filter>
+    </ClInclude>
+    <ClInclude Include="USB\usbd_cdc_if.h">
+      <Filter>USB</Filter>
+    </ClInclude>
+    <ClInclude Include="USB\usbd_cdc.h">
+      <Filter>USB</Filter>
+    </ClInclude>
+    <ClInclude Include="USB\usbd_core.h">
+      <Filter>USB</Filter>
+    </ClInclude>
+    <ClInclude Include="USB\usbd_ioreq.h">
+      <Filter>USB</Filter>
+    </ClInclude>
+    <ClInclude Include="USB\usbd_ctlreq.h">
+      <Filter>USB</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
