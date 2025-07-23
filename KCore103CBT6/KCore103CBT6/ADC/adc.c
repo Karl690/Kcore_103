@@ -36,7 +36,7 @@ adcStruct ADC_Channel[ADC_NUM_CHANNELS];
 adcStruct *ADC_Work_Channel;
 
 
-uint16_t sum = 0; 
+uint32_t sum = 0; 
 uint16_t raw = 0; 
 uint16_t low = 0; 
 uint16_t high = 0; 

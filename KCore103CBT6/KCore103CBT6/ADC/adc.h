@@ -26,7 +26,7 @@ typedef enum {
 typedef struct {
 	uint16_t    adcRaw; // last raw value read from ADC
 	int16_t     convRaw; // converted value from last rawValue read
-	int16_t     adcAvg; // average of the last 10 read (or converted reads) after tossing high and low
+	int32_t     adcAvg; // average of the last 10 read (or converted reads) after tossing high and low
 	float     convAvg; // converted value using the rawAvg
 	float		calcValue; // calculate Value (Temperature) with convAvg by Convertion Table
 	int16_t     sampleHistory[ADC_NUM_SAMPLES]; // last N reads from ADC
