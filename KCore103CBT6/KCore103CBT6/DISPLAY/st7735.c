@@ -45,22 +45,7 @@ void ST7735_Init(uint8_t wid, uint8_t height) {
 	HAL_NVIC_SetPriority(DMA1_Channel3_IRQn, 0, 0);
 	HAL_NVIC_EnableIRQ(DMA1_Channel3_IRQn);
 #endif	
-	hspi.Instance = SPI_PORT;
-	hspi.Init.Mode = SPI_MODE_MASTER;
-	hspi.Init.Direction = SPI_DIRECTION_2LINES;
-	hspi.Init.DataSize = SPI_DATASIZE_8BIT;
-	hspi.Init.CLKPolarity = SPI_POLARITY_LOW;
-	hspi.Init.CLKPhase = SPI_PHASE_1EDGE;
-	hspi.Init.NSS = SPI_NSS_SOFT;
-	hspi.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_4;
-	hspi.Init.FirstBit = SPI_FIRSTBIT_MSB;
-	hspi.Init.TIMode = SPI_TIMODE_DISABLE;
-	hspi.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
-	hspi.Init.CRCPolynomial = 10;
-	if (HAL_SPI_Init(&hspi) != HAL_OK)
-	{
-		Error_Handler();
-	}
+	
 #if (_SPI_PORT == 1)	
 	__HAL_RCC_SPI1_CLK_ENABLE();
 #else
@@ -71,7 +56,29 @@ void ST7735_Init(uint8_t wid, uint8_t height) {
 	GPIO_InitStruct.Pin = SPI_SCK_PIN | SPI_MOSI_PIN;
 	GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
 	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
-	HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+	HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+	
+	GPIO_InitStruct.Pin = ST7735_CS_PIN | ST7735_DC_PIN | ST7735_RST_PIN;
+	GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
+	HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+	
+	hspi.Instance = SPI_PORT;
+	hspi.Init.Mode = SPI_MODE_MASTER;
+	hspi.Init.Direction = SPI_DIRECTION_1LINE;
+	hspi.Init.DataSize = SPI_DATASIZE_8BIT;
+	hspi.Init.CLKPolarity = SPI_POLARITY_LOW;
+	hspi.Init.CLKPhase = SPI_PHASE_1EDGE;
+	hspi.Init.NSS = SPI_NSS_SOFT;
+	hspi.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_8;
+	hspi.Init.FirstBit = SPI_FIRSTBIT_MSB;
+	// hspi.Init.TIMode = SPI_TIMODE_DISABLE;
+	// hspi.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
+	hspi.Init.CRCPolynomial = 7;
+	if (HAL_SPI_Init(&hspi) != HAL_OK)
+	{
+		Error_Handler();
+	}
 #ifdef USE_SPI_DMA	
 	/* SPI1 DMA Init */
     /* SPI1_TX Init */
