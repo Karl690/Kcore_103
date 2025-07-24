@@ -1,0 +1,195 @@
+VisualGDB/Debug/DISPLAY/displaylist.o: DISPLAY/displaylist.c \
+ C:/Users/karl6/Documents/GitHub/Kcore_103/KCore103CBT6/KCore103CBT6/main.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\stdio.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\_ansi.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\newlib.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\_newlib_version.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\config.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\machine\ieeefp.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\features.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\cdefs.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\machine\_default_types.h \
+ c:\sysgcc\arm-eabi\lib\gcc\arm-none-eabi\12.2.1\include\stddef.h \
+ c:\sysgcc\arm-eabi\lib\gcc\arm-none-eabi\12.2.1\include\stdarg.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\reent.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\_ansi.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\_types.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\machine\_types.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\lock.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\stdio.h \
+ c:\sysgcc\arm-eabi\lib\gcc\arm-none-eabi\12.2.1\include\stdint.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\stdint.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\_intsup.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\_stdint.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\string.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\_locale.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\strings.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\string.h \
+ BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h \
+ C:/Users/karl6/Documents/GitHub/Kcore_103/KCore103CBT6/KCore103CBT6/stm32f1xx_hal_conf.h \
+ BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h \
+ BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h \
+ BSP/STM32F1xxxx/CMSIS_HAL/Device/ST/STM32F1xx/Include/stm32f1xx.h \
+ BSP/STM32F1xxxx/CMSIS_HAL/Device/ST/STM32F1xx/Include/stm32f103xb.h \
+ BSP/STM32F1xxxx/CMSIS_HAL/Core/Include/core_cm3.h \
+ BSP/STM32F1xxxx/CMSIS_HAL/Core/Include/cmsis_version.h \
+ BSP/STM32F1xxxx/CMSIS_HAL/Core/Include/cmsis_compiler.h \
+ BSP/STM32F1xxxx/CMSIS_HAL/Core/Include/cmsis_gcc.h \
+ BSP/STM32F1xxxx/CMSIS_HAL/Device/ST/STM32F1xx/Include/system_stm32f1xx.h \
+ BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h \
+ BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h \
+ BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h \
+ BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h \
+ BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_exti.h \
+ BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h \
+ BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h \
+ BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_eth.h \
+ BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_can.h \
+ BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cec.h \
+ BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h \
+ BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_adc.h \
+ BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_adc_ex.h \
+ BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_crc.h \
+ BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dac.h \
+ BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h \
+ BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h \
+ BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_sram.h \
+ BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_nor.h \
+ BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_i2c.h \
+ BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_i2s.h \
+ BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_iwdg.h \
+ BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h \
+ BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rtc.h \
+ BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rtc_ex.h \
+ BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pccard.h \
+ BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_sd.h \
+ BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_nand.h \
+ BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h \
+ BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h \
+ BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h \
+ BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h \
+ BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_usart.h \
+ BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_irda.h \
+ BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_smartcard.h \
+ BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_wwdg.h \
+ BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pcd.h \
+ BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_usb.h \
+ BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pcd_ex.h \
+ BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_hcd.h \
+ BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_mmc.h \
+ BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h \
+ C:/Users/karl6/Documents/GitHub/Kcore_103/KCore103CBT6/KCore103CBT6/taskmanager.h \
+ C:/Users/karl6/Documents/GitHub/Kcore_103/KCore103CBT6/KCore103CBT6/USB/usb_device.h \
+ C:/Users/karl6/Documents/GitHub/Kcore_103/KCore103CBT6/KCore103CBT6/USB/usbd_def.h \
+ C:/Users/karl6/Documents/GitHub/Kcore_103/KCore103CBT6/KCore103CBT6/USB/usbd_conf.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\stdlib.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\machine\stdlib.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\alloca.h \
+ C:/Users/karl6/Documents/GitHub/Kcore_103/KCore103CBT6/KCore103CBT6/GPIO/pins.h \
+ C:/Users/karl6/Documents/GitHub/Kcore_103/KCore103CBT6/KCore103CBT6/GPIO/pinout.h \
+ C:/Users/karl6/Documents/GitHub/Kcore_103/KCore103CBT6/KCore103CBT6/GPIO/gpio.h \
+ C:/Users/karl6/Documents/GitHub/Kcore_103/KCore103CBT6/KCore103CBT6/ADC/adc.h \
+ C:/Users/karl6/Documents/GitHub/Kcore_103/KCore103CBT6/KCore103CBT6/ADC/1xx/adc_1xx.h \
+ C:/Users/karl6/Documents/GitHub/Kcore_103/KCore103CBT6/KCore103CBT6/ADC/AD_Channel_Definitions.h \
+ C:/Users/karl6/Documents/GitHub/Kcore_103/KCore103CBT6/KCore103CBT6/DISPLAY/display.h \
+ C:/Users/karl6/Documents/GitHub/Kcore_103/KCore103CBT6/KCore103CBT6/DISPLAY/displaylist.h \
+ C:/Users/karl6/Documents/GitHub/Kcore_103/KCore103CBT6/KCore103CBT6/DISPLAY/gui.h \
+ C:/Users/karl6/Documents/GitHub/Kcore_103/KCore103CBT6/KCore103CBT6/DISPLAY/st7735.h \
+ C:/Users/karl6/Documents/GitHub/Kcore_103/KCore103CBT6/KCore103CBT6/RevisionHistory.h
+C:/Users/karl6/Documents/GitHub/Kcore_103/KCore103CBT6/KCore103CBT6/main.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\stdio.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\_ansi.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\newlib.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\_newlib_version.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\config.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\machine\ieeefp.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\features.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\cdefs.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\machine\_default_types.h:
+c:\sysgcc\arm-eabi\lib\gcc\arm-none-eabi\12.2.1\include\stddef.h:
+c:\sysgcc\arm-eabi\lib\gcc\arm-none-eabi\12.2.1\include\stdarg.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\reent.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\_ansi.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\_types.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\machine\_types.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\lock.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\stdio.h:
+c:\sysgcc\arm-eabi\lib\gcc\arm-none-eabi\12.2.1\include\stdint.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\stdint.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\_intsup.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\_stdint.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\string.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\_locale.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\strings.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\string.h:
+BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:
+C:/Users/karl6/Documents/GitHub/Kcore_103/KCore103CBT6/KCore103CBT6/stm32f1xx_hal_conf.h:
+BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h:
+BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h:
+BSP/STM32F1xxxx/CMSIS_HAL/Device/ST/STM32F1xx/Include/stm32f1xx.h:
+BSP/STM32F1xxxx/CMSIS_HAL/Device/ST/STM32F1xx/Include/stm32f103xb.h:
+BSP/STM32F1xxxx/CMSIS_HAL/Core/Include/core_cm3.h:
+BSP/STM32F1xxxx/CMSIS_HAL/Core/Include/cmsis_version.h:
+BSP/STM32F1xxxx/CMSIS_HAL/Core/Include/cmsis_compiler.h:
+BSP/STM32F1xxxx/CMSIS_HAL/Core/Include/cmsis_gcc.h:
+BSP/STM32F1xxxx/CMSIS_HAL/Device/ST/STM32F1xx/Include/system_stm32f1xx.h:
+BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h:
+BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h:
+BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h:
+BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h:
+BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_exti.h:
+BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h:
+BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h:
+BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_eth.h:
+BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_can.h:
+BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cec.h:
+BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h:
+BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_adc.h:
+BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_adc_ex.h:
+BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_crc.h:
+BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dac.h:
+BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h:
+BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h:
+BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_sram.h:
+BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_nor.h:
+BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_i2c.h:
+BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_i2s.h:
+BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_iwdg.h:
+BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h:
+BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rtc.h:
+BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rtc_ex.h:
+BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pccard.h:
+BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_sd.h:
+BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_nand.h:
+BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h:
+BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h:
+BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h:
+BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h:
+BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_usart.h:
+BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_irda.h:
+BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_smartcard.h:
+BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_wwdg.h:
+BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pcd.h:
+BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_usb.h:
+BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pcd_ex.h:
+BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_hcd.h:
+BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_mmc.h:
+BSP/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h:
+C:/Users/karl6/Documents/GitHub/Kcore_103/KCore103CBT6/KCore103CBT6/taskmanager.h:
+C:/Users/karl6/Documents/GitHub/Kcore_103/KCore103CBT6/KCore103CBT6/USB/usb_device.h:
+C:/Users/karl6/Documents/GitHub/Kcore_103/KCore103CBT6/KCore103CBT6/USB/usbd_def.h:
+C:/Users/karl6/Documents/GitHub/Kcore_103/KCore103CBT6/KCore103CBT6/USB/usbd_conf.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\stdlib.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\machine\stdlib.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\alloca.h:
+C:/Users/karl6/Documents/GitHub/Kcore_103/KCore103CBT6/KCore103CBT6/GPIO/pins.h:
+C:/Users/karl6/Documents/GitHub/Kcore_103/KCore103CBT6/KCore103CBT6/GPIO/pinout.h:
+C:/Users/karl6/Documents/GitHub/Kcore_103/KCore103CBT6/KCore103CBT6/GPIO/gpio.h:
+C:/Users/karl6/Documents/GitHub/Kcore_103/KCore103CBT6/KCore103CBT6/ADC/adc.h:
+C:/Users/karl6/Documents/GitHub/Kcore_103/KCore103CBT6/KCore103CBT6/ADC/1xx/adc_1xx.h:
+C:/Users/karl6/Documents/GitHub/Kcore_103/KCore103CBT6/KCore103CBT6/ADC/AD_Channel_Definitions.h:
+C:/Users/karl6/Documents/GitHub/Kcore_103/KCore103CBT6/KCore103CBT6/DISPLAY/display.h:
+C:/Users/karl6/Documents/GitHub/Kcore_103/KCore103CBT6/KCore103CBT6/DISPLAY/displaylist.h:
+C:/Users/karl6/Documents/GitHub/Kcore_103/KCore103CBT6/KCore103CBT6/DISPLAY/gui.h:
+C:/Users/karl6/Documents/GitHub/Kcore_103/KCore103CBT6/KCore103CBT6/DISPLAY/st7735.h:
+C:/Users/karl6/Documents/GitHub/Kcore_103/KCore103CBT6/KCore103CBT6/RevisionHistory.h:
