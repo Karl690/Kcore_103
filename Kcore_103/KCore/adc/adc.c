@@ -1,5 +1,6 @@
 #include "main.h"
 #include "adc.h"
+#include "ADC_Tables.h"
 #include "AD_Channel_Definitions.h"
 uint16_t   RawADCDataBuffer[ADC_NUM_CHANNELS] = { 0 };
 
@@ -66,7 +67,7 @@ adcStruct ADC_Channel[ADC_NUM_CHANNELS];
 adcStruct *ADC_Work_Channel;
 
 
-uint16_t sum = 0; 
+uint32_t sum = 0; 
 uint16_t raw = 0; 
 uint16_t low = 0; 
 uint16_t high = 0; 
@@ -118,7 +119,8 @@ void SmoothDataUsingOlympicVotingAverage(void)
 		ADC_Work_Channel->adcAvg += sum;
 		ADC_Work_Channel->adcAvg = ADC_Work_Channel->adcAvg >> 1; //divide by 2, so now it is the AVERAGE of the last 2 readings
 
-		ADC_Work_Channel->convAvg = ScaledADCData[ADC_Work_Channel_Index] = (float)((float)ADC_Work_Channel->adcAvg * adc_conversionFactor);
+		ADC_Work_Channel->convAvg = AdcConvertValue(AdcChannelTable[ADC_Work_Channel_Index].converstionType, ADC_Work_Channel->adcAvg, AdcChannelTable[ADC_Work_Channel_Index].ConvertionTable);
+		ScaledADCData[ADC_Work_Channel_Index] = ADC_Work_Channel->convAvg;
 		//		ADC_Work_Channel->convAvg = ScaledADCData[ADC_Work_Channel_Index] = (float)(((float)ADC_Work_Channel->adcAvg * 3.3) / 4095);
 	}
 	// setup next conversion so data will be ready for the next call in ~10ms
