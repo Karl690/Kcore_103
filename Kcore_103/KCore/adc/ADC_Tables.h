@@ -30,4 +30,4 @@ extern AdcTableStruct const RdcTable_4to20ma[];
 extern AdcTableStruct const RdcTable_rawAdc[];
 extern AdcTableStruct const RtdTable_100[];
 
-int16_t AdcConvertValue(uint8_t conversionType, uint16_t value2convert, AdcTableStruct * table);
+float AdcConvertValue(uint8_t conversionType, uint16_t value2convert, AdcTableStruct * table);

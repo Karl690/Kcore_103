@@ -22,6 +22,7 @@ typedef struct {
 	int16_t     convRaw; // converted value from last rawValue read
 	int32_t     adcAvg; // average of the last 10 read (or converted reads) after tossing high and low
 	float     convAvg; // converted value using the rawAvg
+	float		convVolt; // convert current voltage
 	int16_t     sampleHistory[ADC_NUM_SAMPLES]; // last N reads from ADC
 	uint8_t     sampleIndex; // index of last valid value in the history
 	uint8_t     inputChannel; // actual adc channel input selection

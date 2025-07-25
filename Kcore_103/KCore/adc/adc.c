@@ -121,7 +121,7 @@ void SmoothDataUsingOlympicVotingAverage(void)
 
 		ADC_Work_Channel->convAvg = AdcConvertValue(AdcChannelTable[ADC_Work_Channel_Index].converstionType, ADC_Work_Channel->adcAvg, AdcChannelTable[ADC_Work_Channel_Index].ConvertionTable);
 		ScaledADCData[ADC_Work_Channel_Index] = ADC_Work_Channel->convAvg;
-		//		ADC_Work_Channel->convAvg = ScaledADCData[ADC_Work_Channel_Index] = (float)(((float)ADC_Work_Channel->adcAvg * 3.3) / 4095);
+		ADC_Work_Channel->convVolt = (float)(((float)ADC_Work_Channel->adcAvg * 3.3) / 4095);
 	}
 	// setup next conversion so data will be ready for the next call in ~10ms
 	ADC_Work_Channel_Index++;

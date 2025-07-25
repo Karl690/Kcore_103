@@ -255,10 +255,10 @@ int32_t AdcConvertFromTable(adcConv_t conversionType, uint16_t value2convert, Ad
 	return (retVal);
 }
 
-int16_t AdcConvertValue(uint8_t conversionType, uint16_t value2convert, AdcTableStruct * table)
+float AdcConvertValue(uint8_t conversionType, uint16_t value2convert, AdcTableStruct * table)
 {
 	// convert the raw adc input value to an alternate data type based on the conversionType
-	int16_t convValue;
+	float convValue;
 	switch (conversionType)
 	{
 	case CONV_NEAREST :
@@ -275,6 +275,9 @@ int16_t AdcConvertValue(uint8_t conversionType, uint16_t value2convert, AdcTable
 		//            break;
 	case CONV_NONE:
 		convValue = value2convert;
+		break;
+	case CONV_DC_VOLTS:
+		convValue = (value2convert * 3.3) / 4095;
 		break;
 	default :
 		convValue = BOGUS_TEMPERATURE;

@@ -8,6 +8,7 @@ typedef enum {
 	// return input
 	CONV_NEAREST = 2,
 	CONV_INTERPOLATE = 3,
+	CONV_DC_VOLTS = 4
 } adcConv_t;
 
 
