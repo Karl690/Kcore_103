@@ -145,9 +145,6 @@
       <Filter>timer</Filter>
     </ClCompile>
     <ClCompile Include="KCore\main.c" />
-    <ClCompile Include="KCore\adc\AD_Channel_Definitions.c">
-      <Filter>adc</Filter>
-    </ClCompile>
     <ClCompile Include="KCore\adc\1xx\adc_1xx.c">
       <Filter>adc\1xx</Filter>
     </ClCompile>
@@ -242,9 +239,6 @@
     </ClInclude>
     <ClInclude Include="KCore\main.h" />
     <ClInclude Include="KCore\RevisionHistory.h" />
-    <ClInclude Include="KCore\adc\AD_Channel_Definitions.h">
-      <Filter>adc</Filter>
-    </ClInclude>
     <ClInclude Include="KCore\adc\1xx\adc_1xx.h">
       <Filter>adc\1xx</Filter>
     </ClInclude>

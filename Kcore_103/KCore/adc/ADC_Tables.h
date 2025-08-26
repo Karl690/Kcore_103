@@ -10,10 +10,10 @@
 #define MAX_TEMP                        (temp_t)0x7fff  // max positive
 #define MAX_AMBIENT_TEMPERATURE         (500 << TEMP_FRAC_BITS)
 
-
-#define MAX_ADC12                       0x0fff
 #define HH_POSITION_UNPLUGGED           0xFE	//254
-#define MAX_POSSIBLE_TABLE_SIZE			33
+
+#define HH_NUM_ADC_CHANNELS             5   // legacy (for adc reporting struct)
+#define MAX_ADC12                       0x0fff
 
 typedef int16_t temp_t; // temperature (s10.5 format - 1/32 degree resolution)
 typedef struct {
@@ -21,13 +21,15 @@ typedef struct {
 	temp_t      value; // if temperature (s10.5 format - 1/32 degree) at specified adcValue; position, just value, etc
 } AdcTableStruct;
 
-extern AdcTableStruct const DevicePositionTable[];
-extern AdcTableStruct const RtdTable_50K[];
-extern AdcTableStruct const RtdTable_1M[];
-extern AdcTableStruct const RtdTable_1K[];
-extern AdcTableStruct const RtdTable_10K[];
-extern AdcTableStruct const RdcTable_4to20ma[];
-extern AdcTableStruct const RdcTable_rawAdc[];
-extern AdcTableStruct const RtdTable_100[];
+typedef struct {
+	uint32_t Channel;
+	pinType Pin;
+	uint16_t Prioity;
+	const AdcTableStruct* ConvertionTable;
+}ADC_ChannelDef;
 
-float AdcConvertValue(uint8_t conversionType, uint16_t value2convert, AdcTableStruct * table);
+#define ADC_CHANNEL_NUM 3
+
+extern ADC_ChannelDef AdcChannelTable[ADC_CHANNEL_NUM];
+
+float convertRtdDataFromRawADCValue(const AdcTableStruct* adcTable, uint16_t raw);
