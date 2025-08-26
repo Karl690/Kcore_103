@@ -124,7 +124,7 @@ void SmoothDataUsingOlympicVotingAverage(void)
 		ADC_Work_Channel->convAvg = convertRtdDataFromRawADCValue(AdcChannelTable[ADC_Work_Channel_Index].ConvertionTable, ADC_Work_Channel->adcAvg);
 	}
 	// setup next conversion so data will be ready for the next call in ~10ms
-	if (ADC_Work_Channel_Index == 0) laserTemperature = ADC_Work_Channel->convAvg;
+	if (ADC_Work_Channel_Index == 1) laserTemperature = ADC_Work_Channel->convAvg;
 	ADC_Work_Channel_Index++;
 	if (ADC_Work_Channel_Index >= ADC_CHANNEL_NUM) ADC_Work_Channel_Index = 0; //keep in range
 	adc_config(AdcChannelTable[ADC_Work_Channel_Index].Channel);
