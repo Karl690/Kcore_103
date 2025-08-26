@@ -79,6 +79,8 @@ void ProcessRawADC_Data(void)
 {
 	if (ADC_GetFlagStatus(ADC1, ADC_FLAG_EOC) != RESET)
 	{
+		// Read ADC raw value
+		RawADCDataBuffer[ADC_Work_Channel_Index] = ADC_GetConversionValue(ADC1); 
 		SmoothDataUsingOlympicVotingAverage();	
 	}
 	
@@ -125,5 +127,6 @@ void SmoothDataUsingOlympicVotingAverage(void)
 	if (ADC_Work_Channel_Index == 0) laserTemperature = ADC_Work_Channel->convAvg;
 	ADC_Work_Channel_Index++;
 	if (ADC_Work_Channel_Index >= ADC_CHANNEL_NUM) ADC_Work_Channel_Index = 0; //keep in range
+	adc_config(AdcChannelTable[ADC_Work_Channel_Index].Channel);
 
 }
