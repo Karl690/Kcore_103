@@ -91,7 +91,7 @@
     <ClInclude Include="KCore\adc\ADC_Tables.h" />
     <ClInclude Include="KCore\display\display.h" />
     <ClInclude Include="KCore\display\displaylist.h" />
-    <ClInclude Include="KCore\display\font8x16.h" />
+    <ClInclude Include="KCore\display\font16x8.h" />
     <ClInclude Include="KCore\display\font5x7.h" />
     <ClInclude Include="KCore\display\gui.h" />
     <ClInclude Include="KCore\display\st7735.h" />

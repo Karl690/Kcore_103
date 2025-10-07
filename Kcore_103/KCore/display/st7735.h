@@ -101,5 +101,5 @@ void ST7735_FillRect(uint16_t X1, uint16_t Y1, uint16_t X2, uint16_t Y2, uint16_
 void ST7735_PutChar5x7(uint16_t X, uint16_t Y, uint8_t chr, uint16_t color);
 void ST7735_PutStr5x7(uint8_t X, uint8_t Y, char *str, uint16_t color);
 
-void ST7735_PutChar8x16(uint16_t X, uint16_t Y, uint8_t chr, uint16_t color);
-void ST7735_PutStr8x16(uint8_t X, uint8_t Y, char *str, uint16_t color);
+void ST7735_PutChar16x8(uint16_t X, uint16_t Y, uint8_t chr, uint16_t color);
+void ST7735_PutStr16x8(uint8_t X, uint8_t Y, char *str, uint16_t color);
