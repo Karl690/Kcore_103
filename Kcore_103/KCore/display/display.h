@@ -4,9 +4,17 @@
 //only 1 format can be supported at a time, so only uncomment out 1 format and
 //make sure to comment out the unused format
 
-// #define DISPLAY_128X128 //Set the LCD with screen 128x128pixcel
-#define DISPLAY_128X160//Set the LCD with screen 128x160pixcel
+#define DISPLAY_128X128 //Set the LCD with screen 128x128pixcel
+// #define DISPLAY_128X160//Set the LCD with screen 128x160pixcel
 
+#define FONT16
+#ifdef FONT16
+#define FONT_SIZE 16
+#define LCD_LINESIZE	18			//The size for one line, in pixels
+#else
+#define FONT_SIZE 7
+#define LCD_LINESIZE	11			//The size for one line, in pixels
+#endif
 //128 x 128 display
 #ifdef DISPLAY_128X128              //LCD with screen 128x128 pixels
 #define DISPLAY_WIDTH 130			//width in pixels
@@ -22,14 +30,7 @@
 #define TOP_PADDING 5				//Top side dead zone, in pixels
 #define LEFT_PADDING 5				//Left side dead zone, in pixels
 #define RIGHT_PADDING 5				//Right side dead zone, in pixels
-#define FONT16
-#ifdef FONT16
-#define FONT_SIZE 16
-#define LCD_LINESIZE	18			//The size for one line, in pixels
-#else
-#define FONT_SIZE 7
-#define LCD_LINESIZE	11			//The size for one line, in pixels
-#endif
+
 //NO display  default if on other display is selected....
 #define NO_DISPLAY
 #define DISPLAY_WIDTH 130
