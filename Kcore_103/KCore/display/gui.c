@@ -1,3 +1,4 @@
+#include "display.h"
 #include "st7735.h"
 
 void DisplayInit(uint8_t width, uint8_t height)
@@ -49,5 +50,9 @@ void DrawChar(uint16_t X, uint16_t Y, uint8_t chr, uint16_t color)
 }
 void DrawString(uint8_t X, uint8_t Y, char *str, uint16_t color)
 {
+#ifdef FONT16
+	ST7735_PutStr8x16(X, Y, str, color);
+#else
 	ST7735_PutStr5x7(X, Y, str, color);
+#endif
 }

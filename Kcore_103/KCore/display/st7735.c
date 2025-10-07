@@ -6,13 +6,14 @@
 //#include <delay.h>
 #include "st7735.h"
 #include "font5x7.h"
+#include "font8x16.h"
 uint16_t scr_w;
 uint16_t scr_h;
 
 
 uint16_t scr_width;
 uint16_t scr_height;
-
+extern const unsigned char asc2_0816[95][16];
 
 void ST7735_write(uint8_t data) {
 	while (SPI_I2S_GetFlagStatus(SPI_PORT,SPI_I2S_FLAG_TXE) == RESET);
@@ -355,9 +356,45 @@ void ST7735_PutChar5x7(uint16_t X, uint16_t Y, uint8_t chr, uint16_t color) {
 	CS_H();
 }
 
+
+void ST7735_PutChar8x16(uint16_t X, uint16_t Y, uint8_t chr, uint16_t color) {
+	uint16_t i, j;
+	uint8_t buffer[8];
+	uint8_t CH = color >> 8;
+	uint8_t CL = (uint8_t)color;
+
+	memcpy(buffer, &asc2_0816[chr - 32], 8);
+
+	CS_L();
+	ST7735_AddrSet(X, Y, X + 7, Y + 15);
+	DC_H();
+	for (j = 0; j < 16; j++) {
+		for (i = 0; i < 8; i++) {
+			if ((buffer[i] >> j) & 0x01) {
+				ST7735_write(CH);
+				ST7735_write(CL);
+			}
+			else {
+				ST7735_write(0x00);
+				ST7735_write(0x00);
+			}
+		}
+	}
+	CS_H();
+}
 void ST7735_PutStr5x7(uint8_t X, uint8_t Y, char *str, uint16_t color) {
     while (*str) {
         ST7735_PutChar5x7(X,Y,*str++,color);
         if (X < scr_width - 6) { X += 6; } else if (Y < scr_height - 8) { X = 0; Y += 8; } else { X = 0; Y = 0; }
     };
+}
+
+void ST7735_PutStr8x16(uint8_t X, uint8_t Y, char *str, uint16_t color) {
+	while (*str) {
+		ST7735_PutChar8x16(X, Y, *str++, color);
+		if (X < scr_width - 9) { X += 9; }
+		else if (Y < scr_height - 17) { X = 0; Y += 17; }
+		else { X = 0; Y = 0; }
+	}
+	;
 }

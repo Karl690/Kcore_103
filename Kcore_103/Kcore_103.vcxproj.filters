@@ -242,5 +242,8 @@
     <ClInclude Include="KCore\adc\1xx\adc_1xx.h">
       <Filter>adc\1xx</Filter>
     </ClInclude>
+    <ClInclude Include="KCore\display\font8x16.h">
+      <Filter>display</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
