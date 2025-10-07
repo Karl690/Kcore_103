@@ -368,9 +368,11 @@ void ST7735_PutChar16x8(uint16_t X, uint16_t Y, uint8_t chr, uint16_t color) {
 	CS_L();
 	ST7735_AddrSet(X, Y, X + 7, Y + 15);
 	DC_H();
-	for (j = 0; j < 8; j++) {
-		for (i = 0; i < 16; i++) {
-			if ((buffer[i] >> j) & 0x01) {
+	for (j = 0; j < 16; j++)
+	{
+		for (i = 0; i < 8; i++)
+		{
+			if ((buffer[j] >> i) & 0x01) {
 				ST7735_write(CH);
 				ST7735_write(CL);
 			}
@@ -380,6 +382,18 @@ void ST7735_PutChar16x8(uint16_t X, uint16_t Y, uint8_t chr, uint16_t color) {
 			}
 		}
 	}
+//	for (j = 0; j < 8; j++) {
+//		for (i = 0; i < 16; i++) {
+//			if ((buffer[i] >> j) & 0x01) {
+//				ST7735_write(CH);
+//				ST7735_write(CL);
+//			}
+//			else {
+//				ST7735_write(0x00);
+//				ST7735_write(0x00);
+//			}
+//		}
+//	}
 	CS_H();
 }
 void ST7735_PutStr5x7(uint8_t X, uint8_t Y, char *str, uint16_t color) {
@@ -390,11 +404,10 @@ void ST7735_PutStr5x7(uint8_t X, uint8_t Y, char *str, uint16_t color) {
 }
 
 void ST7735_PutStr16x8(uint8_t X, uint8_t Y, char *str, uint16_t color) {
+	if (Y > scr_height) return;
 	while (*str) {
 		ST7735_PutChar16x8(X, Y, *str++, color);
 		if (X < scr_width - 9) { X += 9; }
-		else if (Y < scr_height - 17) { X = 0; Y += 17; }
-		else { X = 0; Y = 0; }
+		else break;
 	}
-	;
 }

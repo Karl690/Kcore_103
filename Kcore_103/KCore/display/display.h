@@ -10,7 +10,7 @@
 #define FONT16
 #ifdef FONT16
 #define FONT_SIZE 16
-#define LCD_LINESIZE	18			//The size for one line, in pixels
+#define LCD_LINESIZE	25			//The size for one line, in pixels
 #else
 #define FONT_SIZE 7
 #define LCD_LINESIZE	11			//The size for one line, in pixels
@@ -22,7 +22,7 @@
 #define TOP_PADDING 5				//Top side dead zone, in pixels
 #define LEFT_PADDING 5				//Left side dead zone, in pixels
 #define RIGHT_PADDING 5				//Right side dead zone, in pixels
-#define LCD_LINESIZE	11			//The size for one line, in pixels
+
 //128x160 display
 #elif defined(DISPLAY_128X160) //LCD with screen 128x160 pixels
 #define DISPLAY_WIDTH 128			//width in pixels
