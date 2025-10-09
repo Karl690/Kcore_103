@@ -12,7 +12,8 @@ const float VAL_POS = 0.7f;
 void Format_Title(uint8_t row, void* info)
 {
 	varInfo = (LcdVariableInfo*)info;
-	DrawString(30, varInfo->YStart, varInfo->Label, varInfo->Color_1, varInfo->Font_Multiplier);
+	DrawString(varInfo->XStart, varInfo->YStart, varInfo->Label, varInfo->Color_1, varInfo->Font_Multiplier);
+	if (varInfo->Font_Multiplier > 1)return;
 	DrawLine(0, TOP_PADDING + (row * LCD_LINESIZE) + LCD_LINESIZE / 2, 20, TOP_PADDING + (row * LCD_LINESIZE) + LCD_LINESIZE / 2, varInfo->Color_2);
 	DrawLine(varInfo->XStart, varInfo->YStart, DISPLAY_WIDTH, TOP_PADDING + (row * LCD_LINESIZE) + LCD_LINESIZE / 2, varInfo->Color_2);
 }
