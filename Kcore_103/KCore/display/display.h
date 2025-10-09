@@ -21,7 +21,7 @@
 #define TOP_PADDING 5				//Top side dead zone, in pixels
 #define LEFT_PADDING 5				//Left side dead zone, in pixels
 #define RIGHT_PADDING 5				//Right side dead zone, in pixels
-
+#define VariableDisplayStart 68     //start of variable first pixel in X
 //128x160 display
 #elif defined(DISPLAY_128X160) //LCD with screen 128x160 pixels
 #define DISPLAY_WIDTH 128			//width in pixels

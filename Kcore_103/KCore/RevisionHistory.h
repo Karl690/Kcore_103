@@ -9,4 +9,4 @@
 #define RevisionHeader ">KCORE103"
 #define MajorStep "1.016"
 #define RevisionDate "10/09/2025"
-#define HEARTBEATSTRING "KC:" MajorStep
+#define HEARTBEATSTRING "KC:V" MajorStep
