@@ -8,7 +8,7 @@
 char strTempVal[40] = {0};
 uint16_t idx = 0;
 LcdVariableInfo *varInfo  = NULL;
-
+const float VAL_POS = 0.7f;
 void Format_Title(uint8_t row, void* info)
 {
 	varInfo = (LcdVariableInfo*)info;
@@ -22,14 +22,14 @@ void Format_Int32(uint8_t row, void* info)
 	varInfo = (LcdVariableInfo*)info;
 	DrawString(LEFT_PADDING, TOP_PADDING + (row * LCD_LINESIZE) ,varInfo->Label, varInfo->Color_1);
 	sprintf(strTempVal, "%d ", (int)(*((uint32_t*)varInfo->VariablePointer)));
-	DrawString(DISPLAY_WIDTH/2, TOP_PADDING + (row * LCD_LINESIZE), strTempVal, varInfo->Color_2);
+	DrawString(DISPLAY_WIDTH * VAL_POS, TOP_PADDING + (row * LCD_LINESIZE), strTempVal, varInfo->Color_2);
 }
 void Format_Int16(uint8_t row, void* info)
 {
 	varInfo = (LcdVariableInfo*)info;
 	DrawString(LEFT_PADDING, TOP_PADDING + (row * LCD_LINESIZE) ,varInfo->Label, varInfo->Color_1);
 	sprintf(strTempVal, "%d ", (int)(*((uint16_t*)varInfo->VariablePointer)));
-	DrawString(DISPLAY_WIDTH/2, TOP_PADDING + (row * LCD_LINESIZE), strTempVal, varInfo->Color_2);
+	DrawString(DISPLAY_WIDTH * VAL_POS, TOP_PADDING + (row * LCD_LINESIZE), strTempVal, varInfo->Color_2);
 }
 
 void Format_Hex8(uint8_t row, void* info)
@@ -37,21 +37,21 @@ void Format_Hex8(uint8_t row, void* info)
 	varInfo = (LcdVariableInfo*)info;
 	DrawString(LEFT_PADDING, TOP_PADDING + (row * LCD_LINESIZE), varInfo->Label, varInfo->Color_1);
 	sprintf(strTempVal, "0x%02x ", (uint8_t)(*((uint8_t*)varInfo->VariablePointer)));
-	DrawString(DISPLAY_WIDTH/2, TOP_PADDING + (row * LCD_LINESIZE), strTempVal, varInfo->Color_2);
+	DrawString(DISPLAY_WIDTH * VAL_POS, TOP_PADDING + (row * LCD_LINESIZE), strTempVal, varInfo->Color_2);
 }
 void Format_Hex16(uint8_t row, void* info)
 {
 	varInfo = (LcdVariableInfo*)info;
 	DrawString(LEFT_PADDING, TOP_PADDING + (row * LCD_LINESIZE), varInfo->Label, varInfo->Color_1);
 	sprintf(strTempVal, "0x%04x ", (uint16_t)(*((uint16_t*)varInfo->VariablePointer)));
-	DrawString(DISPLAY_WIDTH/2, TOP_PADDING + (row * LCD_LINESIZE), strTempVal, varInfo->Color_2);
+	DrawString(DISPLAY_WIDTH * VAL_POS, TOP_PADDING + (row * LCD_LINESIZE), strTempVal, varInfo->Color_2);
 }
 void Format_Hex32(uint8_t row, void* info)
 {
 	varInfo = (LcdVariableInfo*)info;
 	DrawString(LEFT_PADDING, TOP_PADDING + (row * LCD_LINESIZE), varInfo->Label, varInfo->Color_1);
 	sprintf(strTempVal, "0x%08x ", (int)(*((uint32_t*)varInfo->VariablePointer)));
-	DrawString(DISPLAY_WIDTH/2, TOP_PADDING + (row * LCD_LINESIZE), strTempVal, varInfo->Color_2);
+	DrawString(DISPLAY_WIDTH * VAL_POS, TOP_PADDING + (row * LCD_LINESIZE), strTempVal, varInfo->Color_2);
 }
 
 void Format_Ascii(uint8_t row, void* info)
@@ -59,7 +59,7 @@ void Format_Ascii(uint8_t row, void* info)
 	varInfo = (LcdVariableInfo*)info;
 	DrawString(LEFT_PADDING, TOP_PADDING + (row * LCD_LINESIZE), varInfo->Label, varInfo->Color_1);
 	sprintf(strTempVal, "%s ", (char*)varInfo->VariablePointer);
-	DrawString(DISPLAY_WIDTH/2, TOP_PADDING + (row * LCD_LINESIZE), strTempVal, varInfo->Color_2);
+	DrawString(DISPLAY_WIDTH * VAL_POS, TOP_PADDING + (row * LCD_LINESIZE), strTempVal, varInfo->Color_2);
 }
 
 void Format_Float3_3(uint8_t row, void* info)
@@ -67,7 +67,7 @@ void Format_Float3_3(uint8_t row, void* info)
 	varInfo = (LcdVariableInfo*)info;
 	DrawString(LEFT_PADDING, TOP_PADDING + (row * LCD_LINESIZE),varInfo->Label, varInfo->Color_1);
 	sprintf(strTempVal, "%.3f ", (float)(*((float*)varInfo->VariablePointer)));
-	DrawString(DISPLAY_WIDTH/2, TOP_PADDING + (row * LCD_LINESIZE), strTempVal, varInfo->Color_2);
+	DrawString(DISPLAY_WIDTH * VAL_POS, TOP_PADDING + (row * LCD_LINESIZE), strTempVal, varInfo->Color_2);
 }
 
 void Format_MemoryDumpAscii(uint8_t row, void* info)
@@ -113,7 +113,7 @@ void Format_Boolean(uint8_t row, void* info)
 	varInfo = (LcdVariableInfo*)info;
 	DrawString(LEFT_PADDING, TOP_PADDING + (row * LCD_LINESIZE) ,varInfo->Label, varInfo->Color_1);
 	sprintf(strTempVal, "%s ", (*(uint8_t*)varInfo->VariablePointer) == 0?"False":"True");
-	DrawString(DISPLAY_WIDTH/2, TOP_PADDING + (row * LCD_LINESIZE), strTempVal, varInfo->Color_2);
+	DrawString(DISPLAY_WIDTH * VAL_POS, TOP_PADDING + (row * LCD_LINESIZE), strTempVal, varInfo->Color_2);
 }
 void Format_Bar(uint8_t row, void* info)
 {
