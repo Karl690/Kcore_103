@@ -53,6 +53,7 @@ void DrawString(uint8_t X, uint8_t Y, char *str, uint16_t color)
 #ifdef FONT16
 	ST7735_PutStr16x8(X, Y, str, color);
 #else
-	ST7735_PutStr5x7(X, Y, str, color);
+	// ST7735_PutStr5x7(X, Y, str, color);
+	ST7735_PutStrDouble5x7(X, Y, str, color);
 #endif
 }

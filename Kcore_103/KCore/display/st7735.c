@@ -356,7 +356,36 @@ void ST7735_PutChar5x7(uint16_t X, uint16_t Y, uint8_t chr, uint16_t color) {
 	CS_H();
 }
 
-
+void St7735_PutDoubleChar5x7(uint16_t X, uint16_t Y, uint8_t chr, uint16_t color)
+{
+	chr = chr - ' ';
+	uint8_t cw = 5;
+	uint8_t ch = 7;
+	uint8_t *buffer = (uint8_t*)&Font5x7[chr * 5];
+	int step = 2;
+	for (uint8_t y = 0; y < ch; y++)
+	{
+		for (uint8_t x = 0; x < cw; x++)
+		{
+			if ((x * step) + X >= DISPLAY_WIDTH) continue;
+			if (y*step + Y >= DISPLAY_HEIGHT) continue;
+			if ((buffer[x] >> y) & 0x1)
+			{
+				ST7735_Pixel(X + x * step, Y + y * step, color);
+				if (step != 1) {
+					ST7735_Pixel(X + x * step + 1, Y + y * step + 1, color);
+				}
+			}
+			else
+			{
+				ST7735_Pixel(X + x * step, Y + y * step, 0x0);
+				if (step != 1) {
+					ST7735_Pixel(X + x * step + 1, Y + y * step + 1, 0x0);
+				}
+			}
+		}
+	}
+}
 void ST7735_PutChar16x8(uint16_t X, uint16_t Y, uint8_t chr, uint16_t color) {
 	uint16_t i, j;
 	uint8_t buffer[16];
@@ -382,18 +411,6 @@ void ST7735_PutChar16x8(uint16_t X, uint16_t Y, uint8_t chr, uint16_t color) {
 			}
 		}
 	}
-//	for (j = 0; j < 8; j++) {
-//		for (i = 0; i < 16; i++) {
-//			if ((buffer[i] >> j) & 0x01) {
-//				ST7735_write(CH);
-//				ST7735_write(CL);
-//			}
-//			else {
-//				ST7735_write(0x00);
-//				ST7735_write(0x00);
-//			}
-//		}
-//	}
 	CS_H();
 }
 void ST7735_PutStr5x7(uint8_t X, uint8_t Y, char *str, uint16_t color) {
@@ -402,6 +419,17 @@ void ST7735_PutStr5x7(uint8_t X, uint8_t Y, char *str, uint16_t color) {
         if (X < scr_width - 6) { X += 6; } else if (Y < scr_height - 8) { X = 0; Y += 8; } else { X = 0; Y = 0; }
     };
 }
+
+void ST7735_PutStrDouble5x7(uint8_t X, uint8_t Y, char *str, uint16_t color) {
+	while (*str) {
+		St7735_PutDoubleChar5x7(X, Y, *str++, color);
+		if (X < scr_width - 12) { X += 12; }
+		else if (Y < scr_height - 16) { X = 0; Y += 16; }
+		else { X = 0; Y = 0; }
+	}
+	;
+}
+
 
 void ST7735_PutStr16x8(uint8_t X, uint8_t Y, char *str, uint16_t color) {
 	if (Y > scr_height) return;
