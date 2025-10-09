@@ -21,8 +21,12 @@ typedef struct {
 	DISPLAYFUNCTYPE FuncType; //function type how we show the data, i.e. hex, int, float
 	uint16_t		Color_1; // this is for Label or background in Bar.
 	uint16_t			Color_2; // this is for Value or progress bar in Bar.
+	
 	uint32_t 		Offset; //for FUNC_MEMDUMPASCII if string is array variable(char a[]), it would be 1 otherwise 0. it is only for memory ascii function
 							//for FUNC_MEMDUMPHEX it means offset.
+	uint8_t			XStart; // position of value
+	uint8_t			YStart; // absolute position of line on Screen
+	uint8_t			Font_Multiplier; // font scaler 1 or 2
 } LcdVariableInfo;
 
 

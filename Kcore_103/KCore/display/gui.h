@@ -13,4 +13,4 @@ extern void DrawRect(uint16_t X1, uint16_t Y1, uint16_t X2, uint16_t Y2, uint16_
 extern void FillRect(uint16_t X1, uint16_t Y1, uint16_t X2, uint16_t Y2, uint16_t color);
 
 extern void DrawChar(uint16_t X, uint16_t Y, uint8_t chr, uint16_t color);
-extern void DrawString(uint8_t X, uint8_t Y, char *str, uint16_t color);
+extern void DrawString(uint8_t X, uint8_t Y, char *str, uint16_t color, uint8_t);

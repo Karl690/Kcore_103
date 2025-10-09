@@ -356,36 +356,45 @@ void ST7735_PutChar5x7(uint16_t X, uint16_t Y, uint8_t chr, uint16_t color) {
 	CS_H();
 }
 
-void St7735_PutDoubleChar5x7(uint16_t X, uint16_t Y, uint8_t chr, uint16_t color)
+void St7735_PutDoubleChar5x7(uint16_t XLocation, uint16_t YLocation, uint8_t chr, uint16_t color)
 {
 	chr = chr - ' ';
 	uint8_t cw = 5;
 	uint8_t ch = 7;
 	uint8_t *buffer = (uint8_t*)&Font5x7[chr * 5];
-	int step = 2;
+	uint16_t step = 2;
+	uint16_t Pixel_X = XLocation;
+	uint16_t Pixel_Y = YLocation;
 	for (uint8_t y = 0; y < ch; y++)
-	{
+	{			
+		Pixel_X = XLocation; //reset to left side of character in the X direction
+		if (Pixel_Y >= DISPLAY_HEIGHT) break;//out of vertical bounds, stop drawing
 		for (uint8_t x = 0; x < cw; x++)
 		{
-			if ((x * step) + X >= DISPLAY_WIDTH) continue;
-			if (y*step + Y >= DISPLAY_HEIGHT) continue;
+			if (Pixel_X >= DISPLAY_WIDTH) break;//past end of line, stop drawing
 			if ((buffer[x] >> y) & 0x1)
 			{
-				ST7735_Pixel(X + x * step, Y + y * step, color);
-				if (step != 1) {
-					ST7735_Pixel(X + x * step + 1, Y + y * step + 1, color);
-				}
+				//turn on the pixel
+				ST7735_Pixel(Pixel_X, Pixel_Y, color);
+				ST7735_Pixel(Pixel_X + 1, Pixel_Y, color);
+				ST7735_Pixel(Pixel_X, Pixel_Y + 1, color);
+				ST7735_Pixel(Pixel_X + 1, Pixel_Y + 1, color);
 			}
 			else
 			{
-				ST7735_Pixel(X + x * step, Y + y * step, 0x0);
-				if (step != 1) {
-					ST7735_Pixel(X + x * step + 1, Y + y * step + 1, 0x0);
-				}
+				//turn off the pixel
+				ST7735_Pixel(Pixel_X, Pixel_Y, 0x00);
+				ST7735_Pixel(Pixel_X + 1, Pixel_Y, 0x00);
+				ST7735_Pixel(Pixel_X, Pixel_Y + 1, 0x00);
+				ST7735_Pixel(Pixel_X + 1, Pixel_Y + 1, 0x00);
 			}
+			Pixel_X += step; //point to next pixel x location
 		}
+		Pixel_Y += step; //index to next line
 	}
 }
+ 
+ 
 void ST7735_PutChar16x8(uint16_t X, uint16_t Y, uint8_t chr, uint16_t color) {
 	uint16_t i, j;
 	uint8_t buffer[16];
