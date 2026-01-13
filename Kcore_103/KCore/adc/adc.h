@@ -32,6 +32,7 @@ extern adcStruct ADC_Channel[];
 extern float laserTemperature;
 extern float UvataVoltage;
 extern float CurrentSetPoint;
+extern uint16_t UvataDuty;
 void adc_init(void);
 void adc_start(void);
 void ProcessRawADC_Data();

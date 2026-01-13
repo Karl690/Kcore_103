@@ -8,6 +8,7 @@ float UvataVoltage = 0;
 float CurrentSetPoint = 0;
 float adcConversionFactor = 0.0008f;
 float UvataVoltageConversionFactor = 0.00437f;
+uint16_t UvataDuty = 0;
 void adcInit(ADC_TypeDef *ADCx)
 {
 #define CFGR_ADCPRE_Reset_Mask    ((uint32_t)0xFFFF3FFF)
