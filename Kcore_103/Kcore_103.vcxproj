@@ -43,10 +43,11 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">
     <Link>
       <ProduceRelocationRecords>true</ProduceRelocationRecords>
-      <AdditionalLinkerInputs>;%(Link.AdditionalLinkerInputs)</AdditionalLinkerInputs>
+      <AdditionalLinkerInputs>-u _printf_float;%(Link.AdditionalLinkerInputs)</AdditionalLinkerInputs>
       <LibrarySearchDirectories>;%(Link.LibrarySearchDirectories)</LibrarySearchDirectories>
       <AdditionalLibraryNames>;%(Link.AdditionalLibraryNames)</AdditionalLibraryNames>
-      <LinkerScript>STM32F103C6_flash.lds</LinkerScript>
+      <LinkerScript>STM32F103C8_flash.lds</LinkerScript>
+      <AdditionalOptions>-u _printf_float %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <ClCompile>
       <AdditionalIncludeDirectories>./KCore;./cmsis;./cmsis_boot;./cmsis_lib/inc;./common/inc;./common/lcd/fonts;./common/lcd;./inc;%(ClCompile.AdditionalIncludeDirectories)</AdditionalIncludeDirectories>

@@ -10,6 +10,7 @@
 #define PIN_ADC_POSITION            (PIN_PORT_B | PIN_NUM_01 | PIN_INIT_HIZ     | ANALOG_IN)    // DEFAULT
 #define PIN_ADC_RTD1_IN             (PIN_PORT_A | PIN_NUM_01 | PIN_INIT_HIZ     | ANALOG_IN)    // DEFAULT
 #define PIN_ADC_RTD2_IN             (PIN_PORT_A | PIN_NUM_00 | PIN_INIT_HIZ     | ANALOG_IN)    // DEFAULT
+//#define PIN_ADC_ISET_IN             (PIN_PORT_A | PIN_NUM_03 | PIN_INIT_HIZ     | ANALOG_IN)    // DEFAULT
 
 
 //adc pins for automatic feedback

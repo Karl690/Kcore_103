@@ -29,3 +29,4 @@
 #define DELAY_TIMER							TIM1
 
 extern uint8_t Booted;
+extern float adcConversionFactor;

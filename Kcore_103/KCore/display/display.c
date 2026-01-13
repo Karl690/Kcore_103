@@ -67,6 +67,9 @@ void Format_Float3_3(uint8_t row, void* info)
 {
 	varInfo = (LcdVariableInfo*)info;
 	DrawString(LEFT_PADDING, varInfo->YStart, varInfo->Label, varInfo->Color_1, varInfo->Font_Multiplier);
+	//char str_temp[20];
+	//dtostrf((float)(*((float*)varInfo->VariablePointer)), 4, 2, str_temp); // width 4, 2 decimal places
+	
 	sprintf(strTempVal, "%.3f ", (float)(*((float*)varInfo->VariablePointer)));
 	DrawString(varInfo->XStart, varInfo->YStart, strTempVal, varInfo->Color_2, varInfo->Font_Multiplier);
 }

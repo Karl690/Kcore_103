@@ -15,12 +15,12 @@
 	</ItemDefinitionGroup>
 	<ItemDefinitionGroup>
 		<Link>
-			<LinkerScript Condition="'%(Link.LinkerScript)' == ''">E:/GIT/Kcore_103/Kcore_103/STM32F103C6_flash.lds</LinkerScript>
-			<AdditionalOptions>--specs=nano.specs -u _printf_float --specs=nosys.specs -Wl,--no-warn-rwx-segments %(Link.AdditionalOptions)</AdditionalOptions>
+			<LinkerScript Condition="'%(Link.LinkerScript)' == ''">E:/GIT/Kcore_103/Kcore_103/STM32F103C8_flash.lds</LinkerScript>
+			<AdditionalOptions>--specs=nano.specs -u _printf_float --specs=nosys.specs -Wl,--no-warn-rwx-segments,-Map=output.map %(Link.AdditionalOptions)</AdditionalOptions>
 		</Link>
 	</ItemDefinitionGroup>
 	<PropertyGroup>
-		<DefaultLinkerScript>E:/GIT/Kcore_103/Kcore_103/STM32F103C6_flash.lds</DefaultLinkerScript>
+		<DefaultLinkerScript>E:/GIT/Kcore_103/Kcore_103/STM32F103C8_flash.lds</DefaultLinkerScript>
 	</PropertyGroup>
 
 	<ItemDefinitionGroup>

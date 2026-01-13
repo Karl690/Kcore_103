@@ -4,6 +4,7 @@
 
 uint16_t   RawADCDataBuffer[ADC_CHANNEL_NUM] = { 0 };
 float laserTemperature = 0;
+float adcConversionFactor = 1.123f;//0.0008f;
 void adcInit(ADC_TypeDef *ADCx)
 {
 #define CFGR_ADCPRE_Reset_Mask    ((uint32_t)0xFFFF3FFF)
@@ -88,6 +89,7 @@ void ProcessRawADC_Data(void)
 
 void SmoothDataUsingOlympicVotingAverage(void)
 {
+	float stuntfloat = 0;
 	ADC_Work_Channel = &ADC_Channel[ADC_Work_Channel_Index];
 	ADC_Work_Channel->adcRaw = RawADCDataBuffer[ADC_Work_Channel_Index]; //update last reading
 	//now we need to plug into the 10 reading buffer for smoothing.
@@ -121,6 +123,8 @@ void SmoothDataUsingOlympicVotingAverage(void)
 		//next we will shift by n to effect a divide by 2^n to get the average of the 2^n remaining samples
 		ADC_Work_Channel->adcAvg = (sum >> ADC_SHIFT_FOR_AVG); // update the RAW average
 		//ADC_Work_Channel->convAvg = ScaledADCData[ADC_Work_Channel_Index] = (float)(((float)ADC_Work_Channel->adcAvg * 3.3) / 4095);
+		stuntfloat = ((float)ADC_Work_Channel->adcAvg) * adcConversionFactor;
+		ADC_Work_Channel->convVolt =  0.345f;//stuntfloat;
 		ADC_Work_Channel->convAvg = convertRtdDataFromRawADCValue(AdcChannelTable[ADC_Work_Channel_Index].ConvertionTable, ADC_Work_Channel->adcAvg);
 	}
 	// setup next conversion so data will be ready for the next call in ~10ms

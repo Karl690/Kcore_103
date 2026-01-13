@@ -7,58 +7,32 @@ AdcTableStruct const HeadPositionTable[] __attribute__((aligned(4))) =
 	// from the Hot Head Resistor Value and 12-bit ADC Value spec
 		// 27 entries, 4 bytes each, 108 total bytes
 		// (uint16_t)adcVal, (uint16)devPos   (MUST be in order with increasing adcVals)
-		{ 108, 91 },
-	// max adc value for hotbed1 position
-		{ 294, 26 },
-	// max adc value for yoke 2 aux2
-		{ 452, 16 },
-	// max adc value for yoke 1 aux2
-		{ 635, 21 },
-	// max adc value for yoke 2 hot head 1
-		{ 804, 11 },
-	// max adc value for yoke 1 hot head 1
-		{ 943, 22 },
-	// max adc value for yoke 2 hot head 2
-		{ 1082, 12 },
-	// max adc value for yoke 1 hot head 2
-		{ 1228, 23 },
-	// max adc value for yoke 2 hot head 3
-		{ 1389, 13 },
-	// max adc value for yoke 1 hot head 3
-		{ 1563, 24 },
-	// max adc value for yoke 2 hot head 4
-		{ 1751, 14 },
-	// max adc value for yoke 1 hot head 4
-		{ 1946, 25 },
-	// max adc value for yoke 2 aux1
-		{ 2140, 15 },
-	// max adc value for yoke 1 aux1
-		{ 2345, 92 },
-	// max adc value for hotbed2 position
-		{ 2544, 46 },
-	// max adc value for yoke 4 aux2
-		{ 2723, 36 },
-	// max adc value for yoke 3 aux2
-		{ 2901, 41 },
-	// max adc value for yoke 4 hot head 1
-		{ 3065, 31 },
-	// max adc value for yoke 3 hot head 1
-		{ 3200, 42 },
-	// max  value for yoke 4 hot head 2
-		{ 3317, 32 },
-	// max adc value for yoke 3 hot head 2
-		{ 3439, 43 },
-	// max adc value for yoke 4 hot head 3
-		{ 3557, 33 },
-	// max adc value for yoke 3 hot head 3
-		{ 3667, 44 },
-	// max adc value for yoke 4 hot head 4
-		{ 3780, 34 },
-	// max adc value for yoke 3 hot head 4
-		{ 3906, 45 },
-	// max adc value for yoke 4 aux1
-		{ 4034, 35 },
-	// max adc value for yoke 3 aux1
+		{ 108, 91 },	// max adc value for hotbed1 position
+		{ 294, 26 },	// max adc value for yoke 2 aux2
+		{ 452, 16 },	// max adc value for yoke 1 aux2
+		{ 635, 21 },	// max adc value for yoke 2 hot head 1
+		{ 804, 11 },	// max adc value for yoke 1 hot head 1
+		{ 943, 22 },	// max adc value for yoke 2 hot head 2
+		{ 1082, 12 },	// max adc value for yoke 1 hot head 2
+		{ 1228, 23 },	// max adc value for yoke 2 hot head 3
+		{ 1389, 13 },	// max adc value for yoke 1 hot head 3
+		{ 1563, 24 },	// max adc value for yoke 2 hot head 4
+		{ 1751, 14 },	// max adc value for yoke 1 hot head 4
+		{ 1946, 25 },	// max adc value for yoke 2 aux1
+		{ 2140, 15 },	// max adc value for yoke 1 aux1
+		{ 2345, 92 },	// max adc value for hotbed2 position
+		{ 2544, 46 },	// max adc value for yoke 4 aux2
+		{ 2723, 36 },	// max adc value for yoke 3 aux2
+		{ 2901, 41 },	// max adc value for yoke 4 hot head 1
+		{ 3065, 31 },	// max adc value for yoke 3 hot head 1
+		{ 3200, 42 },	// max  value for yoke 4 hot head 2
+		{ 3317, 32 },	// max adc value for yoke 3 hot head 2
+		{ 3439, 43 },	// max adc value for yoke 4 hot head 3
+		{ 3557, 33 },	// max adc value for yoke 3 hot head 3
+		{ 3667, 44 },	// max adc value for yoke 4 hot head 4
+		{ 3780, 34 },	// max adc value for yoke 3 hot head 4
+		{ 3906, 45 },	// max adc value for yoke 4 aux1
+		{ 4034, 35 },	// max adc value for yoke 3 aux1
 		{ MAX_ADC12, HH_POSITION_UNPLUGGED },
 	// max adc value an unplugged hothead
 };
@@ -206,8 +180,9 @@ ADC_ChannelDef AdcChannelTable[ADC_CHANNEL_NUM] = {
 #else 
 ADC_ChannelDef AdcChannelTable[ADC_CHANNEL_NUM] = {
 	{ ADC_CHANNEL_POSITION, PIN_ADC_POSITION, 0, (void*)RtdTable_1K },
-	{ ADC_CHANNEL_RTD1, PIN_ADC_RTD1_IN, 0, (void*)RtdTable_1K },
+	{ ADC_CHANNEL_RTD1, PIN_ADC_RTD1_IN, 0, (void*)RtdTable_50K },
 	{ ADC_CHANNEL_RTD2, PIN_ADC_RTD2_IN, 0, (void*)RtdTable_1K },
+	{ ADC_CHANNEL_PA3,	ADC2_03_PA3,	 0, (void*)RtdTable_1K },
 };
 #endif
 

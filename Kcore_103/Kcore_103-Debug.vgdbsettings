@@ -25,7 +25,6 @@
     <ProjectFile>Kcore_103.vcxproj</ProjectFile>
     <RemoteBuildEnvironment>
       <Records />
-      <EnvironmentSetupFiles />
     </RemoteBuildEnvironment>
     <ParallelJobCount>1</ParallelJobCount>
     <SuppressDirectoryChangeMessages>true</SuppressDirectoryChangeMessages>
@@ -105,7 +104,7 @@
     <DebugMethod>
       <ID>com.sysprogs.arm.openocd</ID>
       <InterfaceID>stlink-v2</InterfaceID>
-      <InterfaceSerialNumber>F</InterfaceSerialNumber>
+      <InterfaceSerialNumber>5&amp;311516DB&amp;0&amp;12</InterfaceSerialNumber>
       <Configuration xsi:type="com.visualgdb.edp.openocd.settings">
         <CommandLine>-f interface/stlink-v2.cfg -f target/stm32f1x.cfg -c init -c "reset init"</CommandLine>
         <ExtraParameters>

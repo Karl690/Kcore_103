@@ -66,8 +66,8 @@ void ST7735_Init(uint8_t wid, uint8_t height) {
 		RCC_APB1PeriphClockCmd(RCC_APB1Periph_SPI3,ENABLE);
 		GPIO_PinRemapConfig(GPIO_Remap_SWJ_JTAGDisable, ENABLE); // Disable JTAG for use PB3
 	#endif
-	scr_w = wid;
-	scr_h = height;
+	scr_w = wid+5;
+	scr_h = height+5;
 	// Configure and enable SPI
 	SPI_InitTypeDef SPI;
 	SPI.SPI_Mode = SPI_Mode_Master;
@@ -84,7 +84,7 @@ void ST7735_Init(uint8_t wid, uint8_t height) {
 	/// SPI_NSSInternalSoftwareConfig(SPI_PORT,SPI_NSSInternalSoft_Set);
 	SPI_Cmd(SPI_PORT,ENABLE);
 	
-	// Reset display
+	// Reset displayf
 	CS_H();
 	RST_H();
 	delay_ms(5);
@@ -153,8 +153,8 @@ void ST7735_Init(uint8_t wid, uint8_t height) {
 
 	CS_H();
 
-	//ST7735_Orientation(scr_CW);
-	ST7735_Orientation(scr_180);
+	ST7735_Orientation(scr_normal); //for karls display
+	//ST7735_Orientation(scr_180);
 }
 
 void ST7735_Orientation(ScrOrientation_TypeDef orientation) {
