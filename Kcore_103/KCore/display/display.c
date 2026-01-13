@@ -65,12 +65,18 @@ void Format_Ascii(uint8_t row, void* info)
 
 void Format_Float3_3(uint8_t row, void* info)
 {
+	float workfloat = 1.23f;
 	varInfo = (LcdVariableInfo*)info;
 	DrawString(LEFT_PADDING, varInfo->YStart, varInfo->Label, varInfo->Color_1, varInfo->Font_Multiplier);
-	//char str_temp[20];
-	//dtostrf((float)(*((float*)varInfo->VariablePointer)), 4, 2, str_temp); // width 4, 2 decimal places
+	workfloat = (float)(*((float*)varInfo->VariablePointer));
+	//sprintf work around
+	int intPart = (int)workfloat;
+	// Calculate the decimal part (e.g., 456 * 1000) and ensure it's positive
+	int decPart = (int)((workfloat - intPart) * 1000); 
+	// Handle negative numbers if necessary, or just abs() the decPart
+	if (decPart < 0) decPart = -decPart; 
+	sprintf(strTempVal, "%d.%03d", intPart, decPart);
 	
-	sprintf(strTempVal, "%.3f ", (float)(*((float*)varInfo->VariablePointer)));
 	DrawString(varInfo->XStart, varInfo->YStart, strTempVal, varInfo->Color_2, varInfo->Font_Multiplier);
 }
 

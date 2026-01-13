@@ -40,7 +40,7 @@
 LcdVariableInfo LcdVarsTable[] = {	
 	{ &HeartBeat, HEARTBEATSTRING, FUNC_INT32, RED, MAGENTA, 0, VariableDisplayStart, 5, 1 },
 	//	{ &SliceCnt, "Tick", FUNC_INT16, WHITE, MAGENTA, 0,					VariableDisplayStart, 22, 2 },
-		{ &adcConversionFactor, "Temp", FUNC_FLOAT, WHITE, MAGENTA, 0, VariableDisplayStart, 15, 1 },
+		{ &laserTemperature, "Temp", FUNC_FLOAT, WHITE, MAGENTA, 0, VariableDisplayStart, 15, 1 },
 		//{&laserTemperature,			"rtd temp", FUNC_FLOAT, WHITE, MAGENTA, 0,	DISPLAY_WIDTH - 50, 2, 2},
 	{ &ADC_Channel[0].adcAvg, "PB1 POS", FUNC_INT16, WHITE, MAGENTA, 0, VariableDisplayStart, 25, 1 },
 	{ &ADC_Channel[0].convVolt, "PB1 volt", FUNC_FLOAT, WHITE, MAGENTA, 0, VariableDisplayStart, 35, 1 },	
