@@ -30,6 +30,8 @@ typedef struct {
 extern uint16_t RawADCDataBuffer[];
 extern adcStruct ADC_Channel[];
 extern float laserTemperature;
+extern float UvataVoltage;
+extern float CurrentSetPoint;
 void adc_init(void);
 void adc_start(void);
 void ProcessRawADC_Data();

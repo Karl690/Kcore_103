@@ -4,7 +4,10 @@
 
 uint16_t   RawADCDataBuffer[ADC_CHANNEL_NUM] = { 0 };
 float laserTemperature = 0;
+float UvataVoltage = 0;
+float CurrentSetPoint = 0;
 float adcConversionFactor = 0.0008f;
+float UvataVoltageConversionFactor = 0.00437f;
 void adcInit(ADC_TypeDef *ADCx)
 {
 #define CFGR_ADCPRE_Reset_Mask    ((uint32_t)0xFFFF3FFF)
@@ -129,6 +132,9 @@ void SmoothDataUsingOlympicVotingAverage(void)
 	}
 	// setup next conversion so data will be ready for the next call in ~10ms
 	if (ADC_Work_Channel_Index == 1) laserTemperature = ADC_Work_Channel->convAvg;
+	if (ADC_Work_Channel_Index == 2) UvataVoltage = ADC_Work_Channel->adcAvg * UvataVoltageConversionFactor;
+	if (ADC_Work_Channel_Index == 3) CurrentSetPoint = ADC_Work_Channel->convVolt * 2;;
+	
 	ADC_Work_Channel_Index++;
 	if (ADC_Work_Channel_Index >= ADC_CHANNEL_NUM) ADC_Work_Channel_Index = 0; //keep in range
 	adc_config(AdcChannelTable[ADC_Work_Channel_Index].Channel);
