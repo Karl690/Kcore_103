@@ -27,6 +27,7 @@ typedef struct {
 	uint8_t     inputChannel; // actual adc channel input selection
 } adcStruct;
 
+
 extern uint16_t RawADCDataBuffer[];
 extern adcStruct ADC_Channel[];
 extern float laserTemperature;
@@ -34,6 +35,7 @@ extern float UvataVoltage;
 extern float CurrentSetPoint;
 extern uint16_t UvataDuty;
 extern uint16_t CanHeadAddress;
+uint16_t convertRawAdcToCanHeadAddress(uint16_t rawValue);
 void adc_init(void);
 void adc_start(void);
 void ProcessRawADC_Data();

@@ -179,10 +179,10 @@ ADC_ChannelDef AdcChannelTable[ADC_CHANNEL_NUM] = {
 };
 #else 
 ADC_ChannelDef AdcChannelTable[ADC_CHANNEL_NUM] = {
-	{ ADC_CHANNEL_POSITION, PIN_ADC_POSITION, 0, (void*)RtdTable_1K },
-	{ ADC_CHANNEL_RTD1, PIN_ADC_RTD1_IN, 0, (void*)RtdTable_50K },
-	{ ADC_CHANNEL_RTD2, PIN_ADC_RTD2_IN, 0, (void*)RtdTable_1K },
-	{ ADC_CHANNEL_PA3,	ADC2_03_PA3,	 0, (void*)RtdTable_1K },
+	{ ADC_CHANNEL_POSITION, PIN_ADC_POSITION, 0, (void*)HeadPositionTable},
+	{ ADC_CHANNEL_RTD1, PIN_ADC_RTD1_IN,	0, (void*)RtdTable_50K },
+	{ ADC_CHANNEL_RTD2, PIN_ADC_RTD2_IN,	0, (void*)RtdTable_1K },
+	{ ADC_CHANNEL_PA3,	ADC2_03_PA3,		0, (void*)RtdTable_1K },
 };
 #endif
 

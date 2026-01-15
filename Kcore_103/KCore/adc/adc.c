@@ -10,6 +10,69 @@ float adcConversionFactor = 0.0008f;
 float UvataVoltageConversionFactor = 0.00437f;
 uint16_t UvataDuty = 0;
 uint16_t CanHeadAddress = 0;
+
+
+AdcTableStruct const HeadPositionTable2[] __attribute__((aligned(4))) =
+{
+	// from the Hot Head Resistor Value and 12-bit ADC Value spec
+		// 27 entries, 4 bytes each, 108 total bytes
+		// (uint16_t)adcVal, (uint16)devPos   (MUST be in order with increasing adcVals)
+		{ 108, 91 },
+	// max adc value for hotbed1 position
+		{ 294, 26 },
+	// max adc value for yoke 2 aux2
+		{ 452, 16 },
+	// max adc value for yoke 1 aux2
+		{ 635, 21 },
+	// max adc value for yoke 2 hot head 1
+		{ 804, 11 },
+	// max adc value for yoke 1 hot head 1
+		{ 943, 22 },
+	// max adc value for yoke 2 hot head 2
+		{ 1082, 12 },
+	// max adc value for yoke 1 hot head 2
+		{ 1228, 23 },
+	// max adc value for yoke 2 hot head 3
+		{ 1389, 13 },
+	// max adc value for yoke 1 hot head 3
+		{ 1563, 24 },
+	// max adc value for yoke 2 hot head 4
+		{ 1751, 14 },
+	// max adc value for yoke 1 hot head 4
+		{ 1946, 25 },
+	// max adc value for yoke 2 aux1
+		{ 2140, 15 },
+	// max adc value for yoke 1 aux1
+		{ 2345, 92 },
+	// max adc value for hotbed2 position
+		{ 2544, 46 },
+	// max adc value for yoke 4 aux2
+		{ 2723, 36 },
+	// max adc value for yoke 3 aux2
+		{ 2901, 41 },
+	// max adc value for yoke 4 hot head 1
+		{ 3065, 31 },
+	// max adc value for yoke 3 hot head 1
+		{ 3200, 42 },
+	// max  value for yoke 4 hot head 2
+		{ 3317, 32 },
+	// max adc value for yoke 3 hot head 2
+		{ 3439, 43 },
+	// max adc value for yoke 4 hot head 3
+		{ 3557, 33 },
+	// max adc value for yoke 3 hot head 3
+		{ 3667, 44 },
+	// max adc value for yoke 4 hot head 4
+		{ 3780, 34 },
+	// max adc value for yoke 3 hot head 4
+		{ 3906, 45 },
+	// max adc value for yoke 4 aux1
+		{ 4034, 35 },
+	// max adc value for yoke 3 aux1
+		{ MAX_ADC12, HH_POSITION_UNPLUGGED },
+	// max adc value an unplugged hothead
+};
+
 void adcInit(ADC_TypeDef *ADCx)
 {
 #define CFGR_ADCPRE_Reset_Mask    ((uint32_t)0xFFFF3FFF)
@@ -133,7 +196,7 @@ void SmoothDataUsingOlympicVotingAverage(void)
 		ADC_Work_Channel->convAvg = convertRtdDataFromRawADCValue(AdcChannelTable[ADC_Work_Channel_Index].ConvertionTable, ADC_Work_Channel->adcAvg);
 	}
 	// setup next conversion so data will be ready for the next call in ~10ms
-	if (ADC_Work_Channel_Index == 0) CanHeadAddress = ADC_Work_Channel->convAvg;
+	if (ADC_Work_Channel_Index == 0) CanHeadAddress = convertRawAdcToCanHeadAddress(ADC_Work_Channel->adcRaw); 
 	if (ADC_Work_Channel_Index == 1) laserTemperature = ADC_Work_Channel->convAvg;
 	if (ADC_Work_Channel_Index == 2) UvataVoltage = ADC_Work_Channel->adcAvg * UvataVoltageConversionFactor;
 	if (ADC_Work_Channel_Index == 3) CurrentSetPoint = ADC_Work_Channel->convVolt * 2;;
@@ -143,3 +206,18 @@ void SmoothDataUsingOlympicVotingAverage(void)
 	adc_config(AdcChannelTable[ADC_Work_Channel_Index].Channel);
 
 }
+uint16_t convertRawAdcToCanHeadAddress(uint16_t rawValue)
+{
+	uint16_t headaddressToReturn = 0xff;
+	for (int count = 0; count < 32; count++)
+	{
+		if (HeadPositionTable2[count].adcRaw > rawValue)
+		{
+			headaddressToReturn = (uint16_t) HeadPositionTable2[count].value;
+			break;
+		}
+	}
+	return headaddressToReturn;
+}
+
+
