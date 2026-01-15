@@ -60,6 +60,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Canbus.c" />
     <ClCompile Include="KCore\adc\1xx\adc_1xx.c" />
     <ClCompile Include="KCore\adc\adc.c" />
     <ClCompile Include="KCore\adc\ADC_Tables.c" />
@@ -71,6 +72,8 @@
     <ClCompile Include="KCore\taskmanager\taskmanager.c" />
     <ClCompile Include="KCore\timer\timer.c" />
     <ClCompile Include="KCore\utils\utils.c" />
+    <ClCompile Include="util.c" />
+    <ClInclude Include="canbus.h" />
     <ClInclude Include="cmsis\core_cm3.h" />
     <ClInclude Include="cmsis_boot\stm32f10x.h" />
     <ClInclude Include="cmsis_boot\stm32f10x_conf.h" />

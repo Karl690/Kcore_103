@@ -148,6 +148,8 @@
     <ClCompile Include="KCore\adc\1xx\adc_1xx.c">
       <Filter>adc\1xx</Filter>
     </ClCompile>
+    <ClCompile Include="Canbus.c" />
+    <ClCompile Include="util.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cmsis\core_cm3.h">
@@ -245,5 +247,6 @@
     <ClInclude Include="KCore\display\font16x8.h">
       <Filter>display</Filter>
     </ClInclude>
+    <ClInclude Include="canbus.h" />
   </ItemGroup>
 </Project>

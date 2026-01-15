@@ -27,7 +27,7 @@ int main(void)
 	
 	DisplayInit(DISPLAY_WIDTH, DISPLAY_HEIGHT);
 	adc_init();
-	
+	canInit();
 	SysTick_Config(SystemCoreClock / SYSTICKS_PER_SECOND);
 	
 	Booted = 1;
