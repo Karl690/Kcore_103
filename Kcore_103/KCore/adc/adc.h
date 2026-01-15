@@ -33,6 +33,7 @@ extern float laserTemperature;
 extern float UvataVoltage;
 extern float CurrentSetPoint;
 extern uint16_t UvataDuty;
+extern uint16_t CanHeadAddress;
 void adc_init(void);
 void adc_start(void);
 void ProcessRawADC_Data();
