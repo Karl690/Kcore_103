@@ -1,29 +1,43 @@
 #include "canbus.h"
 #include <stm32f10x_rcc.h>
 #include <stm32f10x_can.h>
-#include "stdint.h""
+#include "stdint.h"
+#include "string.h"
+#include "adc/adc.h"
 
 
 uint8_t                        preDefinedAliases[NUM_PRE_DEFINED_ALIASES]; // current list of forced aliases
 uint8_t                        userDefinedAliases[NUM_USER_DEFINED_ALIASES]; // current list of user added aliases
+uint16_t				HydraCanAddress = 0;
+uint8_t 				CanTransmitMailbox;
+uint32_t 				CanTrasmitMsgWaitCounter = 0;
+uint8_t					CanRxTargetId;
+uint8_t					CanRxSourceId;
+uint8_t					CanRxPage;
+uint8_t					CanRxMsgType;
+uint8_t					CanRxImmediateFlag = 0;
 
-uint32_t                    _canTransmitMailboxErrorCount[1][3];
-uint32_t                    _canTransmitAbortedPackets[1][3];
-canStruct                   _canImmediateRx; // buffer to hold next immediate mode can message to process
-bool                     _canImmediateRxIsAvail; // flag to indicate an immediate can message is ready to be processed
-canStruct                   _canRx; // buffer to hold next can message to process
-rxQueueStruct               _canRxQ;
-txQueueStruct               _canTxQ;
-uint32_t                    _workingBufferU32[WORKING_BUFFER_SIZE_IN_WORDS]; // local storage for page data to/from canbus
 
-uint16_t                    _extendedSliceTimeNeeded; // down counter of extra slice times needed
-uint32_t                    _codeCheckSum;
-uint16_t                    _soapPage;
-uint32_t                    _soapAddr;
+uint16_t				CanRxInIndex = 0;
+uint16_t				CanRxOutIndex = 0;
 
-uint16_t					_savedSettingsPage;
-uint32_t					_savedSettingsAddr;
-uint32_t					_savedSettingsSize;
+CANMsg 					CanRxMsgBuffer[CAN_MSG_BUFFER_SIZE];
+uint16_t				CanTxQueHead = 0;
+uint16_t				CanTxQueTail = 0;
+uint16_t				CanTxWaitCount = 0;
+CANMsg 					CanTxMsgBuffer[CAN_MSG_BUFFER_SIZE];
+payloadUnion			CanTxPayLoad = { 0 };
+
+
+uint8_t 				RemoteSoapString[0x400] = { 0 };
+
+CANMsg					CanLastRxBuffer = { 0 };
+CANMsg					CanLastTxBuffer = { 0 };
+payloadUnion			TxWorkData = { 0xff };
+CanRxMsg 				CanRxMessage;
+CanTxMsg 				CanTxMessage;
+uint16_t		CanRxLedCountDown = 0;
+uint16_t		CanTxLedCountDown = 0;
 
 void canInit(void)
 {
@@ -189,3 +203,251 @@ bool canIsValidAlias(uint8_t device)
 	}
 	return (false);
 }
+void ProcessCanTxMessage(void)
+{
+	if (CanTxQueHead == CanTxQueTail) return;
+	CANMsg* pBuffer = &CanTxMsgBuffer[CanTxQueTail];
+	if (SendCanMessage(pBuffer->ID, &pBuffer->PayLoad.u8[0], pBuffer->DataSize) == SUCCESS) 
+	{
+		CanTxQueTail++;
+		memcpy(&CanLastRxBuffer, pBuffer, sizeof(CANMsg));
+		CanTxQueTail &= CAN_MSG_QUE_CNT_MASK;
+		return;
+	}
+	CanTxWaitCount++; //keep track of number of rejected messages
+}
+
+void CheckCanRxMessages(void)
+{
+	//there are 2 canrx buffers in the stm chip, so we need to check each one
+	if (CAN1->RF0R & 0x3) //is there a message in the rx buffer 0
+	{
+		CAN_Receive(CAN1, CAN_FIFO0, &CanRxMessage);
+	}
+	else if (CAN1->RF1R & 0x3) //is there a message in the rx buffer 1
+	{
+		CAN_Receive(CAN1, CAN_FIFO1, &CanRxMessage);
+	}
+	else return;//nothing is waiting, so return 
+//at this moment, CanRxMessage struct has been processed.
+	CanRxTargetId = (CanRxMessage.ExtId >> 20) & 0xFF;
+	//CanRxSourceId = (CanRxMessage.ExtId >> 12) & 0xFF;
+	if (CanRxTargetId == CAN_BROADCAST_ADDRESS || isFilteredAddress(CanRxTargetId)) //if Head Address is same as Can message Head identifier.
+	{
+		CanRxLedCountDown = LED_ON_MAXCOUNT;
+		CANMsg* pInBuffer = &CanRxMsgBuffer[CanRxInIndex];
+
+		pInBuffer->ID = CanRxMessage.ExtId;
+		memcpy(pInBuffer->PayLoad.i8, CanRxMessage.Data, 8);
+		pInBuffer->DataSize = CanRxMessage.DLC;
+
+		pInBuffer->Immediate = CanRxMessage.ExtId & 0x10000000 ? 1 : 0;
+		pInBuffer->MsgType = (CanRxMessage.ExtId & 0x800) ? CAN_WRITE : CAN_READ;
+		pInBuffer->MsgId = ((CanRxMessage.ExtId &  0xFF0) >> 4) & 0x7F;
+		pInBuffer->Page = CanRxMessage.ExtId & 0xF;
+		pInBuffer->SourceAddress = (CanRxMessage.ExtId >> 12) & 0xFF;
+		pInBuffer->TargetAddress = (CanRxMessage.ExtId >> 20) & 0xFF;
+		CanRxInIndex++;
+		if (CanRxInIndex >= CAN_MSG_BUFFER_SIZE) CanRxInIndex = 0;
+	}
+}
+//////////////////////////////////////////////////
+//this function is for sending message thru CAN.
+//
+// param:
+//		target is a head number to send message.
+//		funcId means the function identifier of message.
+//		data is buffer to send. it must be less than 8bytes.
+//		size is the length of buffer.
+
+
+uint8_t SendCanMessage(uint32_t id, uint8_t* data, uint8_t size)
+{
+	uint8_t TxMailBoxIndex = CAN_TxStatus_NoMailBox;
+	/* Select one empty transmit mailbox */
+	if ((CAN1->TSR&CAN_TSR_TME0) == CAN_TSR_TME0)
+	{
+		TxMailBoxIndex = 0;
+	}
+	else if ((CAN1->TSR&CAN_TSR_TME1) == CAN_TSR_TME1)
+	{
+		TxMailBoxIndex = 1;
+	}
+	else if ((CAN1->TSR&CAN_TSR_TME2) == CAN_TSR_TME2)
+	{
+		TxMailBoxIndex = 2;
+	}
+	else
+	{
+		return ERROR;
+	}
+	CAN1->sTxMailBox[TxMailBoxIndex].TIR &= 1; //TMIDxR_TXRQ;
+	CAN1->sTxMailBox[TxMailBoxIndex].TIR |= ((id << 3) | \
+												CAN_Id_Extended | \
+													CAN_RTR_Data);
+
+	/* Set up the DLC */
+
+	CAN1->sTxMailBox[TxMailBoxIndex].TDTR &= (uint32_t)0xFFFFFFF0;
+	CAN1->sTxMailBox[TxMailBoxIndex].TDTR |= size; //Data Size
+
+	/* Set up the data field */
+	CAN1->sTxMailBox[TxMailBoxIndex].TDLR = (((uint32_t)data[3] << 24) |
+											 ((uint32_t)data[2] << 16) |
+											 ((uint32_t)data[1] << 8) |
+											 ((uint32_t)data[0]));
+	CAN1->sTxMailBox[TxMailBoxIndex].TDHR = (((uint32_t)data[7] << 24) |
+											 ((uint32_t)data[6] << 16) |
+											 ((uint32_t)data[5] << 8) |
+											 ((uint32_t)data[4]));
+	/* Request transmission */
+	CAN1->sTxMailBox[TxMailBoxIndex].TIR |= 1; //TMIDxR_TXRQ;
+	CanTxLedCountDown = LED_ON_MAXCOUNT;
+	return SUCCESS;
+}
+void ProcessCanRxMessage(void)
+{	
+	if (CanRxOutIndex == CanRxInIndex) return;//if nothing in the rx que, return
+	CANMsg* pOutBuffer = &CanRxMsgBuffer[CanRxOutIndex]; //point to current messge
+	memcpy(&CanLastRxBuffer, pOutBuffer, sizeof(CANMsg));
+	uint16_t sender = pOutBuffer->SourceAddress; //who sent this message
+	uint16_t Target = pOutBuffer->TargetAddress; //who it was inteneded to go to, 0xff means ALL
+
+	uint16_t address = 0;
+	uint16_t arg1, arg2, arg3, arg4;
+	uint8_t channelOffset = (uint8_t)pOutBuffer->Page & 0x1F; //32 channels maximum
+	//uint8_t channelOffset = sender&0x1F;//32 channels maximum
+//	uint8_t prgVariableIndex = channelOffset;//second variable for clarity
+	//
+	arg1 = pOutBuffer->PayLoad.i16[0]; //assemble 16bit arg from first 2 bytes
+	arg2 = pOutBuffer->PayLoad.i16[1];
+	arg3 = pOutBuffer->PayLoad.i16[2];
+	arg4 = pOutBuffer->PayLoad.i16[3];
+	
+	switch (pOutBuffer->MsgType)
+	{
+	case CAN_WRITE:
+		switch (pOutBuffer->MsgId)
+		{
+
+		//case CAN_MSG_WRITE_SOAPSTRING: break;
+		case CAN_MSG_DEVICE_INIT: break;//it is a response on slave
+
+		}
+		break;
+	case CAN_READ:
+		switch (pOutBuffer->MsgId)
+		{
+		case CAN_MSG_MOTOR_ENABLE:
+//			sprintf(SendString, ">RG:T%d\n", (int)pOutBuffer->SourceAddress);
+//			sendString(SendString);
+			break;
+
+//		case CAN_MSG_READ_SOAPSTRING:
+//			if (pOutBuffer->SourceAddress != AmplifierMasterAddress) {
+//				//read one's soap
+//				uint16_t Address = (pOutBuffer->PayLoad.i16[0]) * 6;
+//				if (Address == 0) memset(RemoteSoapString, 0, 0x400);
+//				for (uint16_t i = 2; i < 8; i++)
+//				{
+//					RemoteSoapString[Address + i - 2] = pOutBuffer->PayLoad.i8[i];
+//					if (RemoteSoapString[Address + i - 2] == 0x0 || RemoteSoapString[Address + i - 2] == 0xFF)
+//					{
+//
+//						sprintf(SendString, ">RI:%d:SOP:%s\n", pOutBuffer->SourceAddress, RemoteSoapString);
+//						sendString(SendString);
+//						break;
+//					}
+//				}
+//			}
+
+//			break;
+		case CAN_MSG_LOOPBACK:
+			CanAddTxBuffer(HydraCanAddress, CanHeadAddress, CAN_READ, CAN_MSG_LOOPBACK, pOutBuffer->Page, 0, 0, 0);
+			break;
+		}
+		break;
+	}
+	CanRxOutIndex++;
+	CanRxOutIndex &= CAN_MSG_QUE_CNT_MASK;
+}
+void CanAddTxBuffer(uint16_t target, uint16_t Source, uint8_t msgType, uint8_t msgId, uint8_t page, uint8_t immediate, payloadUnion* data, uint8_t size)
+{	//karlchris
+	//add check to see if que is full   if cantxquehead++ &0x1f == cantxquetail then que is full
+	CANMsg* pOutBuffer = &CanTxMsgBuffer[CanTxQueHead];
+	pOutBuffer->ID = GenerateFrameID(target, Source, msgType, msgId, page, immediate);
+
+	if (data && size > 0) memcpy(pOutBuffer->PayLoad.i8, data, size);
+	pOutBuffer->DataSize = size;
+	pOutBuffer->Immediate = immediate;
+	pOutBuffer->MsgType = msgType;
+	pOutBuffer->MsgId = msgId;
+	pOutBuffer->Page = page;
+	pOutBuffer->SourceAddress = Source;
+	pOutBuffer->TargetAddress = target;
+
+	CanTxQueHead++;
+	CanTxQueHead &= CAN_MSG_QUE_CNT_MASK;
+}
+uint32_t GenerateFrameID(uint16_t target, uint16_t SourceAddress, uint8_t msgType, uint8_t msgId, uint8_t page, uint8_t immediate)
+{
+	return (uint32_t)((immediate << 28) 
+		+ 	(target << 20) 
+		+ 	((uint32_t)SourceAddress << 12) 
+		+ 	(msgType << 11) 
+		+ 	(msgId << 4) 
+		+ 	(page & 0x0f));//page can only be 4 bits 0-16
+}
+void CanAddTxBuffer8x8Args(uint16_t target, uint16_t SourceAddress, uint8_t msgType, uint8_t msgId, uint8_t page, 
+	uint8_t arg1, uint8_t arg2, uint8_t arg3, uint8_t arg4,uint8_t arg5, uint8_t arg6, uint8_t arg7, uint8_t arg8)
+{
+	CanTxPayLoad.u8[0] = arg1;
+	CanTxPayLoad.u8[1] = arg2;
+	CanTxPayLoad.u8[2] = arg3;
+	CanTxPayLoad.u8[3] = arg4;
+	CanTxPayLoad.u8[4] = arg5;
+	CanTxPayLoad.u8[5] = arg6;
+	CanTxPayLoad.u8[6] = arg7;
+	CanTxPayLoad.u8[7] = arg8;
+	CanAddTxBuffer(target, SourceAddress, msgType, msgId, page, 0, &CanTxPayLoad, 8);
+}
+void CanAddTxBuffer4x16Args(uint16_t target, uint16_t SourceAddress, uint8_t msgType, uint8_t msgId, uint8_t page, uint16_t arg1, uint16_t arg2, uint16_t arg3, uint16_t arg4)
+{
+	CanTxPayLoad.u16[0] = arg1;
+	CanTxPayLoad.u16[1] = arg2;
+	CanTxPayLoad.u16[2] = arg3;
+	CanTxPayLoad.u16[3] = arg4;
+	CanAddTxBuffer(target, SourceAddress, msgType, msgId, page, 0, &CanTxPayLoad, 8);
+}
+void CanAddTxBuffer2x32Args(uint16_t target, uint16_t SourceAddress, uint8_t msgType, uint8_t msgId, uint8_t page, uint32_t arg1, uint32_t arg2)
+{
+	CanTxPayLoad.u32[0] = arg1;
+	CanTxPayLoad.u32[1] = arg2;
+	CanAddTxBuffer(target, SourceAddress, msgType, msgId, page, 0, &CanTxPayLoad, 8);
+}
+void CanAddTxBuffer1x64Args(uint16_t target, uint16_t SourceAddress, uint8_t msgType, uint8_t msgId, uint8_t page, uint64_t arg1)
+{
+	CanTxPayLoad.u64 = arg1;
+	CanAddTxBuffer(target, SourceAddress, msgType, msgId, page, 0, &CanTxPayLoad, 8);
+}
+void CanAddStringTxBuffer(uint16_t target, uint16_t SourceAddress, uint8_t msgType, uint8_t msgId, uint8_t page, char* WorkString)
+{
+	for (int i=0;i<8;i++)
+	{//transfers up to 8 bytes of string into can payload
+			if (WorkString[i] > 0)
+			{
+				CanTxPayLoad.u8[i] = WorkString[i];
+			}
+			else
+			{
+				while (i < 8)
+				{//fill extra payload byes with nulls
+					CanTxPayLoad.u8[i] = 0; //end of the string
+					i++;
+				}
+			}
+		}	
+	CanAddTxBuffer(target, SourceAddress, msgType, msgId, page, 0, &CanTxPayLoad, 8);
+}
+
+////////////////////////////////////////////////////////////////////////////////

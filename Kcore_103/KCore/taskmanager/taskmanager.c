@@ -1,6 +1,7 @@
 #include "main.h"
 #include "taskmanager.h"
 #include "adc/adc.h"
+#include "canbus.h"
 uint16_t SliceOffset = 0;
 uint16_t SliceCnt = 0; // current slice being processed
 uint32_t HeartBeat = 0;
@@ -8,10 +9,10 @@ uint32_t tickCount = 0;
 const PFUNC F1000HZ[NUM_1000HZ] =
 {
 	Spare,
+	ProcessCanRxMessage,
 	Spare,
 	Spare,
-	Spare,
-	Spare,
+	ProcessCanRxMessage,
 	Spare,
 	Spare,
 	Spare,
@@ -22,7 +23,7 @@ const PFUNC F100HZ[NUM_100HZ] =
 	Spare, 
 	ProcessRawADC_Data, // reading ADC raw data
 	Spare,
-	Spare,
+	ProcessCanTxMessage,
 	Spare,
 	Spare, 
 	Spare,

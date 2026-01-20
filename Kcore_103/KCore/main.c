@@ -1,11 +1,13 @@
 #include "main.h"
-
+#include "canbus.h"
 #ifdef __cplusplus
 extern "C"
 #endif
 
 uint8_t Booted = 0;
 uint8_t DisplayIndex = 0;
+uint16_t lastCanHeadAddress = 0xff;
+uint16_t CanWatchdogtimer = 0;//setup the canwatchdog timer for 10 second reset 
 void SetupIWDG(uint32_t interval)
 {
 	// if goal is a 5 second watchdog....CNT = 5 * 125 = 625 nom.... (could be off by a factor of 2
@@ -19,6 +21,29 @@ void SetupIWDG(uint32_t interval)
 	IWDG->KR = IWDG_KR_KEY_Enable; // turn on watchdog ... can't be disable
 }
 
+void registerDeviceAndCheckCommWatchdog(void)
+{
+	if (CanWatchdogtimer == 0)
+	{
+		if (CanHeadAddress == lastCanHeadAddress)
+		{
+			// continue trying to register once every second until we get some feedback
+			payloadUnion payload;
+			//LoadPayloadWithDeviceInfo(1, &payload);
+			payload.u32[0] = 0x30303034;
+			payload.u32[1] = 0x30304131; //hard coded uvata light pen for now
+			canPackIntoTxQueue8x8(CAN_WRITE, CanHeadAddress, CAN_MSG_EVENT_MESSAGE, CAN_EVENT_DEVICE_ANNOUNCE, false, (byte *)&payload);
+		
+			//SET_SENT_ANNOUNCE_BIT; // log that we sent the request for later processing
+			//updateBootSequence(BOOT_STAGE_SENT_ANNOUNCE);
+		}
+		else
+		{
+			lastCanHeadAddress = CanHeadAddress; //update for next check address, must be stable for 2 seconds			
+		}
+	}
+	
+}
 
 int main(void)
 {
