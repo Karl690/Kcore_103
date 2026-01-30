@@ -28,6 +28,7 @@ typedef struct {
 } adcStruct;
 
 
+extern uint16_t ADC_DMA_Buffer[6] __attribute__((aligned(4)));//dma direct buffer
 extern uint16_t RawADCDataBuffer[];
 extern adcStruct ADC_Channel[];
 extern float laserTemperature;
@@ -35,8 +36,13 @@ extern float UvataVoltage;
 extern float CurrentSetPoint;
 extern uint16_t UvataDuty;
 extern uint16_t CanHeadAddress;
+extern uint32_t tmpreg;
+
+// methods 
 uint16_t convertRawAdcToCanHeadAddress(uint16_t rawValue);
 void adc_init(void);
 void adc_start(void);
-void ProcessRawADC_Data();
 void SmoothDataUsingOlympicVotingAverage();
+
+void Init_ADC_DMA_Circular_Mode(); //setup adc in dma mode for autmatic conversion
+void Start_ADC_IN_CONTNOUS_DMA_MODE();

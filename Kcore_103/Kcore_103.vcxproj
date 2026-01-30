@@ -61,6 +61,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Canbus.c" />
+    <ClCompile Include="cmsis_lib\src\stm32f10x_dma.c" />
     <ClCompile Include="KCore\adc\1xx\adc_1xx.c" />
     <ClCompile Include="KCore\adc\adc.c" />
     <ClCompile Include="KCore\adc\ADC_Tables.c" />
@@ -80,6 +81,7 @@
     <ClInclude Include="cmsis_boot\system_stm32f10x.h" />
     <ClInclude Include="cmsis_lib\inc\stm32f10x_adc.h" />
     <ClInclude Include="cmsis_lib\inc\stm32f10x_can.h" />
+    <ClInclude Include="cmsis_lib\inc\stm32f10x_dma.h" />
     <ClInclude Include="cmsis_lib\inc\stm32f10x_exti.h" />
     <ClInclude Include="cmsis_lib\inc\stm32f10x_flash.h" />
     <ClInclude Include="cmsis_lib\inc\stm32f10x_gpio.h" />

@@ -158,7 +158,10 @@ void UpdateScreen(LcdVariableInfo* InfoToDisplay)
 		case FUNC_BOOLEAN: 		Format_Boolean(row, &InfoToDisplay[row]); break;
 		case FUNC_MEMDUMPASCII: Format_MemoryDumpAscii(row, &InfoToDisplay[row]); break;
 		case FUNC_MEMDUMPHEX:   Format_MemoryDumpHex(row, &InfoToDisplay[row]); break;
-		default: break;
+		case FUNC_END:
+			return;//end of display line
+		default: 
+			return; break;
 		}
 		row++;
 	}

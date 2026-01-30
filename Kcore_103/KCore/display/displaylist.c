@@ -61,16 +61,17 @@
 //};
 LcdVariableInfo LcdVarsTable[] = {	
 
-	{ &ADC_Channel[1].adcAvg, "DUTY", FUNC_TITLE, WHITE, MAGENTA, 0, VariableDisplayStart - 40, 10, 2 },
+	{ &ADC_Channel[1].adcAvg, "DUTY",   FUNC_TITLE, WHITE, MAGENTA, 0, VariableDisplayStart - 40, 10, 2 },
 	{ &UvataDuty, "",					FUNC_INT16, WHITE, MAGENTA, 0, VariableDisplayStart - 40, 30, 2 },
 	{ &UvataVoltage, "",				FUNC_TITLE, WHITE, MAGENTA, 0, 0, 50, 1 },
+	//
 	//
 	{ &UvataVoltage, "VOLTS",			FUNC_FLOAT, WHITE, MAGENTA, 0, VariableDisplayStart, 60, 1 },	
 	{ &CanHeadAddress,		"Can ADDR", FUNC_INT16, WHITE, MAGENTA, 0, VariableDisplayStart, 70, 1 },
 	{ &CurrentSetPoint, "ISET",			FUNC_FLOAT, WHITE, MAGENTA, 0, VariableDisplayStart, 80, 1 },
 	{ &laserTemperature, "Temp",		FUNC_FLOAT, WHITE, MAGENTA, 0, VariableDisplayStart, 90, 1 },
-	{ &HeartBeat, HEARTBEATSTRING, FUNC_INT32, RED, MAGENTA, 0, VariableDisplayStart, 100, 1 },
-	{ (uint32_t)0, "--------",			FUNC_INT32, WHITE, MAGENTA, 0, VariableDisplayStart , 110,1 },
+	{ &HeartBeat, HEARTBEATSTRING,		FUNC_INT32, RED,   MAGENTA, 0, VariableDisplayStart, 100, 1 },
+	{ (uint32_t)0, "--------",			FUNC_END,   WHITE, MAGENTA, 0, VariableDisplayStart, 110, 1 },
 };
 LcdVariableInfo TaskTimeTable1[] = {
 	{ (void*)1,				"TT 1",			FUNC_TITLE, RED, MAGENTA, 0,	DISPLAY_WIDTH - 50, 2, 2 },

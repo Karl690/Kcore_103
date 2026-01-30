@@ -13,6 +13,7 @@ typedef enum {
 	FUNC_BOOLEAN,
 	FUNC_MEMDUMPASCII,
 	FUNC_MEMDUMPHEX,
+	FUNC_END,
 }DISPLAYFUNCTYPE;
 
 typedef struct {

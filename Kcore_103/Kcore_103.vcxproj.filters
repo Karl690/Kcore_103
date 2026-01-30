@@ -150,6 +150,9 @@
     </ClCompile>
     <ClCompile Include="Canbus.c" />
     <ClCompile Include="util.c" />
+    <ClCompile Include="cmsis_lib\src\stm32f10x_dma.c">
+      <Filter>cmsis_lib\src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cmsis\core_cm3.h">
@@ -248,5 +251,8 @@
       <Filter>display</Filter>
     </ClInclude>
     <ClInclude Include="canbus.h" />
+    <ClInclude Include="cmsis_lib\inc\stm32f10x_dma.h">
+      <Filter>cmsis_lib\inc</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -21,7 +21,7 @@ const PFUNC F1000HZ[NUM_1000HZ] =
 const PFUNC F100HZ[NUM_100HZ] =
 {
 	Spare, 
-	ProcessRawADC_Data, // reading ADC raw data
+	SmoothDataUsingOlympicVotingAverage, //ProcessRawADC_Data, // reading ADC raw data
 	Spare,
 	ProcessCanTxMessage,
 	Spare,

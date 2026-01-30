@@ -51,8 +51,10 @@ int main(void)
 	gpio_init();
 	
 	DisplayInit(DISPLAY_WIDTH, DISPLAY_HEIGHT);
-	adc_init();
+	//adc_init();
 	canInit();
+	Init_ADC_DMA_Circular_Mode(); //setup adc in dma mode for autmatic conversion
+	Start_ADC_IN_CONTNOUS_DMA_MODE();
 	SysTick_Config(SystemCoreClock / SYSTICKS_PER_SECOND);
 	
 	Booted = 1;
@@ -66,7 +68,7 @@ int main(void)
 		case 2:UpdateScreen(TaskTimeTable2); break;
 		}
 		//delay_sec(1);
-		pinToggleOutput(PIN_LED_175);
+		//pinToggleOutput(PIN_LED_175);
 	}
 }
 
