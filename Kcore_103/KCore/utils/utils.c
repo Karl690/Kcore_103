@@ -1,15 +1,22 @@
-#include "utils.h"
+﻿#include "utils.h"
 void delay_us(uint32_t us)
 {
-	TIM_SetCounter(TIM1, 0); // Reset counter
-	while (TIM_GetCounter(TIM1) < us) ; // Wait until counter reaches 'us'
+	uint32_t count = us * 12; // Approximate: 72MHz / 6 ≈ 12 loops per µs (with optimization)
+    
+	for (volatile uint32_t i = 0; i < count; i++)
+	{
+		__NOP(); // No Operation - helps with timing
+	}
+	
+//	TIM_SetCounter(TIM1, 0); // Reset counter
+//	while (TIM_GetCounter(TIM1) < us) ; // Wait until counter reaches 'us'
 }
 
 
 void delay_ms(uint32_t ms)
 {
 	for (uint32_t i = 0; i < ms; i++) {
-		delay_us(1000); // 1000 �s = 1 ms
+		delay_us(1000); // 1000 µs = 1 ms
 	}
 }
 

@@ -218,7 +218,7 @@ void ProcessCanTxMessage(void)
 }
 
 void CheckCanRxMessages(void)
-{
+{ return;//do nothing now, until we are ready to activate the can bus
 	//there are 2 canrx buffers in the stm chip, so we need to check each one
 	if (CAN1->RF0R & 0x3) //is there a message in the rx buffer 0
 	{

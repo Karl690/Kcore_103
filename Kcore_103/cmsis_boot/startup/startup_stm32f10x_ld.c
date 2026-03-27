@@ -203,7 +203,7 @@ void Default_Reset_Handler(void)
         "    blt     zero_loop");
   
   /* Setup the microcontroller system. */
-  SystemInit();
+  //SystemInit();
     
   /* Call the application's entry point.*/
   main();

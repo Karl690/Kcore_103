@@ -46,8 +46,8 @@
     <Filter Include="Communication">
       <UniqueIdentifier>{c4044a7c-7d44-4e2c-956f-c8a1cc702560}</UniqueIdentifier>
     </Filter>
-    <Filter Include="adc\1xx">
-      <UniqueIdentifier>{493de2ee-16ad-436b-b413-1f9f697c6485}</UniqueIdentifier>
+    <Filter Include="Serial">
+      <UniqueIdentifier>{db996c4e-4d84-44ac-86a0-40e08b1b22c1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -145,9 +145,6 @@
       <Filter>timer</Filter>
     </ClCompile>
     <ClCompile Include="KCore\main.c" />
-    <ClCompile Include="KCore\adc\1xx\adc_1xx.c">
-      <Filter>adc\1xx</Filter>
-    </ClCompile>
     <ClCompile Include="Canbus.c" />
     <ClCompile Include="util.c" />
     <ClCompile Include="cmsis_lib\src\stm32f10x_dma.c">
@@ -244,9 +241,6 @@
     </ClInclude>
     <ClInclude Include="KCore\main.h" />
     <ClInclude Include="KCore\RevisionHistory.h" />
-    <ClInclude Include="KCore\adc\1xx\adc_1xx.h">
-      <Filter>adc\1xx</Filter>
-    </ClInclude>
     <ClInclude Include="KCore\display\font16x8.h">
       <Filter>display</Filter>
     </ClInclude>

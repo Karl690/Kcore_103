@@ -30,3 +30,7 @@
 
 extern uint8_t Booted;
 extern float adcConversionFactor;
+void SetSysClockTo72MHZ_16Mhz_XTAL(void);
+void init_TIM1();
+void init_TIM2();
+void init_TIM3(void);

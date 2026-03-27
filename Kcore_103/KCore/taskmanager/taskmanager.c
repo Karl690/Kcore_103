@@ -6,16 +6,13 @@ uint16_t SliceOffset = 0;
 uint16_t SliceCnt = 0; // current slice being processed
 uint32_t HeartBeat = 0;
 uint32_t tickCount = 0;
+uint32_t muxIndexer = 0;
 const PFUNC F1000HZ[NUM_1000HZ] =
 {
 	Spare,
 	ProcessCanRxMessage,
 	Spare,
-	Spare,
 	ProcessCanRxMessage,
-	Spare,
-	Spare,
-	Spare,
 };
 
 const PFUNC F100HZ[NUM_100HZ] =
@@ -48,7 +45,7 @@ const PFUNC F1HZ[NUM_1HZ] =
 	BlinkHeartBeat,
 	Spare,
 	Spare,
-	Spare,
+	Set_Active_Mux_Channel,
 	Spare,
 	Spare,
 	Spare,
@@ -124,5 +121,58 @@ void func_SystickCallback()
 void BlinkHeartBeat()
 {
 	HeartBeat++;
-	pinToggleOutput(PIN_LED_50);
+	pinToggleOutput(PIN_LED_100);
+}
+
+void  Set_Active_Mux_Channel()
+{	
+	muxIndexer++;
+	muxIndexer &= 0x0003;
+	switch (muxIndexer)
+	{
+	case 0: 	
+		TIM1->CCR1 = 50; // on
+		TIM1->CCR2 = 0; // off  inverted output
+		TIM1->CCR3 = 0; // off
+		TIM1->CCR4 = 0; // off inverted output
+		
+		TIM3->CCR1 = 50; // on
+		TIM3->CCR2 = 0; // off  inverted output
+		TIM3->CCR3 = 0; // off
+		TIM3->CCR4 = 0; // off inverted output
+		break;
+	case 1:	
+		TIM1->CCR1 = 0; // on
+		TIM1->CCR2 = 50; // off  inverted output
+		TIM1->CCR3 = 0; // off
+		TIM1->CCR4 = 0; // off inverted output
+		
+		TIM3->CCR1 = 0; // on
+		TIM3->CCR2 = 50; // on
+		TIM3->CCR3 = 0; // off
+		TIM3->CCR4 = 0; // off
+		break;
+	case 2:	
+		TIM1->CCR1 = 0; // on
+		TIM1->CCR2 = 0; // off  inverted output
+		TIM1->CCR3 = 50; // off
+		TIM1->CCR4 = 0; // off inverted output
+		
+		TIM3->CCR1 = 0; // on
+		TIM3->CCR2 = 0; // off
+		TIM3->CCR3 = 50; // off
+		TIM3->CCR4 = 0; // off
+		break;
+	case 3:	
+		TIM1->CCR1 = 0; // on
+		TIM1->CCR2 = 0; // off  inverted output
+		TIM1->CCR3 = 0; // off
+		TIM1->CCR4 = 50; // off inverted output
+		
+		TIM3->CCR1 = 0; // on
+		TIM3->CCR2 = 0; // off
+		TIM3->CCR3 = 0; // off
+		TIM3->CCR4 = 50; // off
+		break;
+	}
 }

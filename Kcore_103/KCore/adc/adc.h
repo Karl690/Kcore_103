@@ -1,6 +1,7 @@
 #pragma once
 #include <stdint.h>
 #include "1xx/adc_1xx.h"
+#include "ADC_Tables.h"
 
 #define ADC_CHANNEL_POSITION            ADC_Channel_9
 #define ADC_CHANNEL_RTD1                ADC_Channel_1
@@ -37,6 +38,7 @@ extern float CurrentSetPoint;
 extern uint16_t UvataDuty;
 extern uint16_t CanHeadAddress;
 extern uint32_t tmpreg;
+extern AdcTableStruct const HeadPositionTable[];
 
 // methods 
 uint16_t convertRawAdcToCanHeadAddress(uint16_t rawValue);
