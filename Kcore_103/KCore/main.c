@@ -83,52 +83,48 @@ void SysTick_Handler(void)
 }
 void SetSysClockTo72MHZ_16Mhz_XTAL(void)
 {
-	__IO uint32_t HSEStatus = 0; // GB XXX ADDED
- 
-	/* SYSCLK, HCLK, PCLK2 and PCLK1 configuration ---------------------------*/    
-	/* Enable HSE */    
-	RCC->CR |= ((uint32_t)RCC_CR_HSEON);
- 
-	/* Wait till HSE is ready and if Time out is reached exit */
+	__IO uint32_t HSEStatus = 0;
+
+	/* Enable HSE */
+	RCC->CR |= RCC_CR_HSEON;
+
+	/* Wait till HSE is ready */
 	do
 	{
 		HSEStatus = RCC->CR & RCC_CR_HSERDY;
-	} while (HSEStatus == 0);  // wait forever;  // GB XXX ADDED
+	} while (HSEStatus == 0);
 
 	if ((RCC->CR & RCC_CR_HSERDY) != RESET)
 	{
-		HSEStatus = (uint32_t)0x01;
-	}
-	else
-	{
-		HSEStatus = (uint32_t)0x00;
-	}  
-
-	if (HSEStatus == (uint32_t)0x01)
-	{
-		/* Enable Prefetch Buffer */
+		/* Enable Prefetch Buffer and set 2 wait states (required for 72 MHz) */
 		FLASH->ACR |= FLASH_ACR_PRFTBE;
+		FLASH->ACR &= ~FLASH_ACR_LATENCY;
+		FLASH->ACR |= FLASH_ACR_LATENCY_2; // 2 wait states
 
-		/* Flash 2 wait state */
-		FLASH->ACR &= (uint32_t)((uint32_t)~FLASH_ACR_LATENCY);
-		FLASH->ACR |= (uint32_t)FLASH_ACR_LATENCY_2;    
+		/* HCLK = SYSCLK (no division) */
+		RCC->CFGR |= RCC_CFGR_HPRE_DIV1;
 
- 
-		/* HCLK = SYSCLK */
-		RCC->CFGR |= (uint32_t)RCC_CFGR_HPRE_DIV1;
-      
-		/* PCLK2 = HCLK */
-		RCC->CFGR |= (uint32_t)RCC_CFGR_PPRE2_DIV1;
-    
-		/* PCLK1 = HCLK */
-		RCC->CFGR |= (uint32_t)RCC_CFGR_PPRE1_DIV2;
+		/* PCLK2 = HCLK (max 72 MHz) */
+		RCC->CFGR |= RCC_CFGR_PPRE2_DIV1;
 
-  
-		/*  PLL configuration: PLLCLK = HSE * 9 = 72 MHz */
-		RCC->CFGR &= (uint32_t)((uint32_t)~(RCC_CFGR_PLLSRC | RCC_CFGR_PLLXTPRE |
-		                                    RCC_CFGR_PLLMULL));
-		RCC->CFGR |= (uint32_t)(RCC_CFGR_PLLSRC_HSE | RCC_CFGR_PLLMULL9); //works for 16mhz xtal
+//		/* PCLK1 = HCLK / 2 (max 36 MHz) */
+//		RCC->CFGR |= RCC_CFGR_PPRE1_DIV2;
+//
+//		/* PLL config: (HSE/2) * 9 = 72 MHz */
+//		RCC->CFGR &= ~(RCC_CFGR_PLLSRC | RCC_CFGR_PLLXTPRE | RCC_CFGR_PLLMULL);
+//		RCC->CFGR |= (RCC_CFGR_PLLSRC_HSE | 
+//		              RCC_CFGR_PLLXTPRE |      // HSE/2
+//		              RCC_CFGR_PLLMULL9);
+		/* PLL configuration: PLLCLK = (HSE / 2) * 9 = 72 MHz */
+		RCC->CFGR &= (uint32_t)~(RCC_CFGR_PLLSRC | RCC_CFGR_PLLXTPRE | RCC_CFGR_PLLMULL);
 
+		/* PLLSRC = HSE (not HSI/2) */
+		/* PLLXTPRE = HSE divided by 2 */
+		/* PLLMULL = x9 */
+		RCC->CFGR |= (RCC_CFGR_PLLSRC_HSE | 
+		              RCC_CFGR_PLLXTPRE |        // <--- This is the missing bit!
+		              RCC_CFGR_PLLMULL9);
+		
 
 		/* Enable PLL */
 		RCC->CR |= RCC_CR_PLLON;
@@ -137,23 +133,100 @@ void SetSysClockTo72MHZ_16Mhz_XTAL(void)
 		while ((RCC->CR & RCC_CR_PLLRDY) == 0)
 		{
 		}
-    
+
 		/* Select PLL as system clock source */
-		RCC->CFGR &= (uint32_t)((uint32_t)~(RCC_CFGR_SW));
-		RCC->CFGR |= (uint32_t)RCC_CFGR_SW_PLL;    
+		RCC->CFGR &= ~RCC_CFGR_SW;
+		RCC->CFGR |= RCC_CFGR_SW_PLL;
 
 		/* Wait till PLL is used as system clock source */
-		while ((RCC->CFGR & (uint32_t)RCC_CFGR_SWS) != (uint32_t)0x08)
+		while ((RCC->CFGR & RCC_CFGR_SWS) != RCC_CFGR_SWS_PLL)
 		{
 		}
+
+		/* Optional: update SystemCoreClock variable if you use it */
+		// SystemCoreClock = 72000000;
 	}
 	else
 	{
-		/* If HSE fails to start-up, the application will have wrong clock 
-	       configuration. User can add here some code to deal with this error */
-		// GB XXX ADDED - NVIC_SystemReset();
+		/* HSE failed to start - add error handling here */
+		// e.g. NVIC_SystemReset(); or fallback to HSI
 	}
 }
+
+//void SetSysClockTo72MHZ_16Mhz_XTAL(void)
+//{
+//	__IO uint32_t HSEStatus = 0; // GB XXX ADDED
+// 
+//	/* SYSCLK, HCLK, PCLK2 and PCLK1 configuration ---------------------------*/    
+//	/* Enable HSE */    
+//	RCC->CR |= ((uint32_t)RCC_CR_HSEON);
+// 
+//	/* Wait till HSE is ready and if Time out is reached exit */
+//	do
+//	{
+//		HSEStatus = RCC->CR & RCC_CR_HSERDY;
+//	} while (HSEStatus == 0);  // wait forever;  // GB XXX ADDED
+//
+//	if ((RCC->CR & RCC_CR_HSERDY) != RESET)
+//	{
+//		HSEStatus = (uint32_t)0x01;
+//	}
+//	else
+//	{
+//		HSEStatus = (uint32_t)0x00;
+//	}  
+//
+//	if (HSEStatus == (uint32_t)0x01)
+//	{
+//		/* Enable Prefetch Buffer */
+//		FLASH->ACR |= FLASH_ACR_PRFTBE;
+//
+//		/* Flash 2 wait state */
+//		FLASH->ACR &= (uint32_t)((uint32_t)~FLASH_ACR_LATENCY);
+//		FLASH->ACR |= (uint32_t)FLASH_ACR_LATENCY_2;    
+//
+// 
+//		/* HCLK = SYSCLK */
+//		RCC->CFGR |= (uint32_t)RCC_CFGR_HPRE_DIV1;
+//      
+//		/* PCLK2 = HCLK */
+//		RCC->CFGR |= (uint32_t)RCC_CFGR_PPRE2_DIV1;
+//    
+//		/* PCLK1 = HCLK */
+//		RCC->CFGR |= (uint32_t)RCC_CFGR_PPRE1_DIV2;
+//
+//  
+//		/*  PLL configuration: PLLCLK = HSE * 9 = 72 MHz */
+//		RCC->CFGR &= (uint32_t)((uint32_t)~(RCC_CFGR_PLLSRC | RCC_CFGR_PLLXTPRE |
+//		                                    RCC_CFGR_PLLMULL));
+//		
+//		RCC->CFGR |= (uint32_t)(RCC_CFGR_PLLSRC_HSE | RCC_CFGR_PLLMULL9); //works for 16mhz xtal RCC_CFGR_PLLMULL4
+//		//RCC->CFGR |= (uint32_t)(RCC_CFGR_PLLSRC_HSE | RCC_CFGR_PLLMULL4); //works for 16mhz xtal
+//
+//		/* Enable PLL */
+//		RCC->CR |= RCC_CR_PLLON;
+//
+//		/* Wait till PLL is ready */
+//		while ((RCC->CR & RCC_CR_PLLRDY) == 0)
+//		{
+//		}
+//    
+//		/* Select PLL as system clock source */
+//		RCC->CFGR &= (uint32_t)((uint32_t)~(RCC_CFGR_SW));
+//		RCC->CFGR |= (uint32_t)RCC_CFGR_SW_PLL;    
+//
+//		/* Wait till PLL is used as system clock source */
+//		while ((RCC->CFGR & (uint32_t)RCC_CFGR_SWS) != (uint32_t)0x08)
+//		{
+//		}
+//	}
+//	else
+//	{
+//		/* If HSE fails to start-up, the application will have wrong clock 
+//	       configuration. User can add here some code to deal with this error */
+//		// GB XXX ADDED - NVIC_SystemReset();
+//	}
+//}
 void init_TIM1()
 {
 	//will set up all 4 outputs for timer3 to activate the mux channels 5,6,7,8
@@ -175,7 +248,7 @@ void init_TIM1()
 	GPIOA->CRH &= ~(0xFFFFFFFF); // Clear PA8–PA11
 	GPIOA->CRH |= 0xBBBBBBBB; // 50 MHz AF PP for PA[15:8]
 		// 3. TIM1 configuration
-	TIM1->PSC = 20; // Prescaler = 71 → timer clock = 72 MHz / 72 = 1 MHz
+	TIM1->PSC = 35; // Prescaler = 71 → timer clock = 72 MHz / 72 = 1 MHz
 	TIM1->ARR = 99; // Auto-reload = 99 → period = 100 ticks → 10 kHz
 
 	// PWM Mode 1 for all channels (OCxM = 110)
