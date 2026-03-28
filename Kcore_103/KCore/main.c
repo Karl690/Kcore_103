@@ -23,25 +23,25 @@ void SetupIWDG(uint32_t interval)
 
 void registerDeviceAndCheckCommWatchdog(void)
 {
-	if (CanWatchdogtimer == 0)
-	{
-		if (CanHeadAddress == lastCanHeadAddress)
-		{
-			// continue trying to register once every second until we get some feedback
-			payloadUnion payload;
-			//LoadPayloadWithDeviceInfo(1, &payload);
-			payload.u32[0] = 0x30303034;
-			payload.u32[1] = 0x30304131; //hard coded uvata light pen for now
-			canPackIntoTxQueue8x8(CAN_WRITE, CanHeadAddress, CAN_MSG_EVENT_MESSAGE, CAN_EVENT_DEVICE_ANNOUNCE, false, (byte *)&payload);
-		
-			//SET_SENT_ANNOUNCE_BIT; // log that we sent the request for later processing
-			//updateBootSequence(BOOT_STAGE_SENT_ANNOUNCE);
-		}
-		else
-		{
-			lastCanHeadAddress = CanHeadAddress; //update for next check address, must be stable for 2 seconds			
-		}
-	}
+//	if (CanWatchdogtimer == 0)
+//	{
+//		if (CanHeadAddress == lastCanHeadAddress)
+//		{
+//			// continue trying to register once every second until we get some feedback
+//			payloadUnion payload;
+//			//LoadPayloadWithDeviceInfo(1, &payload);
+//			payload.u32[0] = 0x30303034;
+//			payload.u32[1] = 0x30304131; //hard coded uvata light pen for now
+//			canPackIntoTxQueue8x8(CAN_WRITE, CanHeadAddress, CAN_MSG_EVENT_MESSAGE, CAN_EVENT_DEVICE_ANNOUNCE, false, (byte *)&payload);
+//		
+//			//SET_SENT_ANNOUNCE_BIT; // log that we sent the request for later processing
+//			//updateBootSequence(BOOT_STAGE_SENT_ANNOUNCE);
+//		}
+//		else
+//		{
+//			lastCanHeadAddress = CanHeadAddress; //update for next check address, must be stable for 2 seconds			
+//		}
+//	}
 	
 }
 
@@ -57,8 +57,7 @@ int main(void)
 	Start_ADC_IN_CONTNOUS_DMA_MODE();
 	init_TIM1(); //turn on mux pwm for channels 1,2,3,4
 	init_TIM3(); //turn on mux pwm for channels 5,6,7,8
-	//UART1_Init_19200(); //enable uart for mux selection
-	
+	UART1_Init(19200); //enable uart for mux selection
 	SysTick_Config(SystemCoreClock / SYSTICKS_PER_SECOND);
 	
 	Booted = 1;
@@ -107,14 +106,6 @@ void SetSysClockTo72MHZ_16Mhz_XTAL(void)
 		/* PCLK2 = HCLK (max 72 MHz) */
 		RCC->CFGR |= RCC_CFGR_PPRE2_DIV1;
 
-//		/* PCLK1 = HCLK / 2 (max 36 MHz) */
-//		RCC->CFGR |= RCC_CFGR_PPRE1_DIV2;
-//
-//		/* PLL config: (HSE/2) * 9 = 72 MHz */
-//		RCC->CFGR &= ~(RCC_CFGR_PLLSRC | RCC_CFGR_PLLXTPRE | RCC_CFGR_PLLMULL);
-//		RCC->CFGR |= (RCC_CFGR_PLLSRC_HSE | 
-//		              RCC_CFGR_PLLXTPRE |      // HSE/2
-//		              RCC_CFGR_PLLMULL9);
 		/* PLL configuration: PLLCLK = (HSE / 2) * 9 = 72 MHz */
 		RCC->CFGR &= (uint32_t)~(RCC_CFGR_PLLSRC | RCC_CFGR_PLLXTPRE | RCC_CFGR_PLLMULL);
 
@@ -125,7 +116,6 @@ void SetSysClockTo72MHZ_16Mhz_XTAL(void)
 		              RCC_CFGR_PLLXTPRE |        // <--- This is the missing bit!
 		              RCC_CFGR_PLLMULL9);
 		
-
 		/* Enable PLL */
 		RCC->CR |= RCC_CR_PLLON;
 
@@ -377,4 +367,56 @@ void init_TIM3(void)
 	// 7. Enable Timer
 	TIM3->CR1 |= TIM_CR1_ARPE; // Auto-reload preload enable
 	TIM3->CR1 |= TIM_CR1_CEN; // Counter Enable
+}
+
+void  Set_Active_Mux_Channel(uint32_t activeChannel)
+{	
+	activeChannel &= 0x0003;
+	switch (activeChannel)
+	{
+	case 0: 	
+		TIM1->CCR1 = 50; // on
+		TIM1->CCR2 = 0; // off  inverted output
+		TIM1->CCR3 = 0; // off
+		TIM1->CCR4 = 0; // off inverted output
+		
+		TIM3->CCR1 = 50; // on
+		TIM3->CCR2 = 0; // off  inverted output
+		TIM3->CCR3 = 0; // off
+		TIM3->CCR4 = 0; // off inverted output
+		break;
+	case 1:	
+		TIM1->CCR1 = 0; // on
+		TIM1->CCR2 = 50; // off  inverted output
+		TIM1->CCR3 = 0; // off
+		TIM1->CCR4 = 0; // off inverted output
+		
+		TIM3->CCR1 = 0; // on
+		TIM3->CCR2 = 50; // on
+		TIM3->CCR3 = 0; // off
+		TIM3->CCR4 = 0; // off
+		break;
+	case 2:	
+		TIM1->CCR1 = 0; // on
+		TIM1->CCR2 = 0; // off  inverted output
+		TIM1->CCR3 = 50; // off
+		TIM1->CCR4 = 0; // off inverted output
+		
+		TIM3->CCR1 = 0; // on
+		TIM3->CCR2 = 0; // off
+		TIM3->CCR3 = 50; // off
+		TIM3->CCR4 = 0; // off
+		break;
+	case 3:	
+		TIM1->CCR1 = 0; // on
+		TIM1->CCR2 = 0; // off  inverted output
+		TIM1->CCR3 = 0; // off
+		TIM1->CCR4 = 50; // off inverted output
+		
+		TIM3->CCR1 = 0; // on
+		TIM3->CCR2 = 0; // off
+		TIM3->CCR3 = 0; // off
+		TIM3->CCR4 = 50; // off
+		break;
+	}
 }

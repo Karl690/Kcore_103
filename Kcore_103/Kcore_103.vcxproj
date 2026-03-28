@@ -69,6 +69,7 @@
     <ClCompile Include="KCore\display\gui.c" />
     <ClCompile Include="KCore\display\st7735.c" />
     <ClCompile Include="KCore\gpio\pins.c" />
+    <ClCompile Include="KCore\Serial\serial.c" />
     <ClCompile Include="KCore\taskmanager\taskmanager.c" />
     <ClCompile Include="KCore\timer\timer.c" />
     <ClCompile Include="KCore\utils\utils.c" />
@@ -104,6 +105,7 @@
     <ClInclude Include="KCore\gpio\pins_stm32f10x.h" />
     <ClInclude Include="KCore\main.h" />
     <ClInclude Include="KCore\RevisionHistory.h" />
+    <ClInclude Include="KCore\Serial\serial.h" />
     <ClInclude Include="KCore\taskmanager\taskmanager.h" />
     <ClInclude Include="KCore\timer\timer.h" />
     <ClInclude Include="KCore\utils\utils.h" />

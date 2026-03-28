@@ -34,3 +34,4 @@ void SetSysClockTo72MHZ_16Mhz_XTAL(void);
 void init_TIM1();
 void init_TIM2();
 void init_TIM3(void);
+void  Set_Active_Mux_Channel(uint32_t activeChannel);

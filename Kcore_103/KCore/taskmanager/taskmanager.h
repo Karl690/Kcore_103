@@ -1,5 +1,5 @@
 #pragma once
-
+#include "Serial/serial.h"
 #define NUM_1000HZ              4
 #define NUM_100HZ               8      // must remain 10 otherwise loop timing will not be correct
 #define NUM_10HZ                8      // must remain 10 otherwise loop timing will not be correct
@@ -16,4 +16,4 @@ extern uint16_t SliceCnt;
 void Spare(void);
 void func_SystickCallback();
 void BlinkHeartBeat();
-void  Set_Active_Mux_Channel();
+void  Increment_Mux_Channel();

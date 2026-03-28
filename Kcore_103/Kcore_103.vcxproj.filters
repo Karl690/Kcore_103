@@ -150,6 +150,9 @@
     <ClCompile Include="cmsis_lib\src\stm32f10x_dma.c">
       <Filter>cmsis_lib\src</Filter>
     </ClCompile>
+    <ClCompile Include="KCore\Serial\serial.c">
+      <Filter>Serial</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cmsis\core_cm3.h">
@@ -247,6 +250,9 @@
     <ClInclude Include="canbus.h" />
     <ClInclude Include="cmsis_lib\inc\stm32f10x_dma.h">
       <Filter>cmsis_lib\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="KCore\Serial\serial.h">
+      <Filter>Serial</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
